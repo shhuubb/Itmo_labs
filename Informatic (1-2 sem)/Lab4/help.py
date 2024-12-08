@@ -1,1 +1,0 @@
-print('ddddfewwg'[::-1])
