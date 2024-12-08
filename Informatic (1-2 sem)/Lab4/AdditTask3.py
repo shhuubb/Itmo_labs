@@ -62,8 +62,6 @@ def parse_simple_xml(xml_string):
                 help_lst = content
             
             else:
-                print(content)
-                
                 help_lst= [content[:content.find('<')], parse_simple_xml(content[content.find('<'):])]
                 
 
@@ -92,7 +90,7 @@ def dict_to_yaml(dictionary, tab_count):
         elif isinstance(value, list):
             
             for i in value:
-                yaml_string += f"{tab_count*'  '}- {key}:\n"
+                yaml_string += f"{(tab_count-1)*'  '}- {key}:\n"
                     
                 if isinstance(i, str): 
                     yaml_string += f"{(tab_count+1)*'  '}{i}\n"
