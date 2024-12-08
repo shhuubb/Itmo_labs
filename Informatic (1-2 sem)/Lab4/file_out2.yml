@@ -1,0 +1,80 @@
+root: 
+  days: 
+  - day: 
+      '@name': wednesday
+      first:  
+        subj:  Programming
+        format: full-time
+        type: Lecture
+        teacher: Gavrilov Anton Valeryevich
+        room: 1216
+        building: ul.Lomonosova, d.9, lit. M
+        weeks: 1,3,5,7,9,11,13,15
+        from: 08:20
+        to: 9:50
+      fifth: 
+        subj: English
+        format: full-time
+        type: Practice
+        teacher: Morozova Anna Mikhaylovna
+        room: 3213
+        building: ul.Lomonosova, d.9, lit. M
+        weeks: 1,3,5,7,9,11,13,15
+        from: 15:20
+        to: 16:50
+      sixth: 
+        subj: English
+        format: full-time
+        type: Practice
+        teacher: Morozova Anna Mikhaylovna
+        room: 3213
+        building: ul.Lomonosova, d.9, lit. M
+        weeks: 1,3,5,7,9,11,13,15
+        from: 17:00
+        to: 18:30
+  - day: 
+      '@name': saturday
+      second: 
+        subj: Mathematical Analysis
+        format: distant
+        type: Lecture
+        teacher: Bleykher Oksana Vladimirovna
+        weeks: 1,3,5,7,9,11,13,15
+        from: 10:00
+        to: 11:30
+      fouth: 
+        subj: Fundamentals of Professional Activity
+        format: full-time
+        type: Lab class
+        teacher: Bostrikova Darya Konstantinovna
+        room: 2116
+        building: Kronverksky pr., d.49, lit.A
+        weeks: 1,3,5,7,9,11,13,15
+        from: 13:30
+        to: 15:00
+      fifth: 
+        subj: Fundamentals of Professional Activity
+        format: full-time
+        type: Lab class
+        teacher: Bostrikova Darya Konstantinovna
+        room: 2116
+        building: Kronverksky pr., d.49, lit.A
+        weeks: 1,3,5,7,9,11,13,15
+        from: 15:20
+        to: 16:50
+      sixth: 
+        subj: History of Russian Culture in the Context of World Culture
+        format: distant
+        type: Lecture
+        teacher: Zhirkova Galina Petrovna
+        weeks: 1,3,5,7,9,11,13,15
+        from: 17:00
+        to: 18:30
+      seventh: 
+        subj: History of Russian Culture in the Context of World Culture
+        format: distant
+        type: Practice
+        teacher: Martynova Darya Olegovna
+        weeks: 1,3,5,7,9,11,13,15
+        from: 18:40
+        to: 20:10
