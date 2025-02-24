@@ -19,7 +19,7 @@ public abstract class Command{
         return description;
     }
 
-    abstract ExecutionResponse execute(String arg);
+    abstract public ExecutionResponse execute(String arg);
 
     @Override
     public boolean equals(Object obj) {

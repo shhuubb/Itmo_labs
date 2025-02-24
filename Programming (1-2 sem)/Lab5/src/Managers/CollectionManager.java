@@ -89,4 +89,21 @@ public class CollectionManager {
         sort();
         return true;
     }
+    public void clear() {
+        collection.clear();
+        routes.clear();
+        lastInitTime = LocalDateTime.now();
+    }
+    public Vector<Route> getCollection() {
+        return collection;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for (var e : collection){
+            str.append(e.toString()).append("\n");
+        }
+        return str.toString();
+    }
 }

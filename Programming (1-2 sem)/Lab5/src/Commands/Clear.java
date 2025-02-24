@@ -4,24 +4,24 @@ import Client.StandardConsole;
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
 
-public class Show extends Command {
-
+public class Clear extends Command {
     private final CollectionManager collectionManager;
     private final StandardConsole console;
 
-    public Show(CollectionManager collectionManager, StandardConsole console) {
-        super("show", "вывести в стандартный поток вывода все элементы коллекции в строковом представлении");
+
+    public Clear(CollectionManager collectionManager, StandardConsole console) {
+        super("clear", "очистить коллекцию");
         this.collectionManager = collectionManager;
         this.console = console;
     }
 
     @Override
     public ExecutionResponse execute(String arg) {
-        String[] args = arg.split(" ");
-        if (!args[1].isEmpty()) {
+        if (!arg.isEmpty()){
             console.printError("Illegal number of arguments!");
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
-        return new ExecutionResponse(collectionManager.toString(), true);
+        collectionManager.clear();
+        return new ExecutionResponse("Successfully cleared collection!", true);
     }
 }

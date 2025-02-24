@@ -14,18 +14,18 @@ public class UpdateId extends Command{
     private final CollectionManager collectionManager;
 
     public UpdateId(StandardConsole console, CollectionManager collectionManager) {
-        super("add {element}", "добавить новый элемент в коллекцию");
+        super("update id {element}  ", "обновить значения элементов коллекции, id которого равны заданным");
         this.console = console;
         this.collectionManager = collectionManager;
     }
 
+    @Override
     public ExecutionResponse execute(String arg) {
         try {
             String[] args = arg.split(" ");
 
-            if (args.length < 1) {
-                console.printError("Illegal number of arguments!");
-            }
+            if (args.length < 1) console.printError("Illegal number of arguments!");
+
 
             for (String s : args) {
                 console.println("Update a Route with id: " + s);
