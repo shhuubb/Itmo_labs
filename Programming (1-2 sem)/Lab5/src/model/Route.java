@@ -95,8 +95,7 @@ public class Route extends Element implements Validatable, Serializable, Compara
         if (creationDate == null) return false;
         if (from == null) return false;
         if (to == null) return false;
-        if (distance <= 1) return false;
-        return false;
+        return distance > 1;
     }
     public String toString() {
         return "Route : {\"id\" : "+id+", \"name\" : " + name + ", \"coordinates\" : " + coordinates +", \"creationDate\" : "

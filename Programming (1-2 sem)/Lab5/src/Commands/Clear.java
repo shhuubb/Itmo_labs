@@ -9,7 +9,7 @@ public class Clear extends Command {
     private final StandardConsole console;
 
 
-    public Clear(CollectionManager collectionManager, StandardConsole console) {
+    public Clear(StandardConsole console, CollectionManager collectionManager) {
         super("clear", "очистить коллекцию");
         this.collectionManager = collectionManager;
         this.console = console;

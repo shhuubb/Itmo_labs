@@ -24,6 +24,7 @@ public class Add extends Command{
         try{
             if(!arg.isEmpty()){
                 console.printError("Illegal number of arguments!");
+                return new ExecutionResponse("Illegal number of arguments!", false);
             }
             console.println("Add a Route:");
 
@@ -34,7 +35,7 @@ public class Add extends Command{
                 return new ExecutionResponse("Object Route is successfully added!!", true);
             }
             else {
-                console.println("Fs");
+                console.println(a.toString());
                 return new ExecutionResponse("Object Route is not valid.", false);
             }
         } catch (AskBreak e){

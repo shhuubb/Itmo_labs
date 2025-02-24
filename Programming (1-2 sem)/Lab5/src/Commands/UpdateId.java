@@ -18,26 +18,33 @@ public class UpdateId extends Command{
         this.console = console;
         this.collectionManager = collectionManager;
     }
-
     @Override
+
     public ExecutionResponse execute(String arg) {
         try {
             String[] args = arg.split(" ");
 
             if (args.length < 1) console.printError("Illegal number of arguments!");
 
-
             for (String s : args) {
                 console.println("Update a Route with id: " + s);
-                Route a = AskRoute(console, Long.parseLong(s));
-                if (s.equals("exit")) {
-                    throw new AskBreak();
+                try{
+
+                    Long id = Long.parseLong(s.trim());
+                    Route a = AskRoute(console, id);
+
+                    if (!collectionManager.update(a)) {
+                        console.printError("The route with this id was not found.");
+                        return new ExecutionResponse("The route with this id was not found.", false);
+                    }
+
+                } catch(NumberFormatException nfe){
+                    console.printError("Illegal argument!");
+                    return new ExecutionResponse( "Id isn't defined!", false);
+
                 }
 
-                if (!collectionManager.update(a)) {
-                    console.printError("The route with this id was not found.");
-                    return new ExecutionResponse("The route with this id was not found.", false);
-                }
+
             }
             return new ExecutionResponse("Successfully updated", true);
 

@@ -28,10 +28,6 @@ public class RemoveById extends Command{
 
                 Long id = Long.parseLong(s);
 
-                if(arg.equals("exit")){
-                    throw new AskBreak();
-                }
-
                 if(!collectionManager.remove(id)){
                     console.printError("The route with this id was not found.");
                     return new ExecutionResponse("The route with this id was not found.", false);
@@ -40,8 +36,8 @@ public class RemoveById extends Command{
             }
             return new ExecutionResponse("Successfully removed!", true);
 
-        } catch (AskBreak e){
-            return new ExecutionResponse("Cancel", false);
+        } catch (NumberFormatException  e){
+            return new ExecutionResponse( "Id isn't defined!", false);
         }
     }
 }

@@ -80,6 +80,20 @@ public class Ask {
     public static Location AskLocation(StandardConsole console) throws AskBreak{
 
         try{
+            console.println("Location name: ");
+            String name;
+
+            while(true){
+                String line = console.readln().trim();
+                if (line.equals("exit")) throw new AskBreak();
+                if (!line.isEmpty()){
+                    if (line.length() <=318) {
+                        name = line;
+                        break;
+                    }
+                    console.print("Location name length must be less then 318 symbols. Location name: ");
+                }
+            }
             console.print("Coordinate x of Location: ");
             long x;
 
@@ -130,20 +144,7 @@ public class Ask {
                     }
                 }
             }
-            console.println("Location name: ");
-            String name;
-
-            while(true){
-                String line = console.readln().trim();
-                if (line.equals("exit")) throw new AskBreak();
-                if (!line.isEmpty()){
-                        if (line.length() <=318) {
-                            name = line;
-                            break;
-                        }
-                        console.print("Location name length must be less then 318 symbols. Location name: ");
-                }
-            } return new Location(x, y, z, name);
+             return new Location(x, y, z, name);
         }catch(NoSuchElementException | IllegalStateException e){
             console.printError("Reading error");
             return null;

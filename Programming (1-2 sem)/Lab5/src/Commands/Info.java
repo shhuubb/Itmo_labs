@@ -11,7 +11,7 @@ public class Info extends Command {
     private final CollectionManager collectionManager;
     private final StandardConsole console;
 
-    public Info(CollectionManager collectionManager, StandardConsole console) {
+    public Info(StandardConsole console, CollectionManager collectionManager) {
         super("info", "Вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)");
         this.collectionManager = collectionManager;
         this.console = console;

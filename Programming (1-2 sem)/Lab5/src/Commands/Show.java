@@ -9,7 +9,7 @@ public class Show extends Command {
     private final CollectionManager collectionManager;
     private final StandardConsole console;
 
-    public Show(CollectionManager collectionManager, StandardConsole console) {
+    public Show(StandardConsole console, CollectionManager collectionManager) {
         super("show", "вывести в стандартный поток вывода все элементы коллекции в строковом представлении");
         this.collectionManager = collectionManager;
         this.console = console;
