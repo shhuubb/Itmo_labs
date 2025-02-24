@@ -1,0 +1,59 @@
+[
+{
+    "id": 1,
+    "name": "Route1",
+    "coordinates": {
+      "x": 2.50000,
+      "y": 3.23000
+ },
+    "creationDate": {
+      "year": 2025,
+      "month": 2,
+      "day": 23,
+      "hour": 15,
+      "minute": 59
+ },
+    "from": {
+      "LocationName": "home",
+      "x": 132,
+      "y": 12421421,
+      "z": 234.23000
+ },
+    "to" : {
+      "LocationName": "Work",
+      "x": 12,
+      "y": 11421,
+      "z": 24.23000
+ },
+    "distance": 100
+}
+,{
+    "id": 2,
+    "name": "Route1",
+    "coordinates": {
+      "x": 2.50000,
+      "y": 3.23000
+ },
+    "creationDate": {
+      "year": 2025,
+      "month": 2,
+      "day": 23,
+      "hour": 15,
+      "minute": 59
+ },
+    "from": {
+      "LocationName": "home",
+      "x": 132,
+      "y": 12421421,
+      "z": 234.23000
+ },
+    "to" : {
+      "LocationName": "Work",
+      "x": 12,
+      "y": 11421,
+      "z": 24.23000
+ },
+    "distance": 100
+}
+
+]
