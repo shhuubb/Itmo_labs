@@ -19,23 +19,27 @@ public class RemoveById extends Command{
 
     public ExecutionResponse execute(String arg) {
         try{
-            if(arg.split(" ").length != 1){
+            String[] args = arg.split(" ");
+            if(args.length <= 1){
                 console.printError("Illegal number of arguments!");
             }
-            console.println("Remove a Route by Id: ");
+            for (String s : args) {
+                console.println("Remove a Route by Id: "+ s);
 
-            Long id = Long.parseLong(arg);
+                Long id = Long.parseLong(s);
 
-            if(arg.equals("exit")){
-                throw new AskBreak();
+                if(arg.equals("exit")){
+                    throw new AskBreak();
+                }
+
+                if(!collectionManager.remove(id)){
+                    console.printError("The route with this id was not found.");
+                    return new ExecutionResponse("The route with this id was not found.", false);
+
+                }
             }
+            return new ExecutionResponse("Successfully removed!", true);
 
-            if(collectionManager.remove(id)){
-                return new ExecutionResponse("Successfully removed!", true);
-            } else{
-                console.printError("The route with this id was not found.");
-                return new ExecutionResponse("The route with this id was not found.", true);
-            }
         } catch (AskBreak e){
             return new ExecutionResponse("Cancel", false);
         }

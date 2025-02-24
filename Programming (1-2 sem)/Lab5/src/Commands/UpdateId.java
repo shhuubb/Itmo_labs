@@ -23,7 +23,7 @@ public class UpdateId extends Command{
         try {
             String[] args = arg.split(" ");
 
-            if (args.length != 1) {
+            if (args.length < 1) {
                 console.printError("Illegal number of arguments!");
             }
 

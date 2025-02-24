@@ -28,7 +28,10 @@ public class StandardConsole implements Console {
     public boolean isCanReadln() throws NoSuchElementException, IllegalStateException {
         return (fileScanner!=null ? fileScanner : defScanner).hasNextLine();
     }
+    public String printTable(String RightEl, String LeftEl) {
+        return String.format(" %-35s%-1s%n", RightEl, LeftEl);
 
+    }
     public void prompt() {
         print(P);
     }
