@@ -171,7 +171,7 @@ public class Ask {
 
         }catch(NullPointerException |NoSuchElementException | IllegalStateException e){
             console.printError("Reading error");
-            return null;
+            return 0;
         }
 
     }

@@ -12,18 +12,11 @@ import model.Route;
 public class Main {
 
     public static void main(String[] args) throws AskBreak {
-        StandardConsole console = new StandardConsole();
-        CollectionManager collectionManager = new CollectionManager(new DumpManager("Json.json",console));
-        CommandManager commandManager = new CommandManager();
-        Help help = new Help(console, commandManager);
-        Add add = new Add(console, collectionManager);
-        commandManager.register("Add", new Add(console, collectionManager));
-        commandManager.register("RemoveById", new RemoveById(console, collectionManager));
-        commandManager.register("Save", new Save(console, collectionManager));
-        commandManager.register("Filter", new FilterContainsName(console, collectionManager));
-        FilterContainsName filter = new FilterContainsName(console, collectionManager);
-        add.execute("");
-        add.execute("");
-        filter.execute("dick");
+        String input = "{Route1, 12, 243, Home, 324, 343,343.43, School, 324, 343, 343.43, 100}";
+        String[] list = input.substring(1, input.length()-1).split(",");
+
+        for (String line : list) {
+            System.out.println(line);
+        }
     }
 }

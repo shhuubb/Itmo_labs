@@ -4,8 +4,10 @@ import Client.StandardConsole;
 import Managers.CollectionManager;
 import Utility.AskBreak;
 import Utility.ExecutionResponse;
+import Utility.ParseFileRoute;
 import model.Route;
 
+import static Utility.ParseFileRoute.ParseRoute;
 import static model.Ask.AskRoute;
 
 
@@ -21,14 +23,24 @@ public class Add extends Command{
 
     @Override
     public ExecutionResponse execute(String arg) {
+        Route a;
         try{
-            if(!arg.isEmpty()){
+            if(!arg.isEmpty() && !(arg.trim().charAt(0) == '{')){
                 console.printError("Illegal number of arguments!");
                 return new ExecutionResponse("Illegal number of arguments!", false);
             }
-            console.println("Add a Route:");
-
-            Route a = AskRoute(console, collectionManager.getCurrentId());
+            else if (arg.trim().charAt(0) == '{'){
+                try{
+                    a = ParseRoute(console, arg, collectionManager.getCurrentId());
+                }catch (NullPointerException e){
+                    console.printError("Illegal argument!");
+                    return new ExecutionResponse("Illegal argument!", false);
+                }
+            }
+            else{
+                console.println("Add a Route:");
+                a = AskRoute(console, collectionManager.getCurrentId());
+            }
 
             if (a.validate()){
                 collectionManager.add(a);
@@ -38,6 +50,7 @@ public class Add extends Command{
                 console.println(a.toString());
                 return new ExecutionResponse("Object Route is not valid.", false);
             }
+
         } catch (AskBreak e){
             return new ExecutionResponse("Cancel", false);
         }
