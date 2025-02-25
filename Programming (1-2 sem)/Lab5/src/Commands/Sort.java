@@ -3,7 +3,10 @@ package Commands;
 import Client.StandardConsole;
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
-
+/**
+ * Команда sort: сортирует коллекцию в естественном порядке.
+ * @author sh_ub
+ */
 public class Sort extends Command {
     private final CollectionManager collectionManager;
     private final StandardConsole console;

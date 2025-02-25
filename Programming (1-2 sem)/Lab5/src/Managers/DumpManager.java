@@ -9,7 +9,10 @@ import java.util.Vector;
 
 import static Utility.JsonParser.parseJson;
 import static Utility.JsonSerialization.ToJson;
-
+/**
+ * Класс для записи и чтения данных из файла
+ * @author sh_ub
+ */
 public class DumpManager {
     private final String fileName;
     private final StandardConsole console;
@@ -18,19 +21,25 @@ public class DumpManager {
         this.fileName = fileName;
         this.console = console;
     }
-
+    /**
+     * Записывает данные в файл
+     * @param collection коллекция
+     */
     public void dump(Vector<Route> collection) {
-        try {
-            OutputStream outputStream = new FileOutputStream(fileName);
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+        try (OutputStream outputStream = new FileOutputStream(fileName, false);
+             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream)) {
 
-            outputStreamWriter.write(ToJson(collection));
-            outputStreamWriter.close();
-        }catch (IOException e) {
-            console.printError("File " + fileName + " could not be opened.");
+            outputStreamWriter.write(ToJson(collection)); // Записываем данные в файл
+            outputStreamWriter.flush(); // Обеспечиваем, что данные записаны
+
+        } catch (IOException e) {
+            console.printError("File " + fileName + " could not be opened or written.");
         }
     }
-
+    /**
+     * Считывает данные из файла
+     * @return коллекцию
+     */
     public Vector<Route> read() {
         if (fileName != null && !fileName.isEmpty()){
             try {
@@ -45,11 +54,13 @@ public class DumpManager {
                         jsonString.append(line);
                     }
                 }
-
-                if (jsonString.isEmpty()) {
-                    jsonString = new StringBuilder("[]");
+                if (!jsonString.toString().trim().isEmpty()) {
+                    if (jsonString.substring(1, jsonString.length() - 1).trim().isEmpty()) {
+                        return new Vector<>();
+                    }
+                    return parseJson(jsonString.toString());
                 }
-                return parseJson(jsonString.toString());
+                return new Vector<>();
 
 
             } catch (FileNotFoundException e) {

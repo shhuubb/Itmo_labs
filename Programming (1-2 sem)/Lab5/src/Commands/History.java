@@ -5,7 +5,10 @@ import Managers.CommandManager;
 import Utility.ExecutionResponse;
 
 import java.util.ArrayList;
-
+/**
+ * Команда history: выводит последние 7 команд (без их аргументов).
+ * @author sh_ub
+ */
 public class History extends Command {
     CommandManager commandmanager = new CommandManager();
     StandardConsole console = new StandardConsole();
@@ -30,8 +33,9 @@ public class History extends Command {
     public String GettingHistory(ArrayList<String> list) {
         StringBuilder sb = new StringBuilder();
         int leftpointer = list.size()>=7? list.size()-7 : 0 ;
-        for (; leftpointer < list.size(); leftpointer++) {
-            sb.append(list.get(leftpointer)).append("\n");
+        int rightpointer = list.size();
+        for (; leftpointer < rightpointer; rightpointer--) {
+            sb.append(list.get(rightpointer-1)).append("\n");
         }
         return sb.toString();
     }

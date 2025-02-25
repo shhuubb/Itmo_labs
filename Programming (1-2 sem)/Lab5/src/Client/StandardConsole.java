@@ -11,7 +11,7 @@ public class StandardConsole implements Console {
     private static Scanner defScanner = new Scanner(System.in);
 
     public void print(Object message) {
-        System.out.println(message);
+        System.out.print(message);
     }
 
     public void println(Object message) {

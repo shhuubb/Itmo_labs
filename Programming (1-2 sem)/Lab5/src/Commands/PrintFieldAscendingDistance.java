@@ -5,10 +5,12 @@ import Managers.CollectionManager;
 import Utility.ExecutionResponse;
 import model.Route;
 
-import java.util.Comparator;
 import java.util.Vector;
 import java.util.stream.Collectors;
-
+/**
+ * Команда print_field_ascending_distance: выводит значения поля distance всех элементов в порядке возрастания.
+ * @author sh_ub
+ */
 public class PrintFieldAscendingDistance extends Command {
     private final CollectionManager collectionManager;
     private final StandardConsole console;
@@ -34,7 +36,12 @@ public class PrintFieldAscendingDistance extends Command {
             return new ExecutionResponse("Successful execution!", true);
         }
     }
-
+    /**
+     * Метод для получения списка дистанций
+     * @param routes маршруты
+     * @return String список дистанций
+     * @author sh_ub
+     */
     private String GettingDistances(Vector<Route> routes) {
         return routes.stream()
                 .map(Route::getDistance)

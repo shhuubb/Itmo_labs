@@ -1,7 +1,10 @@
 package model;
 
 import Utility.Validatable;
-
+/**
+ * Класс локации маршрута
+ * @author sh_ub
+ */
 public class Location implements Validatable {
     private Long x; //Поле не может быть null
     private long y;
@@ -47,6 +50,10 @@ public class Location implements Validatable {
         this.name = name;
     }
 
+    /**
+     * Проверяет правильность полей.
+     * @return true, если все верно, иначе false
+     */
     @Override
     public boolean validate() {
         if (x== null) return false;

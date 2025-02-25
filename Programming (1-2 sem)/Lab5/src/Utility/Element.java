@@ -2,7 +2,10 @@ package Utility;
 
 import model.Coordinates;
 import model.Location;
-
+/**
+ * Абстрактный класс для маршрута
+ * @author sh_ub
+ */
 public abstract class Element {
        abstract public Long getId();
        abstract public String getName();

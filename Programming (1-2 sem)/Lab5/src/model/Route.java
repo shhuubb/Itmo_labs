@@ -6,7 +6,10 @@ import Utility.Validatable;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
-
+/**
+ * Класс маршрута
+ * @author sh_ub
+ */
 public class Route extends Element implements Validatable, Serializable, Comparable<Route> {
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -86,7 +89,10 @@ public class Route extends Element implements Validatable, Serializable, Compara
     public void setDistance(int distance) {
         this.distance = distance;
     }
-
+    /**
+     * Проверяет правильность полей.
+     * @return true, если все верно, иначе false
+     */
     @Override
     public boolean validate() {
         if (id == null || id < 0) return false;
@@ -115,6 +121,10 @@ public class Route extends Element implements Validatable, Serializable, Compara
         return Objects.hash(id, name, creationDate, coordinates,  from, to,  distance);
     }
 
+    /**
+     * Сортирует объекты по полю distance.
+     * @return 0, 1 или -1 в зависимости от полей distance
+     */
     @Override
     public int compareTo(Route o) {
         return this.getDistance() - o.getDistance();

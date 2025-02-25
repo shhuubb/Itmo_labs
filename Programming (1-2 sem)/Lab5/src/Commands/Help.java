@@ -7,6 +7,11 @@ import Utility.ExecutionResponse;
 
 import java.util.stream.Collectors;
 
+/**
+ * Команда help: выводит справку по доступным командам.
+ *
+ * @author sh_ub
+ */
 public class Help extends Command {
 
     private final StandardConsole console;

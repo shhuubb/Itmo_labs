@@ -7,11 +7,20 @@ import model.Route;
 import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.Vector;
-
+/**
+ * Класс для сереализации данных в json
+ * @author sh_ub
+ */
 public class JsonSerialization {
     private static StringBuilder json = new StringBuilder("[\n");
 
+    /**
+     * Основной метод для парсинга коллекции в json строку
+     * @param routes коллекция
+     * @return json строка
+     */
     public static String ToJson(Vector<Route> routes) {
+        json = new StringBuilder("[\n");
         for (int i = 0; i < routes.size(); i++) {
             json.append(RouteToJson(routes.get(i)));
             if (i < routes.size() - 1) {

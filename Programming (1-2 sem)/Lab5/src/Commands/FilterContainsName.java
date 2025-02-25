@@ -7,7 +7,11 @@ import model.Route;
 
 import java.util.ArrayList;
 import java.util.Vector;
-
+/**
+ * Команда filter_contains_name name: выводит элементы, значение поля name которых содержит заданную подстроку.
+ * Name Подстрока, которую нужно искать в поле name.
+ * @author sh_ub
+ */
 public class FilterContainsName extends Command {
     private final CollectionManager collectionManager;
     private final StandardConsole console;

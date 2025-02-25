@@ -1,7 +1,10 @@
 package Commands;
 
 import Utility.ExecutionResponse;
-
+/**
+ * Абстрактный класс для всех команд
+ * @author sh_ub
+ */
 public abstract class Command{
     private final String name;
     private final String description;
@@ -19,6 +22,10 @@ public abstract class Command{
         return description;
     }
 
+    /**
+     * Абстрактный метод для выполнения команды
+     * @param arg аргументы команд
+     */
     abstract public ExecutionResponse execute(String arg);
 
     @Override

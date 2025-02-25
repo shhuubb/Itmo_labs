@@ -7,7 +7,10 @@ import java.time.LocalDateTime;
 
 import java.util.*;
 
-
+/**
+ * Класс для управления коллекцией
+ * @author sh_ub
+ */
 public class CollectionManager {
     private Long currentId = 1L;
     private Map<Long, Route> routes = new HashMap<>();
@@ -38,12 +41,17 @@ public class CollectionManager {
         while(routes.get(currentId) != null) currentId++;
         return currentId;
     }
-
+    /**
+     * Метод для сохранения коллекции в файл
+     */
     public void saveCollection() {
         dumpManager.dump(collection);
         lastSaveTime = LocalDateTime.now();
     }
-
+    /**
+     * Метод для добавления маршрута в коллекцию
+     * @param r маршрут
+     */
     public boolean add(Route r) {
         if (isContain(r)) return false;
         routes.put(r.getId(), r);
@@ -51,7 +59,10 @@ public class CollectionManager {
         sort();
         return true;
     }
-
+    /**
+     * Метод для удаления маршрута из коллекции по id
+     * @param id маршрут
+     */
     public boolean remove(Long id) {
         var r = routes.get(id);
         if (r == null) return false;
@@ -60,7 +71,9 @@ public class CollectionManager {
         sort();
         return true;
     }
-
+    /**
+     * Метод для сортировки коллекции
+     */
     public void sort(){
         Collections.sort(collection);
     }
@@ -73,6 +86,9 @@ public class CollectionManager {
         sort();
         return true;
     }
+    /**
+     * Метод для инициализации коллекции
+     */
     public boolean init(){
         collection.clear();
         lastInitTime = LocalDateTime.now();
@@ -89,6 +105,9 @@ public class CollectionManager {
         sort();
         return true;
     }
+    /**
+     * Метод для очищения коллекции
+     */
     public void clear() {
         collection.clear();
         routes.clear();

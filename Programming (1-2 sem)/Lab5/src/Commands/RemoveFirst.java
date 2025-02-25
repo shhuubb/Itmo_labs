@@ -4,7 +4,10 @@ import Client.StandardConsole;
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
 
-
+/**
+ * Команда remove_first: удаляет первый элемент из коллекции.
+ * @author sh_ub
+ */
 public class RemoveFirst extends Command {
     private final CollectionManager collectionManager;
     private final StandardConsole console;

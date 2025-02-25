@@ -4,13 +4,16 @@ import Client.StandardConsole;
 import Managers.CollectionManager;
 import Utility.AskBreak;
 import Utility.ExecutionResponse;
-import Utility.ParseFileRoute;
 import model.Route;
 
 import static Utility.ParseFileRoute.ParseRoute;
 import static model.Ask.AskRoute;
 
-
+/**
+ * Команда add {element}: добавляет новый элемент в коллекцию.
+ * {element} - Элемент, который нужно добавить в коллекцию.
+ * @author sh_ub
+ */
 public class Add extends Command{
     private final StandardConsole console;
     private final CollectionManager collectionManager;
@@ -29,7 +32,11 @@ public class Add extends Command{
                 console.printError("Illegal number of arguments!");
                 return new ExecutionResponse("Illegal number of arguments!", false);
             }
-            else if (arg.trim().charAt(0) == '{'){
+            else if (arg.isEmpty()){
+                console.println("Add a Route:");
+                a = AskRoute(console, collectionManager.getCurrentId());
+            }
+            else {
                 try{
                     a = ParseRoute(console, arg, collectionManager.getCurrentId());
                 }catch (NullPointerException e){
@@ -37,19 +44,23 @@ public class Add extends Command{
                     return new ExecutionResponse("Illegal argument!", false);
                 }
             }
-            else{
-                console.println("Add a Route:");
-                a = AskRoute(console, collectionManager.getCurrentId());
-            }
 
-            if (a.validate()){
-                collectionManager.add(a);
-                return new ExecutionResponse("Object Route is successfully added!!", true);
+            if (a != null) {
+                if (a.validate()){
+                    collectionManager.add(a);
+                    return new ExecutionResponse("Object Route is successfully added!!", true);
+                }
+                else {
+                    console.printError("Illegal argument!");
+                    return new ExecutionResponse("Object Route is not valid.", false);
+                }
             }
             else {
-                console.println(a.toString());
-                return new ExecutionResponse("Object Route is not valid.", false);
+                console.printError("Illegal argument!");
+                return new ExecutionResponse("Illegal argument!", false);
             }
+
+
 
         } catch (AskBreak e){
             return new ExecutionResponse("Cancel", false);

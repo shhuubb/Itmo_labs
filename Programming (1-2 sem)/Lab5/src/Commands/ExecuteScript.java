@@ -3,7 +3,12 @@ package Commands;
 import Client.StandardConsole;
 import Utility.Console;
 import Utility.ExecutionResponse;
-
+/**
+ * Команда execute_script file_name: считывает и исполняет скрипт из указанного файла.
+ * В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
+ *  fileName - Имя файла, содержащего скрипт.
+ * @author sh_ub
+ */
 public class ExecuteScript extends Command {
     private final StandardConsole console;
 

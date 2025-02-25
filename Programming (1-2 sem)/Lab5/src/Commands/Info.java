@@ -6,7 +6,11 @@ import Utility.ExecutionResponse;
 
 import java.time.LocalDateTime;
 
-
+/**
+ * Команда info: выводит информацию о коллекции (тип, дата инициализации, количество элементов и т.д.).
+ *
+ * @author sh_ub
+ */
 public class Info extends Command {
     private final CollectionManager collectionManager;
     private final StandardConsole console;

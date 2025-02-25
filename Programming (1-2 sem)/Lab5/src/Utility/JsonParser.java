@@ -8,9 +8,11 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Vector;
-
+/**
+ * Класс для десереализации данных из json
+ * @author sh_ub
+ */
 public class JsonParser {
-
     public static Vector<Route> parseJson(String json) {
         Vector<Route> routes = new Vector<>();
         json = json.trim().replace("\n", "").replace("\r", "").replace(" ", "");
@@ -45,7 +47,7 @@ public class JsonParser {
          Location from = null;
          Location to = null;
          int distance = 1;
-        routeString = routeString.substring(1, routeString.length() - 1); // Убираем {}
+        routeString = routeString.substring(1, routeString.length() - 1);
 
         String[] fields = routeString.split(",");
         for (String field : fields) {

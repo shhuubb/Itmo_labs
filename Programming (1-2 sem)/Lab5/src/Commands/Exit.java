@@ -2,7 +2,11 @@ package Commands;
 
 import Client.StandardConsole;
 import Utility.ExecutionResponse;
-
+/**
+ * Команда exit: завершает программу (без сохранения в файл).
+ *
+ * @author sh_ub
+ */
 public class Exit extends Command {
     private final StandardConsole console;
 

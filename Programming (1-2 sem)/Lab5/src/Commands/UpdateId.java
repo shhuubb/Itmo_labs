@@ -9,7 +9,12 @@ import model.Route;
 import static Utility.ParseFileRoute.ParseRoute;
 import static model.Ask.AskRoute;
 
-
+/**
+ * Команда update id {element}: обновляет значение элемента коллекции, id которого равен заданному.
+ * Id - Идентификатор элемента, который нужно обновить.
+ * {element} - Новое значение элемента.
+ * @author sh_ub
+ */
 public class UpdateId extends Command {
     private final StandardConsole console;
     private final CollectionManager collectionManager;

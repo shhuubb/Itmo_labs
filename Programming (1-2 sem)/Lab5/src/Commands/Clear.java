@@ -4,6 +4,11 @@ import Client.StandardConsole;
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
 
+/**
+ * Команда clear: очищает коллекцию.
+ *
+ * @author sh_ub
+ */
 public class Clear extends Command {
     private final CollectionManager collectionManager;
     private final StandardConsole console;

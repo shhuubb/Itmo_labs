@@ -3,7 +3,11 @@ package Commands;
 import Client.StandardConsole;
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
-
+/**
+ * Команда show: выводит все элементы коллекции в строковом представлении.
+ *
+ * @author sh_ub
+ */
 public class Show extends Command {
 
     private final CollectionManager collectionManager;
@@ -17,11 +21,12 @@ public class Show extends Command {
 
     @Override
     public ExecutionResponse execute(String arg) {
-        String[] args = arg.split(" ");
-        if (!args[1].isEmpty()) {
+        String[] args = arg.trim().split(" ");
+        if (args.length > 1) {
             console.printError("Illegal number of arguments!");
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
+        console.println(collectionManager.toString());
         return new ExecutionResponse(collectionManager.toString(), true);
     }
 }

@@ -14,18 +14,23 @@ public class ParseFileRoute {
 
     public static Route ParseRoute(StandardConsole console, String line, Long id) throws AskBreak{
         final String[] list = line.substring(1, line.length()-1).split(",");
-        String name = AskName(console, list[0]);
-        Coordinates coordinates = AskCoordinates(console, list[1], list[2]);
-        Location from = AskLocation(console, list[3], list[4], list[5], list[6]);
-        Location to = AskLocation(console, list[7], list[8], list[9], list[10]);
-        int distance = AskDistance(console, list[11]);
-        return new Route(id, name, coordinates, ZonedDateTime.now(), from, to, distance);
+        try{
+            String name = AskName(console, list[0]);
+            Coordinates coordinates = AskCoordinates(console, list[1], list[2]);
+            Location from = AskLocation(console, list[3], list[4].trim(), list[5].trim(), list[6].trim());
+            Location to = AskLocation(console, list[7], list[8], list[9], list[10]);
+            int distance = AskDistance(console, list[11]);
+            return new Route(id, name, coordinates, ZonedDateTime.now(), from, to, distance);
+        } catch (NoSuchElementException | ArrayIndexOutOfBoundsException e){
+            return null;
+        }
+
 
     }
     private static String AskName(StandardConsole console, String name) throws AskBreak{
         try{
             if (name.equals("exit")) throw new AskBreak();
-            if (name.isEmpty()) console.printError(name+" is not a valid route name");
+            if (name.isEmpty()) return null;
 
         }  catch(NoSuchElementException | IllegalStateException e){
             console.printError("Reading error");
@@ -36,12 +41,14 @@ public class ParseFileRoute {
 
     private static Coordinates AskCoordinates(StandardConsole console, String lineX, String lineY) throws AskBreak{
         try{
+            lineX = lineX.trim();
+            lineY = lineY.trim();
             double x = 0;
             if (lineX.equals("exit")) throw new AskBreak();
             if (!lineX.isEmpty()) {
                 try {
                     x = Double.parseDouble(lineX);
-                    if (x > -605){
+                    if (x < -605){
                         console.printError("Coordinate x must be greater -605.");
                         return null;
                     }
@@ -56,7 +63,7 @@ public class ParseFileRoute {
                 if (!lineY.isEmpty()){
                     try {
                         y = Float.parseFloat(lineY);
-                        if (y<=243) {
+                        if (y>243) {
                             console.printError("Coordinate y must be less 244.");
                             return null;
                         }
@@ -75,6 +82,9 @@ public class ParseFileRoute {
     }
     private static Location AskLocation(StandardConsole console, String LocationName, String coordinateX, String coordinateY, String coordinateZ) throws AskBreak{
         try{
+            coordinateX = coordinateX.trim();
+            coordinateY = coordinateY.trim();
+            coordinateZ = coordinateZ.trim();
             String name = "";
             if (LocationName.equals("exit")) throw new AskBreak();
             if (!LocationName.isEmpty()){
@@ -95,6 +105,7 @@ public class ParseFileRoute {
                     x = Long.parseLong(coordinateX);
                 }
                 catch (NumberFormatException e) {
+                    console.println(coordinateX);
                     console.printError("Coordinate x of Location must be integer number.");
                     return null;
                 }

@@ -3,7 +3,10 @@ package Commands;
 import Client.StandardConsole;
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
-
+/**
+ * Команда save: сохраняет коллекцию в файл.
+ * @author sh_ub
+ */
 public class Save extends Command {
     private final CollectionManager collectionManager;
     private final StandardConsole console;

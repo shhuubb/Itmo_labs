@@ -7,6 +7,11 @@ import model.Route;
 
 import java.util.Vector;
 
+/**
+ * Команда max_by_name: выводит любой объект из коллекции, значение поля name которого является максимальным.
+ * @author sh_ub
+ */
+
 public class MaxByName extends Command {
     private final CollectionManager collectionManager;
     private final StandardConsole console;
@@ -16,7 +21,11 @@ public class MaxByName extends Command {
         this.collectionManager = collectionManager;
         this.console = console;
     }
-
+    /**
+     * Метод для получения максимального имени
+     * @param collection коллекция
+     * @author sh_ub
+     */
     public String GettingMaxName(Vector<Route> collection){
         return collection.stream()
                 .map(Route::getName)

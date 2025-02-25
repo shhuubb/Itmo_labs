@@ -5,7 +5,10 @@ import Utility.AskBreak;
 
 import java.time.ZonedDateTime;
 import java.util.NoSuchElementException;
-
+/**
+ * Класс для получения данных о маршруте от пользователя
+ * @author sh_ub
+ */
 public class Ask {
     public static Route AskRoute(StandardConsole console, Long id) throws AskBreak {
         var name = AskName(console);
@@ -80,7 +83,7 @@ public class Ask {
     public static Location AskLocation(StandardConsole console) throws AskBreak{
 
         try{
-            console.println("Location name: ");
+            console.print("Location name: ");
             String name;
 
             while(true){
@@ -127,7 +130,7 @@ public class Ask {
                 }
             }
 
-            console.println("Coordinate z of Location: ");
+            console.print("Coordinate z of Location: ");
             double z;
 
             while(true){

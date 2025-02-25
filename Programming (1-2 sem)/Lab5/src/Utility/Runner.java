@@ -20,11 +20,10 @@ public class Runner {
 
     public void interactiveMode() {
         try {
-            ExecutionResponse commandStatus;
+            ExecutionResponse commandStatus = new ExecutionResponse("start", true);
             String[] userCommand;
-
             do {
-                console.prompt();
+                if (commandStatus.isSuccess()) console.prompt();
                 userCommand = (console.readln().trim() + " ").split(" ", 2);
                 userCommand[1] = userCommand[1].trim();
 
@@ -41,6 +40,7 @@ public class Runner {
 
     private ExecutionResponse launchCommand(String[] userCommand) {
         if (userCommand[0].isEmpty()) return new ExecutionResponse("Empty command", false);
+
         var command = commandManager.getCommands().get(userCommand[0]);
 
         if (command == null) {
@@ -50,11 +50,11 @@ public class Runner {
 
         switch (userCommand[0]) {
             case "exit" -> {
-                return commandManager.getCommands().get("exit").execute(userCommand[1]);
-
+                System.exit(1);
+                return new ExecutionResponse("Exit", true);
             }
             case "execute_script" -> {
-                return commandManager.getCommands().get("execute_script").execute(userCommand[1]);
+                return ScriptMode(userCommand[1]);
             }
             default -> {
                 return commandManager.getCommands().get(userCommand[0]).execute(userCommand[1]); }
@@ -63,26 +63,41 @@ public class Runner {
 
     private ExecutionResponse ScriptMode(String fileName) {
         String[] userCommand;
-        ExecutionResponse commandStatus = new ExecutionResponse("ScriptMode", true);
+        ExecutionResponse commandStatus;
         scriptStack.add(fileName);
         if (!new File(fileName).exists()) {
             console.printError("File is not exists");
             return new ExecutionResponse("File is not exists",false);
         }
-
+        String line;
         try (FileReader filereader = new FileReader(fileName); BufferedReader bufferedReader = new BufferedReader(filereader)) {
             do{
-                userCommand = (bufferedReader.readLine().trim() + " ").split(" ", 2);
+                line = bufferedReader.readLine();
+                userCommand = (line.trim() + " ").split(" ", 2);
                 userCommand[1] = userCommand[1].trim();
                 commandManager.addToHistory(userCommand[0]);
-                switch (userCommand[0]) {
-                    case "execute_script" -> {
-
+                var needLaunch = true;
+                if (userCommand[0].equals("execute_script")) {
+                    var recStart = -1;
+                    var i = 0;
+                    for (String script : scriptStack) {
+                        i++;
+                        if (userCommand[1].equals(script)) {
+                            if (recStart < 0) recStart = i;
+                            if (lengthRecursion < 0) {
+                                console.println("Была замечена рекурсия! Введите максимальную глубину рекурсии (0..500)");
+                                while (lengthRecursion < 0 || lengthRecursion > 500) {
+                                    try { console.print("> "); lengthRecursion = Integer.parseInt(console.readln().trim()); } catch (NumberFormatException e) { console.println("длина не распознан"); }
+                                }
+                            }
+                            if (i > recStart + lengthRecursion || i > 500)
+                                needLaunch = false;
+                        }
                     }
-                    default -> launchCommand(userCommand);
                 }
+                commandStatus = needLaunch ? launchCommand(userCommand) :new ExecutionResponse("scriptMode", true);
             }
-            while (commandStatus.isSuccess() || !commandStatus.getResponse().equals("exit"));
+            while (!line.isEmpty() || commandStatus.isSuccess() || !commandStatus.getResponse().equals("exit"));
 
         }catch (FileNotFoundException exception) {
             console.printError("File is not found");

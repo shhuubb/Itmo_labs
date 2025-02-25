@@ -1,8 +1,12 @@
 package Utility;
-
+/**
+ * Класс для обработки выполнения комманд
+ * @author sh_ub
+ */
 public class ExecutionResponse {
-    private String response;
-    private boolean success;
+
+    private String response; // сообщение о выполнение
+    private boolean success; // флаг выполнения
     public ExecutionResponse(String response, boolean success) {
         this.response = response;
         this.success = success;
