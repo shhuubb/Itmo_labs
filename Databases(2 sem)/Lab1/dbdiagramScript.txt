@@ -1,0 +1,57 @@
+Table ActionScene{
+  Id serial [pk]
+  Placeid int  [ref: < Place.Id]
+  Objectid int [ref: < Objects.Id]
+  Actionid int [ref: < Actions .Id]
+  StartTime DATETIME 
+  EndTime DATETIME
+}
+ 
+
+Table Place{
+  Id serial [pk]
+  Name  varchar(100) UNIQUE
+}
+
+Table Actions{
+  Id serial [pk]
+  Name varchar(100)
+  ActionTypeId int [ref: > ActionToType.ActionId]
+  DirectionId int [ref: - Place.Id]
+  Purpose TEXT
+}
+Table ActionToType{
+  ActionId int 
+  ActionTypeId int
+}
+Table ActionDescription{
+  Id serial  [pk, ref: > ActionToType.ActionTypeId]
+  Description TEXT
+}
+
+Table Objects {
+  Id serial [pk]
+  Type varchar(10)
+  Characteristic varchar(1000)
+}
+
+Table Animal {
+  Id serial [pk]
+  Object_id int
+  Nickname varchar(100)
+  Age TINYINT
+  Size varchar
+}
+
+Table Human {
+  Id serial [pk]
+  Object_id int
+  Name varchar(100)
+  Age smallint 
+  Gender varchar(10)
+}
+
+
+
+Ref: Animal.Object_id > Objects.Id
+Ref: Human.Object_id > Objects.Id
