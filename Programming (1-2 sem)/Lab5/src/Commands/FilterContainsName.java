@@ -31,7 +31,7 @@ public class FilterContainsName extends Command {
         var list = GettingMatches(collectionManager.getCollection(), arg);
         console.println(list.size() + " matches found.");
         for (var match : list) {
-            console.print(match.toString());
+            console.println(match.toString());
         }
 
         return new ExecutionResponse("Matches found.", true);

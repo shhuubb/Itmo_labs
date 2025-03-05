@@ -40,7 +40,7 @@ public class MaxByName extends Command {
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
         console.println(GettingMaxName(collectionManager.getCollection()));
-        return new ExecutionResponse("Successful Print of max name", false);
+        return new ExecutionResponse("Successful Print of max name", true);
     }
 
 

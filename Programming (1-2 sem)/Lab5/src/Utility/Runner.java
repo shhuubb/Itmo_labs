@@ -22,13 +22,14 @@ public class Runner {
         try {
             ExecutionResponse commandStatus = new ExecutionResponse("start", true);
             String[] userCommand;
+            console.prompt();
             do {
-                if (commandStatus.isSuccess()) console.prompt();
                 userCommand = (console.readln().trim() + " ").split(" ", 2);
                 userCommand[1] = userCommand[1].trim();
 
                 commandManager.addToHistory(userCommand[0]);
                 commandStatus = launchCommand(userCommand);
+                console.prompt();
             } while (commandStatus.isSuccess() || !commandStatus.getResponse().equals("exit"));
 
         } catch (NoSuchElementException exception) {
@@ -44,7 +45,7 @@ public class Runner {
         var command = commandManager.getCommands().get(userCommand[0]);
 
         if (command == null) {
-            console.printError("Command '" + userCommand[0] + "' not found. Use 'help' for more information.");
+            console.println("Command '" + userCommand[0] + "' not found. Use 'help' for more information.");
             return new ExecutionResponse("Command is not found", false);
         }
 
@@ -109,7 +110,7 @@ public class Runner {
         } catch (IOException e) {
             console.printError("Error while reading a file");
         } finally {
-            scriptStack.removeLast();
+            scriptStack.remove(scriptStack.size()-1);
         }
         return new ExecutionResponse("Error", false);
     }

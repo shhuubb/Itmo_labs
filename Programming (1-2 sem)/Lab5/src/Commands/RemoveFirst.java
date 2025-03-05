@@ -25,7 +25,7 @@ public class RemoveFirst extends Command {
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
 
-        var id = collectionManager.getCollection().getFirst().getId();
+        var id = collectionManager.getCollection().get(0).getId();
 
         if(!collectionManager.remove(id)){
             console.println("Remove a Route by Id: " + id);

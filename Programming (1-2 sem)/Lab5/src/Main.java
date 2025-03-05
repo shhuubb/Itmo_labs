@@ -7,13 +7,14 @@ import Managers.DumpManager;
 
 import Utility.Runner;
 
+import static Utility.Path.getJsonPath;
+
 
 public class Main {
     public static void main(String[] args) {
+
         var console = new StandardConsole();
-
-
-        var dumpManager = new DumpManager("Json.json", console);
+        var dumpManager = new DumpManager(getJsonPath(), console);
         var collectionManager = new CollectionManager(dumpManager);
         if (!collectionManager.init()) {
             System.exit(1);

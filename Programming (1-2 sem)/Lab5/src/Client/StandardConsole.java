@@ -19,7 +19,7 @@ public class StandardConsole implements Console {
     }
 
     public void printError(Object obj) {
-        System.err.println("Error: " + obj);
+        System.out.println("Error: " + obj);
     }
 
     public String readln() throws NoSuchElementException, IllegalStateException {
