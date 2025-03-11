@@ -1,15 +1,14 @@
 package Commands;
 
-import Client.StandardConsole;
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
+
 /**
  * Команда save: сохраняет коллекцию в файл.
  * @author sh_ub
  */
 public class Save extends Command {
     private final CollectionManager collectionManager;
-
 
     public Save(CollectionManager collectionManager) {
         super("save", "сохранить коллекцию в файл");

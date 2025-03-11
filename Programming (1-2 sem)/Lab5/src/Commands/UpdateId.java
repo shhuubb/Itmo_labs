@@ -27,40 +27,30 @@ public class UpdateId extends Command {
 
     @Override
     public ExecutionResponse execute(String arg) {
-        try {
-            String[] args = arg.split(" ");
+        String[] args = arg.split(" ");
 
-            if (args.length > 1) console.printError("Illegal number of arguments!");
-
+        try{
+            Long id = Long.parseLong(args[0].trim());
             Route a;
-            try{
-                Long id = Long.parseLong(args[0].trim());
-                console.println("Update a Route with id: " + args[0]);
-                if (!(args.length == 1 || (args.length == 2 && args[1].trim().charAt(0) == '{')))
-                    return new ExecutionResponse("Illegal number of arguments!", false);
-
-                else if (args.length == 1)
-                    a = AskRoute(console, id);
-
-                else {
-                    try {
-                        a = ParseRoute(console, args[1], id);
-                    } catch (NullPointerException e) {
-                        return new ExecutionResponse("Illegal argument!", false);
-                    }
+            if (!(args.length == 1 || (args.length == 2 && args[1].trim().charAt(0) == '{')))
+                return new ExecutionResponse("Illegal number of arguments!", false);
+            else if (args.length == 1)
+                a = AskRoute(console, id);
+            else {
+                try {
+                    a = ParseRoute(console, args[1], id);
+                } catch (NullPointerException e) {
+                    return new ExecutionResponse("Illegal argument!", false);
                 }
-
-                if (!collectionManager.update(a)) {
-                    return new ExecutionResponse("The route with this id was not found.", false);
-                }
-
-            } catch(AskBreak e){
-                return new ExecutionResponse("Cancel", false);
             }
-            return new ExecutionResponse("Route was successfully updated", true);
-            } catch (NumberFormatException e) {
-                return new ExecutionResponse("Illegal argument!", false);
-            }
+
+            if (!collectionManager.update(a))
+                return new ExecutionResponse("The route with this id was not found.", false);
+
+        } catch(AskBreak e){
+            return new ExecutionResponse("Exit", false);
+        }
+        return new ExecutionResponse("Route was successfully updated", true);
     }
 }
 

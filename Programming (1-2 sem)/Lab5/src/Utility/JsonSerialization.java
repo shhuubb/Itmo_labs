@@ -27,7 +27,6 @@ public class JsonSerialization {
                 json.append(",");
             }
         }
-
         json.append("\n]");
         return json.toString();
     }
@@ -73,8 +72,6 @@ public class JsonSerialization {
                 object.getDayOfMonth(),
                 object.getHour(),
                 object.getMinute());
-
-
     }
     private static String LocationToJson(Location object) {
         return """

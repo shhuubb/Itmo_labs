@@ -2,9 +2,9 @@ package Commands;
 
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
+
 /**
  * Команда show: выводит все элементы коллекции в строковом представлении.
- *
  * @author sh_ub
  */
 public class Show extends Command {
@@ -18,7 +18,6 @@ public class Show extends Command {
 
     @Override
     public ExecutionResponse execute(String arg) {
-
         String[] args = arg.trim().split(" ");
 
         if (args.length > 1)

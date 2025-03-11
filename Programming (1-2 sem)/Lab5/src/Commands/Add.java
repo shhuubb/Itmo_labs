@@ -6,6 +6,8 @@ import Utility.AskBreak;
 import Utility.ExecutionResponse;
 import model.Route;
 
+import java.util.Objects;
+
 import static Utility.ParseFileRoute.ParseRoute;
 import static model.Ask.AskRoute;
 
@@ -28,32 +30,22 @@ public class Add extends Command{
     public ExecutionResponse execute(String arg) {
         Route a;
         try{
-            if(!arg.isEmpty() && !(arg.trim().charAt(0) == '{'  )){
+            if(!arg.isEmpty() && !(arg.trim().charAt(0) == '{'  ))
                 return new ExecutionResponse("Illegal number of arguments!", false);
-            }
-            else if (arg.isEmpty()){
+            else if (arg.isEmpty())
                 a = AskRoute(console, collectionManager.getCurrentId());
-            }
-            else {
+            else
                 a = ParseRoute(console, arg, collectionManager.getCurrentId());
-            }
 
-            if (a != null) {
-                if (a.validate()){
-                    collectionManager.add(a);
-                    return new ExecutionResponse("Object Route is successfully added!!", true);
-                }
-                else {
-                    return new ExecutionResponse("Object Route is not valid.", false);
-                }
+            if (Objects.requireNonNull(a).validate()){
+                collectionManager.add(a);
+                return new ExecutionResponse("Object Route is successfully added!!", true);
             }
-            else {
-                return new ExecutionResponse("Illegal argument!", false);
-            }
+            else
+                return new ExecutionResponse("Object Route is not valid.", false);
 
         } catch (AskBreak e){
-            return new ExecutionResponse("Cancel", false);
+            return new ExecutionResponse("Interrupting", false);
         }
-
     }
 }

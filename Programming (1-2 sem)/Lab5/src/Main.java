@@ -1,32 +1,34 @@
 import Client.StandardConsole;
+
 import Commands.*;
+
 import Managers.CollectionManager;
 import Managers.CommandManager;
 import Managers.DumpManager;
 
-
 import Utility.Runner;
-import model.Route;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
 
 import static Utility.Path.getJsonPath;
 
-
+/**
+ * Главный класс
+ */
 public class Main {
     public static void main(String[] args) {
-
         var console = new StandardConsole();
         var dumpManager = new DumpManager(getJsonPath(), console);
         final var collectionManager = new CollectionManager(dumpManager);
+
+        //Проверка загрузки коллекции
         if (!collectionManager.init()) {
             System.exit(1);
         }
-
+        //Добавление комманд
         var commandManager = new CommandManager() {{
             register("help", new Help(console, this));
-            register("info", new Info(console, collectionManager));
+            register("info", new Info(collectionManager));
             register("show", new Show(collectionManager));
             register("add", new Add(console, collectionManager));
             register("update", new UpdateId(console, collectionManager));
@@ -34,7 +36,7 @@ public class Main {
             register("clear", new Clear(collectionManager));
             register("save", new Save(collectionManager));
             register("execute_script", new ExecuteScript());
-            register("exit", new Exit(console));
+            register("exit", new Exit());
             register("remove_first", new RemoveFirst(collectionManager));
             register("sort", new Sort(console, collectionManager));
             register("max_by_name", new MaxByName(collectionManager));

@@ -1,6 +1,5 @@
 package Commands;
 
-import Client.StandardConsole;
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
 import model.Route;
@@ -11,7 +10,6 @@ import java.util.Vector;
  * Команда max_by_name: выводит любой объект из коллекции, значение поля name которого является максимальным.
  * @author sh_ub
  */
-
 public class MaxByName extends Command {
     private final CollectionManager collectionManager;
 
@@ -19,10 +17,10 @@ public class MaxByName extends Command {
         super("max_by_name", "Вывести любой объект из коллекции, значение поля name которого является максимальным");
         this.collectionManager = collectionManager;
     }
+
     /**
-     * Метод для получения максимального имени
+     * Метод для получения объекта из коллекции, значение поля name которого является максимальным.
      * @param collection коллекция
-     * @author sh_ub
      */
     public String GettingMaxName(Vector<Route> collection){
         return collection.stream()

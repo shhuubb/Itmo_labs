@@ -18,6 +18,9 @@ public class Runner {
         this.commandManager = commandManager;
     }
 
+    /**
+     * Режим чтения команд из консоли
+     */
     public void interactiveMode() {
         try {
             ExecutionResponse commandStatus;
@@ -44,14 +47,18 @@ public class Runner {
         }
     }
 
+    /**
+     * Метод для выбора комманды
+     * @param userCommand команда пользователя
+     * @return ExecutionResponse выбора
+     */
     private ExecutionResponse launchCommand(String[] userCommand) {
         if (userCommand[0].isEmpty()) return new ExecutionResponse("", true);
 
         var command = commandManager.getCommands().get(userCommand[0]);
 
-        if (command == null) {
+        if (command == null)
             return new ExecutionResponse("Command '" + userCommand[0] + "' not found. Use 'help' for more information.", false);
-        }
 
         switch (userCommand[0]) {
             case "exit" -> {
@@ -66,6 +73,11 @@ public class Runner {
         }
     }
 
+    /**
+     * Режим чтения комманд из файла
+     * @param fileName имя файла
+     * @return ExecutionResponse результат выполнения
+     */
     private ExecutionResponse ScriptMode(String fileName) {
         String[] userCommand;
         ExecutionResponse commandStatus;

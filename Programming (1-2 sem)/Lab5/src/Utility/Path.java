@@ -5,16 +5,15 @@ package Utility;
  * @author sh_ub
  */
 public class Path {
+
     /**
-     * Возвращает путь в зависимости от того, где запускается прога: локально или на гелиосе
+     * Возвращает путь к файлу в зависимости от нахождения программы на сервере или на локальном устройстве.
+     * @return String путь к файлу
      */
+
     public static String getJsonPath() {
         String jsonPath = System.getenv("JSON_PATH");
 
-        if (jsonPath == null || jsonPath.isEmpty()) {
-            jsonPath = "/home/studs/s468125/history.txt"; // Локальный путь по умолчанию
-        }
-
-        return jsonPath;
+        return jsonPath == null || jsonPath.isEmpty() ? "/home/studs/s468125/history.txt" : jsonPath;
     }
 }

@@ -3,6 +3,7 @@ package Commands;
 import Client.StandardConsole;
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
+
 /**
  * Команда sort: сортирует коллекцию в естественном порядке.
  * @author sh_ub
@@ -18,9 +19,8 @@ public class Sort extends Command {
 
     @Override
     public ExecutionResponse execute(String arg) {
-        if(!arg.isEmpty()) {
+        if(!arg.isEmpty())
             return new ExecutionResponse("Illegal number of arguments!", false);
-        }
 
         collectionManager.sort();
         return new ExecutionResponse("Successfully sorted collection", true);

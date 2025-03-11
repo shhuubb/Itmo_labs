@@ -11,34 +11,27 @@ import java.util.Vector;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 /**
- * Класс для десереализации данных из json
+ * Класс для дессереализации данных из json
  * @author sh_ub
  */
 public class JsonParser {
     public static Vector<Route> parseJson(String json) {
         Vector<Route> routes = new Vector<>();
         json = json.trim().replace("\n", "").replace("\r", "").replace(" ", "");
-
-
         json = json.substring(1, json.length() - 1);
-
-
         String[] routeStrings = json.split("\\},\\s*\\{");
 
         for (String routeString : routeStrings) {
-
-            if (!routeString.startsWith("{")) {
+            if (!routeString.startsWith("{"))
                 routeString = "{" + routeString;
-            }
-            if (!routeString.endsWith("}")) {
+            if (!routeString.endsWith("}"))
                 routeString = routeString + "}";
-            }
 
             Route route = parseRoute(routeString);
             routes.add(route);
         }
-
         return routes;
     }
 
@@ -60,92 +53,41 @@ public class JsonParser {
         } else {
             return null;
         }
-
-
     }
 
     private static Coordinates parseCoordinates(String coordinatesString) {
-        double x = 0.;
-        float y = 0.f;
-        coordinatesString = coordinatesString.substring(1, coordinatesString.length() - 1); // Убираем {}
+        Pattern pattern = Pattern.compile("\\{\"x\":(.+),\"y\":(.+)}");
+        Matcher matcher = pattern.matcher(coordinatesString);
 
-        String[] fields = coordinatesString.split(",");
-        for (String field : fields) {
-            String[] keyValue = field.split(":", 2);
-            String key = keyValue[0].replace("\"", "");
-            String value = keyValue[1].replace("\"", "");
+        if (matcher.find())
+            return new Coordinates(Double.parseDouble(matcher.group(1)), Float.parseFloat(matcher.group(2)));
 
-            switch (key) {
-                case "x" ->
-                        x = Double.parseDouble(value);
-                case "y" ->
-                        y = Float.parseFloat(value);
-
-            }
-        }
-
-        return new Coordinates(x, y);
+        return null;
     }
 
     private static ZonedDateTime parseCreationDate(String creationDateString) {
-
-        creationDateString = creationDateString.substring(1, creationDateString.length() - 1);
-        int year = 0, month =1, day = 1, hour = 0 , minute = 0;
-        String[] fields = creationDateString.split(",");
-        for (String field : fields) {
-            String[] keyValue = field.split(":", 2);
-            String key = keyValue[0].replace("\"", "");
-            String value = keyValue[1].replace("\"", "");
-
-            switch (key) {
-                case "year" ->
-                        year = Integer.parseInt(value);
-
-                case "month" ->
-                        month = Integer.parseInt(value);
-
-                case "day" ->
-                        day = Integer.parseInt(value);
-
-                case "hour"->
-                        hour = Integer.parseInt(value);
-
-                case "minute"->
-                        minute = Integer.parseInt(value);
-            }
+        Pattern pattern = Pattern.compile("\\{\"year\":(.+),\\s*\"month\":(.+),\\s*\"day\":(.+),\\s*\"hour\":(.+),\\s*\"minute\":(.+)}");
+        Matcher matcher = pattern.matcher(creationDateString);
+        if (matcher.find()){
+            LocalDateTime localDateTime = LocalDateTime.of(
+                    Integer.parseInt(matcher.group(1)),
+                    Integer.parseInt(matcher.group(2)),
+                    Integer.parseInt(matcher.group(3)),
+                    Integer.parseInt(matcher.group(4)),
+                    Integer.parseInt(matcher.group(5)));
+            
+            ZoneId zoneId = ZoneId.systemDefault();
+            return ZonedDateTime.of(localDateTime, zoneId);
         }
-        LocalDateTime localDateTime = LocalDateTime.of(year, month, day, hour, minute);
-        ZoneId zoneId = ZoneId.systemDefault();
-        return ZonedDateTime.of(localDateTime, zoneId);
+        return null;
     }
 
-
     private static Location parseLocation(String locationString) {
-        long x = 0L;
-        long y = 0L;
-        double z = 0.;
-        String name = "";
-        locationString = locationString.substring(1, locationString.length() - 1);
+        Pattern pattern = Pattern.compile("\\{\"LocationName\":(.+),\\s*\"x\":(.+),\\s*\"y\":(.+),\\s*\"z\":(.+)}");
+        Matcher matcher = pattern.matcher(locationString);
+        if (matcher.find())
+            return new Location(Long.parseLong(matcher.group(2)), Long.parseLong(matcher.group(3)), Double.parseDouble(matcher.group(4)), matcher.group(1));
 
-        String[] fields = locationString.split(",");
-        for (String field : fields) {
-            String[] keyValue = field.split(":", 2);
-            String key = keyValue[0].replace("\"", "");
-            String value = keyValue[1].replace("\"", "");
-
-            switch (key) {
-                case "LocationName" ->
-                        name = value;
-                case "x" ->
-                        x = Long.parseLong(value);
-                case "y" ->
-                        y = Long.parseLong(value);
-                case "z" ->
-                        z = Double.parseDouble(value);
-
-            }
-        }
-
-        return new Location(x, y, z, name);
+        return null;
     }
 }

@@ -50,9 +50,8 @@ public class DumpManager {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     line = line.trim();
-                    if (!line.isEmpty()) {
+                    if (!line.isEmpty())
                         jsonString.append(line);
-                    }
                 }
                 if (!jsonString.toString().trim().isEmpty()) {
                     if (jsonString.substring(1, jsonString.length() - 1).trim().isEmpty()) {
@@ -61,7 +60,6 @@ public class DumpManager {
                     return parseJson(jsonString.toString());
                 }
                 return new Vector<>();
-
 
             } catch (FileNotFoundException e) {
                 console.printError("File " + fileName + " could not be opened.");

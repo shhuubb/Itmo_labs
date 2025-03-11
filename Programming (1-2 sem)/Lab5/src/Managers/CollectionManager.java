@@ -39,9 +39,11 @@ public class CollectionManager {
     }
 
     public Long getCurrentId() {
+        currentId = 1L;
         while(routes.get(currentId) != null) currentId++;
         return currentId;
     }
+
     /**
      * Метод для сохранения коллекции в файл
      */
@@ -49,6 +51,7 @@ public class CollectionManager {
         dumpManager.dump(collection);
         lastSaveTime = LocalDateTime.now();
     }
+
     /**
      * Метод для добавления маршрута в коллекцию
      * @param r маршрут
@@ -60,6 +63,7 @@ public class CollectionManager {
         sort();
         return true;
     }
+
     /**
      * Метод для удаления маршрута из коллекции по id
      * @param id маршрут
@@ -72,6 +76,7 @@ public class CollectionManager {
         sort();
         return true;
     }
+
     /**
      * Метод для сортировки коллекции
      */
@@ -87,6 +92,7 @@ public class CollectionManager {
         sort();
         return true;
     }
+
     /**
      * Метод для инициализации коллекции
      */
@@ -107,6 +113,7 @@ public class CollectionManager {
         sort();
         return true;
     }
+
     /**
      * Метод для очищения коллекции
      */

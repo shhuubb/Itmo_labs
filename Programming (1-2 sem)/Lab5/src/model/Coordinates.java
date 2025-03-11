@@ -1,6 +1,8 @@
 package model;
 
-public class Coordinates{
+import Utility.Validatable;
+
+public class Coordinates implements Validatable {
     private Double x; //Значение поля должно быть больше -605, Поле не может быть null
     private Float y; //Максимальное значение поля: 243, Поле не может быть null
 
@@ -28,5 +30,11 @@ public class Coordinates{
     @Override
     public String toString() {
         return "("+x + "; " + y+")";
+    }
+
+    @Override
+    public boolean validate() {
+        if (x== null) return false;
+        return y != null;
     }
 }

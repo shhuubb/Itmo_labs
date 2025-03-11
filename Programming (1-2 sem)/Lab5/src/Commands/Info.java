@@ -13,24 +13,19 @@ import java.time.LocalDateTime;
  */
 public class Info extends Command {
     private final CollectionManager collectionManager;
-    private final StandardConsole console;
 
-    public Info(StandardConsole console, CollectionManager collectionManager) {
+    public Info(CollectionManager collectionManager) {
         super("info", "Вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)");
         this.collectionManager = collectionManager;
-        this.console = console;
     }
 
     @Override
     public ExecutionResponse execute(String arg) {
-        if(!arg.isEmpty()) {
-            console.printError("Illegal number of arguments!");
+        if(!arg.isEmpty())
             return new ExecutionResponse("Illegal number of arguments!", false);
-        }
 
         LocalDateTime lastInitTime = collectionManager.getLastInitTime();
         LocalDateTime lastSaveTime = collectionManager.getLastSaveTime();
-
 
         var r = """
                 Information about collection: Type, lastInitTime, lastSaveTime and count of elements:

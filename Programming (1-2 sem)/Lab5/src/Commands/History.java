@@ -28,6 +28,12 @@ public class History extends Command {
 
         return new ExecutionResponse(GettingHistory(list), true);
     }
+
+    /**
+     * Получение истории запросов
+     * @param list список запросов
+     * @return последние 7 комманд
+     */
     public String GettingHistory(ArrayList<String> list) {
         StringBuilder sb = new StringBuilder();
         int firstIndex = list.size()>=8? list.size()-8 : 0 ;
