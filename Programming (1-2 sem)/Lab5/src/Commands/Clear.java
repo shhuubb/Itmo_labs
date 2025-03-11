@@ -11,19 +11,16 @@ import Utility.ExecutionResponse;
  */
 public class Clear extends Command {
     private final CollectionManager collectionManager;
-    private final StandardConsole console;
 
 
-    public Clear(StandardConsole console, CollectionManager collectionManager) {
+    public Clear(CollectionManager collectionManager) {
         super("clear", "очистить коллекцию");
         this.collectionManager = collectionManager;
-        this.console = console;
     }
 
     @Override
     public ExecutionResponse execute(String arg) {
         if (!arg.isEmpty()){
-            console.printError("Illegal number of arguments!");
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
         collectionManager.clear();

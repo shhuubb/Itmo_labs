@@ -25,16 +25,15 @@ public class FilterContainsName extends Command {
     @Override
     public ExecutionResponse execute(String arg) {
         if (arg.isEmpty()) {
-            console.printError("Substring is empty");
             return new ExecutionResponse("Substring is empty", false);
         }
         var list = GettingMatches(collectionManager.getCollection(), arg);
-        console.println(list.size() + " matches found.");
+
         for (var match : list) {
             console.println(match.toString());
         }
 
-        return new ExecutionResponse("Matches found.", true);
+        return new ExecutionResponse(list.size() + " matches found.", true);
     }
 
     private ArrayList<Route> GettingMatches(Vector<Route> list, String substring) {

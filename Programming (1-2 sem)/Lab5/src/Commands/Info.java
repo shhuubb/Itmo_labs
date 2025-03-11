@@ -37,13 +37,12 @@ public class Info extends Command {
                 Type: %s,
                 LastInitTime: %s
                 LastSaveTime: %s
-                CountOfElements: %d
-            """.formatted(collectionManager.getCollection().getClass(),
+                CountOfElements: %d"""
+                .formatted(collectionManager.getCollection().getClass(),
                 lastInitTime==null ? "The collection has not been updated in this session yet.": lastInitTime,
                 lastSaveTime==null ? "The collection has not been saved in this session yet.": lastSaveTime,
                 collectionManager.getCollection().size());
 
-        console.print(r);
-        return new ExecutionResponse("Successful getting info!", true);
+        return new ExecutionResponse(r, true);
     }
 }

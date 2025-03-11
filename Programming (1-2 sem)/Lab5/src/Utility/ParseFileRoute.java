@@ -13,9 +13,11 @@ import java.util.NoSuchElementException;
 public class ParseFileRoute {
 
     public static Route ParseRoute(StandardConsole console, String line, Long id) throws AskBreak{
-        final String[] list = line.substring(1, line.length()-1).split(",");
+        line = line.trim();
+        String[] list = line.substring(1, line.length()-1).split(",");
+
         try{
-            String name = AskName(console, list[0]);
+            String name = AskName(console, list[0].trim());
             Coordinates coordinates = AskCoordinates(console, list[1], list[2]);
             Location from = AskLocation(console, list[3], list[4].trim(), list[5].trim(), list[6].trim());
             Location to = AskLocation(console, list[7], list[8], list[9], list[10]);
@@ -152,8 +154,8 @@ public class ParseFileRoute {
             if (distanceLine.equals("exit")) throw new AskBreak();
             if (!distanceLine.isEmpty()){
                     try{
-                        distance = Integer.parseInt(distanceLine);
-                        if(distance > 1) console.printError("Distance must be greater than 1.");
+                        distance = Integer.parseInt(distanceLine.trim());
+                        if(distance <= 1) console.printError("Distance must be greater than 1.");
 
                     }
                     catch(NumberFormatException e){

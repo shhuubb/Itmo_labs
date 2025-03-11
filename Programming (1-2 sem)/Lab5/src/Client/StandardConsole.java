@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class StandardConsole implements Console {
     private static final String P = "> ";
     private static Scanner fileScanner = null;
-    private static Scanner defScanner = new Scanner(System.in);
+    private static final Scanner defScanner = new Scanner(System.in);
 
     public void print(Object message) {
         System.out.print(message);

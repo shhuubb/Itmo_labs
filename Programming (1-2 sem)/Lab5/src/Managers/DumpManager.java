@@ -65,7 +65,7 @@ public class DumpManager {
 
             } catch (FileNotFoundException e) {
                 console.printError("File " + fileName + " could not be opened.");
-            } catch (IllegalStateException | IOException e) {
+            } catch (IOException e) {
                 console.printError("Error in reading file " + fileName + ".");
                 System.exit(0);
             }

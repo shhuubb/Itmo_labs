@@ -9,8 +9,8 @@ import java.util.NoSuchElementException;
 
 public class Runner {
     private Console console;
-    private final CommandManager commandManager;
-    private final List<String> scriptStack = new ArrayList<>();
+    private  CommandManager commandManager;
+    private  List<String> scriptStack = new ArrayList<>();
     private int lengthRecursion = -1;
 
     public Runner(Console console, CommandManager commandManager) {
@@ -20,15 +20,20 @@ public class Runner {
 
     public void interactiveMode() {
         try {
-            ExecutionResponse commandStatus = new ExecutionResponse("start", true);
+            ExecutionResponse commandStatus;
             String[] userCommand;
             console.prompt();
             do {
-                userCommand = (console.readln().trim() + " ").split(" ", 2);
+                userCommand = (console.readln().trim().toLowerCase() + " ").split(" ", 2);
                 userCommand[1] = userCommand[1].trim();
 
                 commandManager.addToHistory(userCommand[0]);
                 commandStatus = launchCommand(userCommand);
+                String answer = commandStatus.getResponse();
+
+                if(commandStatus.isSuccess()) console.print(answer + (answer.isEmpty() ? "" : "\n"));
+                else console.printError(answer);
+
                 console.prompt();
             } while (commandStatus.isSuccess() || !commandStatus.getResponse().equals("exit"));
 
@@ -40,13 +45,12 @@ public class Runner {
     }
 
     private ExecutionResponse launchCommand(String[] userCommand) {
-        if (userCommand[0].isEmpty()) return new ExecutionResponse("Empty command", false);
+        if (userCommand[0].isEmpty()) return new ExecutionResponse("", true);
 
         var command = commandManager.getCommands().get(userCommand[0]);
 
         if (command == null) {
-            console.println("Command '" + userCommand[0] + "' not found. Use 'help' for more information.");
-            return new ExecutionResponse("Command is not found", false);
+            return new ExecutionResponse("Command '" + userCommand[0] + "' not found. Use 'help' for more information.", false);
         }
 
         switch (userCommand[0]) {
@@ -74,9 +78,8 @@ public class Runner {
         try (FileReader filereader = new FileReader(fileName); BufferedReader bufferedReader = new BufferedReader(filereader)) {
             do{
                 line = bufferedReader.readLine();
-                userCommand = (line.trim() + " ").split(" ", 2);
+                userCommand = (line.trim()+ " ").split(" ", 2);
                 userCommand[1] = userCommand[1].trim();
-                commandManager.addToHistory(userCommand[0]);
                 var needLaunch = true;
                 if (userCommand[0].equals("execute_script")) {
                     var recStart = -1;
@@ -93,14 +96,23 @@ public class Runner {
                             }
                             if (i > recStart + lengthRecursion || i > 500)
                                 needLaunch = false;
+
                         }
                     }
                 }
-                commandStatus = needLaunch ? launchCommand(userCommand) :new ExecutionResponse("scriptMode", true);
-            }
-            while (!line.isEmpty() || commandStatus.isSuccess() || !commandStatus.getResponse().equals("exit"));
 
-        }catch (FileNotFoundException exception) {
+                commandStatus = needLaunch ? launchCommand(userCommand) : new ExecutionResponse("Recursion depth exceeded!", false);
+
+                String answer = commandStatus.getResponse();
+                if(commandStatus.isSuccess()) console.print(answer + (answer.isEmpty() ? "" : "\n"));
+                else console.printError(answer);
+            }
+            while (commandStatus.isSuccess() || !commandStatus.getResponse().equals("exit"));
+
+        } catch (NullPointerException exception) {
+            return new ExecutionResponse("---------------Script succesfully executed---------------", true);
+        }
+        catch (FileNotFoundException exception) {
             console.printError("File is not found");
         }catch (NoSuchElementException exception) {
             console.printError("File is empty");
@@ -112,6 +124,6 @@ public class Runner {
         } finally {
             scriptStack.remove(scriptStack.size()-1);
         }
-        return new ExecutionResponse("Error", false);
+        return new ExecutionResponse("", true);
     }
 }

@@ -11,6 +11,7 @@ import java.util.NoSuchElementException;
  */
 public class Ask {
     public static Route AskRoute(StandardConsole console, Long id) throws AskBreak {
+        console.println("Add a Route:");
         var name = AskName(console);
         var coordinates = AskCoordinates(console);
         var from = AskLocation(console);

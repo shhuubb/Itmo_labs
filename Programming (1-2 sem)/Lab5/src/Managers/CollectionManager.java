@@ -6,18 +6,19 @@ import model.Route;
 import java.time.LocalDateTime;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Класс для управления коллекцией
  * @author sh_ub
  */
 public class CollectionManager {
-    private Long currentId = 1L;
-    private Map<Long, Route> routes = new HashMap<>();
-    private Vector<Route> collection = new Vector<Route>();
+    private static Long currentId = 1L;
+    private static Map<Long, Route> routes = new HashMap<>();
+    private static Vector<Route> collection = new Vector<>();
     private LocalDateTime lastInitTime;
     private LocalDateTime lastSaveTime;
-    private final DumpManager dumpManager;
+    private DumpManager dumpManager;
 
     public CollectionManager(DumpManager dumpManager) {
         this.lastInitTime = null;
@@ -92,6 +93,7 @@ public class CollectionManager {
     public boolean init(){
         collection.clear();
         lastInitTime = LocalDateTime.now();
+
         collection = dumpManager.read();
         for (var e : collection)
             if (routes.get(e.getId()) != null) {
@@ -119,10 +121,6 @@ public class CollectionManager {
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder();
-        for (var e : collection){
-            str.append(e.toString()).append("\n");
-        }
-        return str.toString();
+        return collection.isEmpty() ?  "" :  collection.stream().map(Route::toString).collect(Collectors.joining("\n"));
     }
 }

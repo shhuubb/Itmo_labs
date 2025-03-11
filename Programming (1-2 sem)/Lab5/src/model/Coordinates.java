@@ -1,8 +1,5 @@
 package model;
-/**
- * Класс координат
- * @author sh_ub
- */
+
 public class Coordinates{
     private Double x; //Значение поля должно быть больше -605, Поле не может быть null
     private Float y; //Максимальное значение поля: 243, Поле не может быть null

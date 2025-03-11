@@ -2,7 +2,7 @@ package Utility;
 
 /**
  * Управляет переменной окружения для парсинга history
- * @author
+ * @author sh_ub
  */
 public class Path {
     /**

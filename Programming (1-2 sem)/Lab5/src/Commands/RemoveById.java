@@ -3,6 +3,9 @@ package Commands;
 import Client.StandardConsole;
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
+
+import java.util.Arrays;
+
 /**
  * Команда remove_by_id id: удаляет элемент из коллекции по его id.
  *
@@ -24,7 +27,6 @@ public class RemoveById extends Command{
         try{
             String[] args = arg.split(" ");
             if(args.length < 1){
-                console.printError("Illegal number of arguments!");
                 return new ExecutionResponse("Illegal number of arguments!", false);
             }
             for (String s : args) {
@@ -32,13 +34,12 @@ public class RemoveById extends Command{
                 Long id = Long.parseLong(s);
 
                 if(!collectionManager.remove(id)){
-                    console.printError("The route with this id was not found.");
                     return new ExecutionResponse("The route with this id was not found.", false);
                 }
 
                 console.println("Remove a Route by Id: "+ s);
             }
-            return new ExecutionResponse("Successfully removed!", true);
+            return new ExecutionResponse("Routes with id"+ arg, true);
 
         } catch (NumberFormatException  e){
             return new ExecutionResponse( "Id isn't defined!", false);

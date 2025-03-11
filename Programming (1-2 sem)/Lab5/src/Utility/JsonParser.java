@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Vector;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  * Класс для десереализации данных из json
  * @author sh_ub
@@ -40,41 +43,25 @@ public class JsonParser {
     }
 
     private static Route parseRoute(String routeString) {
-         Long id = null;
-         String name = null;
-         Coordinates coordinates = null;
-         ZonedDateTime creationDate = null;
-         Location from = null;
-         Location to = null;
-         int distance = 1;
-        routeString = routeString.substring(1, routeString.length() - 1);
+        String regex = "\\{\"id\":(.+),\"name\":\"(.+)\",\"coordinates\":(\\{.+}),\"creationDate\":(\\{.+}),\"from\":(\\{.+}),\"to\":(\\{.+}),\"distance\":(.+)}";
 
-        String[] fields = routeString.split(",");
-        for (String field : fields) {
-            String[] keyValue = field.split(":", 2);
-            String key = keyValue[0].replace("\"", "");
-            String value = keyValue[1].replace("\"", "");
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(routeString);
 
-            switch (key) {
-                case "id" ->
-                        id = Long.parseLong(value);
-                case "name" ->
-                        name = value;
-                case "coordinates" ->
-                        coordinates = parseCoordinates(value);
-                case "creationDate" ->
-                        creationDate = parseCreationDate(value);
-                case "from" ->
-                        from = parseLocation(value);
-                case "to" ->
-                        to = parseLocation(value);
-                case "distance" ->
-                        distance = Integer.parseInt(value);
-
-            }
+        if (matcher.find()) {
+            String id = matcher.group(1);// Группа 1: id
+            String name = matcher.group(2); // Группа 2: name
+            String coordinates = matcher.group(3); // Группа 3: coordinates
+            String creationDate = matcher.group(4); // Группа 4: creationDate
+            String from = matcher.group(5); // Группа 5: from
+            String to = matcher.group(6); // Группа 6: to
+            String distance = matcher.group(7); // Группа 7: distance
+            return new Route(Long.parseLong(id), name, parseCoordinates(coordinates), parseCreationDate(creationDate), parseLocation(from), parseLocation(to), Integer.parseInt(distance));
+        } else {
+            return null;
         }
 
-        return new Route(id, name, coordinates, creationDate, from, to, distance);
+
     }
 
     private static Coordinates parseCoordinates(String coordinatesString) {

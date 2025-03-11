@@ -1,7 +1,6 @@
 package Commands;
 
 import Client.StandardConsole;
-import Utility.Console;
 import Utility.ExecutionResponse;
 /**
  * Команда execute_script file_name: считывает и исполняет скрипт из указанного файла.
@@ -10,21 +9,16 @@ import Utility.ExecutionResponse;
  * @author sh_ub
  */
 public class ExecuteScript extends Command {
-    private final StandardConsole console;
 
-    public ExecuteScript(StandardConsole console) {
+    public ExecuteScript() {
         super("execute_script <file_name>", "исполнить скрипт из указанного файла");
-        this.console = console;
     }
 
     @Override
     public ExecutionResponse execute(String arg) {
         if (arg.trim().isEmpty()) {
-            console.printError("Illegal number of arguments!");
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
-
-        console.println("Выполнение скрипта '" + arg + "'...");
-        return new ExecutionResponse("File is Load", true);
+        return new ExecutionResponse("Выполнение скрипта '" + arg + "'...", true);
     }
 }
