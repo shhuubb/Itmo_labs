@@ -69,7 +69,7 @@ public class Runner {
                 return ScriptMode(userCommand[1]);
             }
             default -> {
-                return commandManager.getCommands().get(userCommand[0]).execute(userCommand[1]); }
+                return command.execute(userCommand[1]); }
         }
     }
 
