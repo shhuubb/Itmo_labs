@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Lab6.iml" filepath="$PROJECT_DIR$/.idea/Lab6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lab6.iml" filepath="$PROJECT_DIR$/lab6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client/lab6.Client.iml" filepath="$PROJECT_DIR$/.idea/modules/Client/lab6.Client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client/lab6.Client.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Client/lab6.Client.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Client/lab6.Client.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Client/lab6.Client.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Common/lab6.Common.iml" filepath="$PROJECT_DIR$/.idea/modules/Common/lab6.Common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Common/lab6.Common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Common/lab6.Common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Common/lab6.Common.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Common/lab6.Common.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server/lab6.Server.iml" filepath="$PROJECT_DIR$/.idea/modules/Server/lab6.Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server/lab6.Server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Server/lab6.Server.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server/lab6.Server.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Server/lab6.Server.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab6.main.iml" filepath="$PROJECT_DIR$/.idea/modules/lab6.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab6.test.iml" filepath="$PROJECT_DIR$/.idea/modules/lab6.test.iml" />
+    </modules>
+  </component>
+</project>
