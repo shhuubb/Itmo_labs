@@ -48,7 +48,7 @@ public class Runner {
     }
 
     /**
-     * Метод для выбора комманды
+     * Метод для выбора команды
      * @param userCommand команда пользователя
      * @return ExecutionResponse выбора
      */
@@ -74,7 +74,7 @@ public class Runner {
     }
 
     /**
-     * Режим чтения комманд из файла
+     * Режим чтения команд из файла
      * @param fileName имя файла
      * @return ExecutionResponse результат выполнения
      */
