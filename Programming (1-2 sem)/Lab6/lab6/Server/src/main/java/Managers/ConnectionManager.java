@@ -5,7 +5,7 @@ import java.net.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 
-public class ConnectionManager {
+public class    ConnectionManager {
 
     public static void main(String[] args) throws IOException {
         try{

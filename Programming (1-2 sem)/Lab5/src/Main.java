@@ -8,8 +8,6 @@ import Managers.DumpManager;
 
 import Utility.Runner;
 
-import java.util.List;
-
 import static Utility.Path.getJsonPath;
 
 /**
