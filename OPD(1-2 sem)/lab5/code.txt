@@ -1,7 +1,11 @@
 ORG 0x115
+
 StartAddr : WORD 0x55F
 CurAddr: WORD ?
-COUNT: WORD 0x0002
+
+Count: WORD 0x0002
+
+Mask: WORD 0x00FF
 
 START:
 	CLA
@@ -9,30 +13,32 @@ START:
 	ST CurAddr
 
 LOAD:
+	LD #0x02
+	ST Count
 	LD(CurAddr)+
 	CALLING:
 		SWAB
 		PUSH
 		CALL SYMBOL
 		POP
-		LOOP COUNT
+		LOOP Count
 		JUMP CALLING
 	JUMP LOAD
-
-STOP: 
-	POP
-	POP
-	HLT
 
 SYMBOL:
 	IN 7
 	AND #0x40
 	BEQ SYMBOL
 	LD &1
-	SXTB 
+	AND MASK 
 	BEQ STOP
 	OUT 6
 	RET
+
+STOP: 
+	POP
+	POP
+	HLT
 
 ORG 0x55F
 WORD 0x0102
