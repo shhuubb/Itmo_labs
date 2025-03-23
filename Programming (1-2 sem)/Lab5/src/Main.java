@@ -23,7 +23,7 @@ public class Main {
         if (!collectionManager.init()) {
             System.exit(1);
         }
-        //Добавление комманд
+        //Добавление команд
         var commandManager = new CommandManager() {{
             register("help", new Help(console, this));
             register("info", new Info(collectionManager));

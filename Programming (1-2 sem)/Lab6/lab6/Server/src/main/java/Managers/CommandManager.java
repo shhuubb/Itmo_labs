@@ -1,6 +1,6 @@
 package Managers;
 
-import Commands.Command;
+import Utility.Command;
 
 import java.util.ArrayList;
 import java.util.HashMap;

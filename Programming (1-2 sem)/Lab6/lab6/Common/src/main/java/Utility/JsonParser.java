@@ -74,7 +74,6 @@ public class JsonParser {
                     Integer.parseInt(matcher.group(3)),
                     Integer.parseInt(matcher.group(4)),
                     Integer.parseInt(matcher.group(5)));
-            
             ZoneId zoneId = ZoneId.systemDefault();
             return ZonedDateTime.of(localDateTime, zoneId);
         }

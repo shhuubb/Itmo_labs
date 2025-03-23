@@ -1,3 +1,59 @@
 [
+{
+    "id": 1,
+    "name": "ДОМ",
+    "coordinates": {
+      "x": 23.00000,
+      "y": 34.00000
+ },
+    "creationDate": {
+      "year": 2025,
+      "month": 3,
+      "day": 22,
+      "hour": 18,
+      "minute": 5
+ },
+    "from": {
+      "LocationName": ""Home"",
+      "x": 34,
+      "y": 3,
+      "z": 43.00000
+ },
+    "to" : {
+      "LocationName": ""Unic"",
+      "x": 43,
+      "y": 43,
+      "z": 12.00000
+ },
+    "distance": 1334
+}
+,{
+    "id": 2,
+    "name": "ДОМ",
+    "coordinates": {
+      "x": 23.00000,
+      "y": 34.00000
+ },
+    "creationDate": {
+      "year": 2025,
+      "month": 3,
+      "day": 22,
+      "hour": 18,
+      "minute": 5
+ },
+    "from": {
+      "LocationName": ""Home"",
+      "x": 34,
+      "y": 3,
+      "z": 43.00000
+ },
+    "to" : {
+      "LocationName": ""Unic"",
+      "x": 43,
+      "y": 43,
+      "z": 12.00000
+ },
+    "distance": 1334
+}
 
 ]

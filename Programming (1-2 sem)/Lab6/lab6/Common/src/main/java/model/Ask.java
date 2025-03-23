@@ -4,22 +4,88 @@ import Utility.AskBreak;
 import Utility.StandardConsole;
 
 import java.time.ZonedDateTime;
+import java.util.Arrays;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.regex.Pattern;
+
 /**
  * Класс для получения данных о маршруте от пользователя
  * @author sh_ub
  */
 public class Ask {
-    public static Route AskRoute(StandardConsole console, Long id) throws AskBreak {
+    public static Route AskRoute(StandardConsole console, String[] args) throws AskBreak {
+
+        Pattern FileRoute = Pattern.compile("\\s*\\{([А-Яа-яA-Za-z]+|\\d+|\\d+,\\d+)(,\\s*([А-Яа-яA-Za-z]+|\\d+|\\d+,\\d+))*\\}\\s*");
+        if (args.length == 0)
+            return AskRoute(console);
+        else if (args.length == 1 && FileRoute.matcher(args[0]).matches())
+            return AskRoute(console, args[0]);
+
+        else if (args.length == 1){
+            try{
+                Long id = Long.parseLong(args[0]);
+                return AskRoute(console, id);
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
+
+        else if(args.length == 2 && FileRoute.matcher(args[1]).matches()){
+            try{
+                Long id = Long.parseLong(args[0]);
+                return AskRoute(console, args[1], id);
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
+        else
+            return null;
+    }
+
+    private static Route AskRoute(StandardConsole console, Long id) throws AskBreak {
+        Route route = AskRoute(console);
+        route.setId(id);
+        return route;
+    }
+
+    private static Route AskRoute(StandardConsole console) throws AskBreak {
         console.println("Add a Route:");
         var name = AskName(console);
         var coordinates = AskCoordinates(console);
         var from = AskLocation(console);
         var to = AskLocation(console);
         var distance = AskDistance(console);
-        return new Route(id, name, coordinates, ZonedDateTime.now(), from, to, distance);
+        return new Route(0L, name, coordinates, ZonedDateTime.now(), from, to, distance);
     }
-    public static String AskName(StandardConsole console) throws AskBreak{
+
+    private static Route AskRoute(StandardConsole console, String line, Long id) throws AskBreak {
+        Route route = AskRoute(console, line);
+        Objects.requireNonNull(route).setId(id);
+        return route;
+    }
+
+    private static Route AskRoute(StandardConsole console, String line) throws AskBreak {
+        List<String> list = new java.util.ArrayList<>(List.of(line.trim().substring(1, line.length() - 1).split(",")));
+        list.replaceAll(String::trim);
+
+        if (list.stream().anyMatch(s -> s.equals("exit")))
+            throw new AskBreak();
+
+        try{
+            String name = AskName(list.get(0).trim());
+            Coordinates coordinates = AskCoordinates(console, list.get(1), list.get(2));
+            Location from = AskLocation(console, list.get(3), list.get(4), list.get(5), list.get(6));
+            Location to = AskLocation(console, list.get(7), list.get(8), list.get(9), list.get(10));
+            int distance = AskDistance(console, list.get(11));
+            return new Route(0L, name, coordinates, ZonedDateTime.now(), from, to, distance);
+        } catch (NoSuchElementException | ArrayIndexOutOfBoundsException e){
+            return null;
+        }
+    }
+
+    private static String AskName(StandardConsole console) throws AskBreak{
         console.print("name: ");
         String name;
         try{
@@ -37,7 +103,11 @@ public class Ask {
         }
     }
 
-    public static Coordinates AskCoordinates(StandardConsole console) throws AskBreak{
+    private static String AskName(String name){
+        return name.isEmpty() ? null : name;
+    }
+
+    private static Coordinates AskCoordinates(StandardConsole console) throws AskBreak{
 
         console.print("Coordinate x: ");
         try{
@@ -81,7 +151,42 @@ public class Ask {
             return null;
         }
     }
-    public static Location AskLocation(StandardConsole console) throws AskBreak{
+
+    private static Coordinates AskCoordinates(StandardConsole console, String lineX, String lineY) throws AskBreak{
+
+        double x = 0;
+        if (!lineX.isEmpty()) {
+            try {
+                x = Double.parseDouble(lineX);
+                if (x < -605){
+                    console.printError("Coordinate x must be greater -605.");
+                    return null;
+                }
+            } catch (NumberFormatException e) {
+                console.printError("Coordinate x must be number.");
+            }
+        }
+
+        float y = 0;
+        if (!lineY.isEmpty()){
+            try {
+                y = Float.parseFloat(lineY);
+                if (y>243) {
+                    console.printError("Coordinate y must be less 244.");
+                    return null;
+                }
+            }
+            catch (NumberFormatException e) {
+                console.printError("Coordinate y must be number.");
+                return null;
+            }
+        }
+        return new Coordinates(x, y);
+    }
+
+
+
+    private static Location AskLocation(StandardConsole console) throws AskBreak{
 
         try{
             console.print("Location name: ");
@@ -154,7 +259,52 @@ public class Ask {
             return null;
         }
     }
-    public static Integer AskDistance(StandardConsole console) throws AskBreak{
+
+    private static Location AskLocation(StandardConsole console, String LocationName, String coordinateX, String coordinateY, String coordinateZ) throws AskBreak{
+
+        String name = "";
+        if (!LocationName.isEmpty()){
+            if (LocationName.length() <=318)
+                name = LocationName;
+            else{
+                console.printError("Location name length must be less then 318 symbols.");
+                return null;
+            }
+        }
+
+        long x = 0;
+        if (!coordinateX.isEmpty()){
+            try {x = Long.parseLong(coordinateX);}
+            catch (NumberFormatException e) {
+                console.println(coordinateX);
+                console.printError("Coordinate x of Location must be integer number.");
+                return null;
+            }
+        }
+
+        long y = 0;
+        if (!coordinateY.isEmpty()){
+            try {y = Long.parseLong(coordinateY);}
+            catch (NumberFormatException e) {
+                console.printError("Coordinate y of Location must be integer number. ");
+                return null;
+            }
+        }
+
+        double z = 0;
+        if (!coordinateZ.isEmpty()){
+            try {z = Double.parseDouble(coordinateZ);}
+
+            catch (NumberFormatException e) {
+                console.printError("Coordinate z of Location must be number.");
+                return null;
+            }
+        }
+        return new Location(x, y, z, name);
+    }
+
+
+    private static Integer AskDistance(StandardConsole console) throws AskBreak{
         console.print("Distance: ");
         try{
             int distance;
@@ -177,7 +327,21 @@ public class Ask {
             console.printError("Reading error");
             return 0;
         }
-
     }
 
+
+    private static Integer AskDistance(StandardConsole console, String distanceLine){
+        int distance = 0;
+        if (!distanceLine.isEmpty()){
+            try{
+                distance = Integer.parseInt(distanceLine);
+                if(distance <= 1)
+                    console.printError("Distance must be greater than 1.");
+
+            } catch(NumberFormatException e){
+                console.printError("Distance must be number.");
+            }
+        }
+        return distance;
+    }
 }

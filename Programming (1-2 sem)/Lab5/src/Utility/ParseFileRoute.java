@@ -39,7 +39,7 @@ public class ParseFileRoute {
             Location to = AskLocation(console, list.get(7), list.get(8), list.get(9), list.get(10));
             int distance = AskDistance(console, list.get(11));
             return new Route(id, name, coordinates, ZonedDateTime.now(), from, to, distance);
-        } catch (NoSuchElementException | ArrayIndexOutOfBoundsException e){
+        } catch (NoSuchElementException | IndexOutOfBoundsException e){
             return null;
         }
 

@@ -7,8 +7,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="lab6.Client.main" />
-    <orderEntry type="module" module-name="lab6.Server.main" />
-    <orderEntry type="module" module-name="lab6.Common.main" scope="RUNTIME" />
+    <orderEntry type="module" module-name="lab6.Common.main" />
   </component>
   <component name="TestModuleProperties" production-module="lab6.Client.main" />
 </module>

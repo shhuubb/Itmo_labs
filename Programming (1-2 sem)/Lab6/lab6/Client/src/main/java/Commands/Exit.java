@@ -1,11 +1,14 @@
 package Commands;
 
+
+
 import Utility.ExecutionResponse;
+
 /**
  * Команда exit: завершает программу (без сохранения в файл).
  * @author sh_ub
  */
-public class Exit extends Command {
+public class Exit extends Utility.Command {
 
     public Exit() {
         super("exit ", "завершить программу (без сохранения в файл)");

@@ -9,7 +9,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="lab6.Server.main" />
-    <orderEntry type="module" module-name="lab6.Common.main" scope="RUNTIME" />
+    <orderEntry type="module" module-name="lab6.Common.main" />
   </component>
 </module>

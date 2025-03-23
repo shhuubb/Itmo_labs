@@ -1,6 +1,7 @@
 package Commands;
 
 import Managers.CollectionManager;
+import Utility.Command;
 import Utility.ExecutionResponse;
 
 import java.time.LocalDateTime;

@@ -2,6 +2,7 @@ package Commands;
 
 import Managers.CollectionManager;
 import Utility.AskBreak;
+import Utility.Command;
 import Utility.ExecutionResponse;
 import Utility.StandardConsole;
 import model.Route;
@@ -16,7 +17,7 @@ import static model.Ask.AskRoute;
  * {element} - Элемент, который нужно добавить в коллекцию.
  * @author sh_ub
  */
-public class Add extends Command{
+public class Add extends Command {
     private StandardConsole console;
     private CollectionManager collectionManager;
 

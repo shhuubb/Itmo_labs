@@ -1,5 +1,6 @@
 package Commands;
 
+import Utility.Command;
 import Utility.StandardConsole;
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
@@ -8,7 +9,7 @@ import Utility.ExecutionResponse;
  * Команда remove_by_id id: удаляет элемент из коллекции по его id.
  * @author sh_ub
  */
-public class RemoveById extends Command{
+public class RemoveById extends Command {
     private final StandardConsole console;
     private final CollectionManager collectionManager;
 

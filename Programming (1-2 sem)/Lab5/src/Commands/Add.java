@@ -46,6 +46,8 @@ public class Add extends Command{
 
         } catch (AskBreak e){
             return new ExecutionResponse("Interrupting", false);
+        } catch (NullPointerException e){
+            return new ExecutionResponse("Illegal arguments!", false);
         }
     }
 }
