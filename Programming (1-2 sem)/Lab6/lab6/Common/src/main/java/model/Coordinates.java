@@ -2,7 +2,9 @@ package model;
 
 import Utility.Validatable;
 
-public class Coordinates implements Validatable {
+import java.io.Serializable;
+
+public class Coordinates implements Validatable, Serializable {
     private Double x; //Значение поля должно быть больше -605, Поле не может быть null
     private Float y; //Максимальное значение поля: 243, Поле не может быть null
 

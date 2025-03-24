@@ -3,26 +3,32 @@ package utility;
 import Command.CommandType;
 import Command.CommandWithArgs;
 
+import Connection.ConnectionClient;
+
 import Utility.AskBreak;
 import Utility.ExecutionResponse;
 import Utility.StandardConsole;
 
 
 import java.io.*;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+
 
 import static model.Ask.AskRoute;
 
 
 public class Runner {
     private StandardConsole console;
-
     private  List<String> scriptStack = new ArrayList<>();
     private int lengthRecursion = -1;
+    private ConnectionClient connection = new ConnectionClient(3425);
 
-    public Runner(StandardConsole console) {
+    public Runner(StandardConsole console) throws UnknownHostException {
         this.console = console;
     }
 
@@ -31,6 +37,7 @@ public class Runner {
      */
     public void interactiveMode() throws AskBreak {
         try {
+            connection.start();
             ExecutionResponse commandStatus;
             String[] userCommand;
             console.prompt();
@@ -63,28 +70,29 @@ public class Runner {
         if (userCommand[0].isEmpty()) return new ExecutionResponse("", true);
         try {
             var command = CommandType.valueOf(userCommand[0].toUpperCase());
-            switch (command) {
-                case EXECUTE_SCRIPT -> {
+            CommandWithArgs commandWithArgs;
+            if (command == CommandType.EXECUTE_SCRIPT) {}
+            else {
+                if (command == CommandType.ADD || command == CommandType.UPDATE){
+                    commandWithArgs = new CommandWithArgs(command, AskRoute(console, userCommand[1].split(" ")));
+            }
+                else if (command == CommandType.FILTER_CONTAINS_NAME || command == CommandType.REMOVE_BY_ID)
+                    commandWithArgs = new CommandWithArgs(command, userCommand[1].trim());
 
-                }
-                default -> {
-                    byte[] arr = new byte[userCommand.length];
-                    if (command == CommandType.ADD || command == CommandType.UPDATE) {
-                        var commandWithArgs = new CommandWithArgs(command, AskRoute(console, userCommand[1].split(" ")));
-                    }
-                    else if (command == CommandType.FILTER_CONTAINS_NAME || command == CommandType.REMOVE_BY_ID){
-                        var commandWithArgs = new CommandWithArgs(command, userCommand[1].trim());
-                    }
-                    else {
-                        var commandWithArgs = new CommandWithArgs(command);
-                    }
-                }
-
+                else
+                    commandWithArgs = new CommandWithArgs(command);
+                connection.send(connection.serializeObject(commandWithArgs));
+                ExecutionResponse commandStatus = connection.deserializeObject(connection.receive());
+                return commandStatus;
             }
         }
         catch (IllegalArgumentException e) {
             return new ExecutionResponse("Command '" + userCommand[0] + "' not found. Use 'help' for more information.", false);
+        }catch (IOException e){
+            return new ExecutionResponse("Server is unavailable for command '" + userCommand[0] + "'", false);
         }
+
+        return new ExecutionResponse("", true);
     }
 
     /**

@@ -2,7 +2,9 @@ package Command;
 
 import model.Route;
 
-public class CommandWithArgs {
+import java.io.Serializable;
+
+public class CommandWithArgs implements Serializable {
     private  CommandType command;
     private String args;
     private Route route;

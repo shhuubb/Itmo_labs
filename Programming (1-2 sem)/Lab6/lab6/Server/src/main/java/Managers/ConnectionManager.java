@@ -1,34 +1,81 @@
 package Managers;
 
-import java.io.IOException;
+import Command.CommandWithArgs;
+import Utility.ExecutionResponse;
+
+import java.io.*;
 import java.net.*;
-import java.nio.ByteBuffer;
-import java.nio.channels.DatagramChannel;
 
-public class    ConnectionManager {
+public class ConnectionManager {
+    private DatagramSocket ds;
+    private final int port;
+    private InetAddress lastClientAddress;
+    private int lastClientPort;
 
-    public static void main(String[] args) throws IOException {
-        try{
-            byte arr[] = new byte[10];
-            int len = arr.length;
-            DatagramChannel dc;
-            ByteBuffer buf;
-            int port = 6789;
-            SocketAddress addr;
-            addr = new InetSocketAddress(port);
-            dc = DatagramChannel.open();
-            dc.bind(addr);
-            while (true){
-                buf = ByteBuffer.wrap(arr);
-                addr = dc.receive(buf);
-                for (int j = 0; j < len; j++) {
-                    arr[j] *= 2;
-                }
-                buf.flip();
-                dc.send(buf, addr);
-            }
+    public ConnectionManager(int port) throws SocketException {
+        this.port = port;
+        this.ds = new DatagramSocket(port);
+    }
+
+    public byte[] serializeObject(Object object) throws IOException {
+        try (ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+             ObjectOutputStream out = new ObjectOutputStream(byteOut)) {
+            out.writeObject(object);
+            return byteOut.toByteArray();
         }
-    catch (Exception e){
-        System.out.println(e);}
+    }
+
+    public CommandWithArgs deserialize(byte[] bytes) {
+        try (ByteArrayInputStream is = new ByteArrayInputStream(bytes);
+             ObjectInputStream in = new ObjectInputStream(is)) {
+            return (CommandWithArgs) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Deserialization error: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public void send(byte[] arr) throws IOException {
+        if (ds == null || ds.isClosed()) {
+            throw new IOException("Socket is not initialized");
+        }
+        if (lastClientAddress == null) {
+            throw new IOException("No client address available");
+        }
+        System.out.println(lastClientPort);
+
+        DatagramPacket packet = new DatagramPacket(arr, arr.length, lastClientAddress, lastClientPort);
+        ds.send(packet);
+    }
+
+    public byte[] receive() throws IOException {
+        byte[] arr = new byte[65535];
+        DatagramPacket packet = new DatagramPacket(arr, arr.length);
+        ds.receive(packet);
+
+        this.lastClientAddress = packet.getAddress();
+        this.lastClientPort = packet.getPort();
+
+        return arr;
+    }
+
+    public static void main(String[] args) {
+        try {
+            ConnectionManager cm = new ConnectionManager(1234);
+
+            while (true) {
+                byte[] data = cm.receive();
+                CommandWithArgs cmd = cm.deserialize(data);
+
+                if (cmd != null) {
+                    System.out.println("Received command: " + cmd.getCommand());
+
+                    ExecutionResponse response = new ExecutionResponse("Processed: " + cmd.getCommand(), true);
+                    cm.send(cm.serializeObject(response));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

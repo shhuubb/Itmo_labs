@@ -1,9 +1,12 @@
 package Utility;
+
+import java.io.Serializable;
+
 /**
  * Класс для хранения результата выполнения
  * @author sh_ub
  */
-public class ExecutionResponse {
+public class ExecutionResponse implements Serializable {
 
     private String response; // сообщение о выполнение
     private boolean success; // флаг выполнения

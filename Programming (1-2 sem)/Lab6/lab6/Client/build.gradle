@@ -10,7 +10,8 @@ repositories {
 }
 
 dependencies {
-    implementation project(':Common')}
+    implementation project(':Common')
+}
 
 test {
     useJUnitPlatform()

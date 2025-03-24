@@ -1,11 +1,14 @@
 package model;
 
 import Utility.Validatable;
+
+import java.io.Serializable;
+
 /**
  * Класс локации маршрута
  * @author sh_ub
  */
-public class Location implements Validatable {
+public class Location implements Validatable, Serializable {
     private Long x; //Поле не может быть null
     private long y;
     private Double z; //Поле не может быть null
