@@ -13,6 +13,7 @@ public class ConnectionClient {
     private DatagramChannel dc;
     private final int port;
     private SocketAddress serverAddr;
+    private SocketAddress responseAddr;
 
     public ConnectionClient(int port) throws UnknownHostException {
         this.port = port;
@@ -51,8 +52,8 @@ public class ConnectionClient {
             throw new IOException("Channel is not initialized");
         }
         ByteBuffer bufffer = ByteBuffer.allocate(65535);
-        SocketAddress senderAddr = dc.receive(bufffer);
-        if (senderAddr != null) {
+        responseAddr = dc.receive(bufffer);
+        if (responseAddr != null) {
             byte[] data = new byte[bufffer.position()];
             bufffer.flip();
             bufffer.get(data);
@@ -64,7 +65,7 @@ public class ConnectionClient {
     public boolean start() {
         try {
             dc = DatagramChannel.open();
-            dc.bind(new InetSocketAddress("127.0.0.1", port));
+            dc.bind(new InetSocketAddress("localhost", port));
             dc.configureBlocking(false);
             return true;
         } catch (IOException e) {

@@ -16,14 +16,14 @@ import java.util.regex.Pattern;
  */
 public class Ask {
     public static Route AskRoute(StandardConsole console, String[] args) throws AskBreak {
-
         Pattern FileRoute = Pattern.compile("\\s*\\{([А-Яа-яA-Za-z]+|\\d+|\\d+,\\d+)(,\\s*([А-Яа-яA-Za-z]+|\\d+|\\d+,\\d+))*\\}\\s*");
-        if (args.length == 0)
+        if (args.length == 1){
             return AskRoute(console);
-        else if (args.length == 1 && FileRoute.matcher(args[0]).matches())
+        }
+        else if (args.length == 2 && FileRoute.matcher(args[0]).matches())
             return AskRoute(console, args[0]);
 
-        else if (args.length == 1){
+        else if (args.length == 2){
             try{
                 Long id = Long.parseLong(args[0]);
                 return AskRoute(console, id);
@@ -32,7 +32,7 @@ public class Ask {
             }
         }
 
-        else if(args.length == 2 && FileRoute.matcher(args[1]).matches()){
+        else if(args.length == 3 && FileRoute.matcher(args[1]).matches()){
             try{
                 Long id = Long.parseLong(args[0]);
                 return AskRoute(console, args[1], id);

@@ -11,10 +11,10 @@ import Utility.StandardConsole;
 
 
 import java.io.*;
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
+
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -75,6 +75,7 @@ public class Runner {
             else {
                 if (command == CommandType.ADD || command == CommandType.UPDATE){
                     commandWithArgs = new CommandWithArgs(command, AskRoute(console, userCommand[1].split(" ")));
+                    System.out.println(Arrays.asList(userCommand[1].split(" ")));
             }
                 else if (command == CommandType.FILTER_CONTAINS_NAME || command == CommandType.REMOVE_BY_ID)
                     commandWithArgs = new CommandWithArgs(command, userCommand[1].trim());
