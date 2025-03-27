@@ -23,12 +23,11 @@ public class Help extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(String arg) {
+    public ExecutionResponse execute(Object arg) {
 
-            if (!arg.trim().isEmpty())
-                return new ExecutionResponse("Illegal number of arguments!",false);
-
-            return new ExecutionResponse(commandmanager.getCommands().values().stream().map(command -> console.printTable(command.getName(), command.getDescription())).collect(Collectors.joining("\n")), true);
+        if (arg!= null)
+            return new ExecutionResponse("Illegal number of arguments!",false);
+        return new ExecutionResponse(commandmanager.getCommands().values().stream().map(command -> console.printTable(command.getName(), command.getDescription())).collect(Collectors.joining("\n")), true);
     }
 }
 

@@ -18,10 +18,9 @@ public class Show extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(String arg) {
-        String[] args = arg.trim().split(" ");
+    public ExecutionResponse execute(Object arg) {
 
-        if (args.length > 1)
+        if (arg != null)
             return new ExecutionResponse("Illegal number of arguments!", false);
 
         return new ExecutionResponse(collectionManager.toString(), true);

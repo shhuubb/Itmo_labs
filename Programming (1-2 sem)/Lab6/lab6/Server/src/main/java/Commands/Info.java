@@ -20,8 +20,8 @@ public class Info extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(String arg) {
-        if(!arg.isEmpty())
+    public ExecutionResponse execute(Object arg) {
+        if(arg != null)
             return new ExecutionResponse("Illegal number of arguments!", false);
 
         LocalDateTime lastInitTime = collectionManager.getLastInitTime();

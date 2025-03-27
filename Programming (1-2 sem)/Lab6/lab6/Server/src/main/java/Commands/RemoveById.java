@@ -20,9 +20,10 @@ public class RemoveById extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(String arg) {
+    public ExecutionResponse execute(Object arg) {
         try{
-            String[] args = arg.split(" ");
+
+            String[] args = new String(arg.toString()).split(" ");
             if(args.length < 1){
                 return new ExecutionResponse("Illegal number of arguments!", false);
             }

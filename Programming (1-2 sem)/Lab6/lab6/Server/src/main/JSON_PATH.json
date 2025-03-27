@@ -1,0 +1,31 @@
+[
+{
+    "id": 1,
+    "name": "213",
+    "coordinates": {
+      "x": 23.00000,
+      "y": 23.00000
+ },
+    "creationDate": {
+      "year": 2025,
+      "month": 3,
+      "day": 25,
+      "hour": 19,
+      "minute": 12
+ },
+    "from": {
+      "LocationName": "23",
+      "x": 23,
+      "y": 23,
+      "z": 23.00000
+ },
+    "to" : {
+      "LocationName": "23",
+      "x": 23,
+      "y": 23,
+      "z": 23.00000
+ },
+    "distance": 23
+}
+
+]

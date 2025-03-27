@@ -8,20 +8,20 @@ import Utility.ExecutionResponse;
  * Команда save: сохраняет коллекцию в файл.
  * @author sh_ub
  */
-public class Save extends Command {
-    private final CollectionManager collectionManager;
+public class Exit extends Command {
+    CollectionManager collectionManager;
 
-    public Save(CollectionManager collectionManager) {
-        super("save", "сохранить коллекцию в файл");
+    public Exit(CollectionManager collectionManager) {
+        super("exit", "выйти из приложения");
         this.collectionManager = collectionManager;
     }
 
     @Override
-    public ExecutionResponse execute(String arg) {
-        if (!arg.isEmpty()){
+    public ExecutionResponse execute(Object arg) {
+        if (arg != null){
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
         collectionManager.saveCollection();
-        return new ExecutionResponse("Collection successfully saved!", true);
+        return new ExecutionResponse("Connection closed", true);
     }
 }

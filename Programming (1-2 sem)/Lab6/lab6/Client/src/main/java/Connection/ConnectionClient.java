@@ -66,7 +66,6 @@ public class ConnectionClient {
         try {
             dc = DatagramChannel.open();
             dc.bind(new InetSocketAddress("localhost", port));
-            dc.configureBlocking(false);
             return true;
         } catch (IOException e) {
             System.err.println("Failed to start connection: " + e.getMessage());

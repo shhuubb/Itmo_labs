@@ -15,8 +15,8 @@ public class ExecuteScript extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(String arg) {
-        if (arg.trim().isEmpty()) {
+    public ExecutionResponse execute(Object arg) {
+        if (arg!= null) {
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
         return new ExecutionResponse("Выполнение скрипта '" + arg + "'...", true);

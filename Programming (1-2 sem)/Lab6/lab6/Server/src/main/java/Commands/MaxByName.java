@@ -31,8 +31,8 @@ public class MaxByName extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(String arg) {
-        if(!arg.isEmpty()) {
+    public ExecutionResponse execute(Object arg) {
+        if(arg != null) {
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
         return new ExecutionResponse(GettingMaxName(collectionManager.getCollection()), true);

@@ -3,6 +3,7 @@ package utility;
 import Command.CommandType;
 import Command.CommandWithArgs;
 
+import Commands.Exit;
 import Connection.ConnectionClient;
 
 import Utility.AskBreak;
@@ -69,18 +70,23 @@ public class Runner {
     private ExecutionResponse launchCommand(String[] userCommand) throws AskBreak {
         if (userCommand[0].isEmpty()) return new ExecutionResponse("", true);
         try {
-            var command = CommandType.valueOf(userCommand[0].toUpperCase());
+            CommandType command = CommandType.valueOf(userCommand[0].toUpperCase());
             CommandWithArgs commandWithArgs;
-            if (command == CommandType.EXECUTE_SCRIPT) {}
-            else {
-                if (command == CommandType.ADD || command == CommandType.UPDATE){
-                    commandWithArgs = new CommandWithArgs(command, AskRoute(console, userCommand[1].split(" ")));
-                    System.out.println(Arrays.asList(userCommand[1].split(" ")));
+            if (command == CommandType.EXECUTE_SCRIPT) {
+                ScriptMode(userCommand[1]);
             }
+            else {
+                if (command == CommandType.ADD || command == CommandType.UPDATE)
+                    commandWithArgs = new CommandWithArgs(command, AskRoute(console, userCommand[1].split(" ")));
+
                 else if (command == CommandType.FILTER_CONTAINS_NAME || command == CommandType.REMOVE_BY_ID)
                     commandWithArgs = new CommandWithArgs(command, userCommand[1].trim());
-
-                else
+                else if (command == CommandType.EXIT) {
+                    Exit ex = new Exit(console);
+                    commandWithArgs = new CommandWithArgs(command);
+                    connection.send(connection.serializeObject(commandWithArgs));
+                    ex.execute(null);
+                } else
                     commandWithArgs = new CommandWithArgs(command);
                 connection.send(connection.serializeObject(commandWithArgs));
                 ExecutionResponse commandStatus = connection.deserializeObject(connection.receive());
@@ -115,10 +121,10 @@ public class Runner {
                 line = bufferedReader.readLine();
                 userCommand = (line.trim()+ " ").split(" ", 2);
                 userCommand[1] = userCommand[1].trim();
-                var needLaunch = true;
+                boolean needLaunch = true;
                 if (userCommand[0].equals("execute_script")) {
-                    var recStart = -1;
-                    var i = 0;
+                    int recStart = -1;
+                    int i = 0;
                     for (String script : scriptStack) {
                         i++;
                         if (userCommand[1].equals(script)) {

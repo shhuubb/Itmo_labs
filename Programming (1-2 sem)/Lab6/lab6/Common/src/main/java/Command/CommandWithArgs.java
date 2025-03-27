@@ -22,6 +22,7 @@ public class CommandWithArgs implements Serializable {
         this.command = command;
         this.route = route;
     }
+
     public CommandType getCommand() {
         return command;
     }

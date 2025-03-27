@@ -25,11 +25,12 @@ public class FilterContainsName extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(String arg) {
-        if (arg.isEmpty())
+    public ExecutionResponse execute(Object arg) {
+        String args = new String(arg.toString());
+        if (args.isEmpty())
             return new ExecutionResponse("Substring is empty", false);
 
-        var list = GettingMatches(collectionManager.getCollection(), arg);
+        ArrayList<Route> list = GettingMatches(collectionManager.getCollection(), args);
 
         for (var match : list)
             console.println(match.toString());

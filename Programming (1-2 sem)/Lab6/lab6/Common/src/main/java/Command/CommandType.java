@@ -8,7 +8,7 @@ public enum CommandType {
     UPDATE,
     REMOVE_BY_ID,
     CLEAR,
-    SAVE,
+    EXIT,
     EXECUTE_SCRIPT,
     REMOVE_FIRST,
     SORT,
