@@ -4,8 +4,8 @@ import utility.Runner;
 
 import java.net.UnknownHostException;
 
-class Main {
-    public static void main(String[] args) throws UnknownHostException, AskBreak {
+class Client {
+    public static void main(String[] args) throws AskBreak {
         Runner runner = new Runner(new StandardConsole());
         runner.interactiveMode();
     }

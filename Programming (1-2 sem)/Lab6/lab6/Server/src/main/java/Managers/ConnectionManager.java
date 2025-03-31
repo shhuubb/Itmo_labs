@@ -53,8 +53,7 @@ public class ConnectionManager {
             throw new IOException(errorMsg);
         }
 
-        logger.debug("Sending response to {}:{} ({} bytes)",
-                lastClientAddress, lastClientPort, arr.length);
+        logger.debug("Sending response to {}:{} ({} bytes)", lastClientAddress, lastClientPort, arr.length);
 
         DatagramPacket packet = new DatagramPacket(arr, arr.length, lastClientAddress, lastClientPort);
         ds.send(packet);

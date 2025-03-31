@@ -1,7 +1,6 @@
 package Connection;
 
-import Command.CommandType;
-import Command.CommandWithArgs;
+
 import Utility.ExecutionResponse;
 
 import java.io.*;
@@ -11,13 +10,11 @@ import java.nio.channels.DatagramChannel;
 
 public class ConnectionClient {
     private DatagramChannel dc;
-    private final int port;
     private SocketAddress serverAddr;
     private SocketAddress responseAddr;
 
-    public ConnectionClient(int port) throws UnknownHostException {
-        this.port = port;
-        this.serverAddr = new InetSocketAddress("localhost", 1234);
+    public ConnectionClient(int ServerPort, String ServerHost) {
+        this.serverAddr = new InetSocketAddress(ServerHost, ServerPort);
     }
 
     public byte[] serializeObject(Object object) throws IOException {
@@ -30,7 +27,7 @@ public class ConnectionClient {
 
     public ExecutionResponse deserializeObject(byte[] bytes) {
         if (bytes == null) return new ExecutionResponse( "Ответ от сервера не получен, выполнение отменено!",false);
-        InputStream is = new ByteArrayInputStream(bytes);
+        ByteArrayInputStream is = new ByteArrayInputStream(bytes);
         try (ObjectInputStream in = new ObjectInputStream(is)) {
             return (ExecutionResponse) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
@@ -51,12 +48,12 @@ public class ConnectionClient {
         if (dc == null || !dc.isOpen()) {
             throw new IOException("Channel is not initialized");
         }
-        ByteBuffer bufffer = ByteBuffer.allocate(65535);
-        responseAddr = dc.receive(bufffer);
+        ByteBuffer buffer = ByteBuffer.allocate(65535);
+        responseAddr = dc.receive(buffer);
         if (responseAddr != null) {
-            byte[] data = new byte[bufffer.position()];
-            bufffer.flip();
-            bufffer.get(data);
+            byte[] data = new byte[buffer.position()];
+            buffer.flip();
+            buffer.get(data);
             return data;
         }
         return null;
@@ -65,7 +62,8 @@ public class ConnectionClient {
     public boolean start() {
         try {
             dc = DatagramChannel.open();
-            dc.bind(new InetSocketAddress("localhost", port));
+            dc.bind(null);
+            dc.connect(serverAddr);
             return true;
         } catch (IOException e) {
             System.err.println("Failed to start connection: " + e.getMessage());

@@ -13,9 +13,7 @@ import Utility.StandardConsole;
 
 import java.io.*;
 
-import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -27,9 +25,9 @@ public class Runner {
     private StandardConsole console;
     private  List<String> scriptStack = new ArrayList<>();
     private int lengthRecursion = -1;
-    private ConnectionClient connection = new ConnectionClient(3425);
+    private ConnectionClient connection = new ConnectionClient(1234, "localhost");
 
-    public Runner(StandardConsole console) throws UnknownHostException {
+    public Runner(StandardConsole console) {
         this.console = console;
     }
 
@@ -38,7 +36,7 @@ public class Runner {
      */
     public void interactiveMode() throws AskBreak {
         try {
-            connection.start();
+            if (!connection.start()) System.exit(0);
             ExecutionResponse commandStatus;
             String[] userCommand;
             console.prompt();
@@ -96,7 +94,7 @@ public class Runner {
         catch (IllegalArgumentException e) {
             return new ExecutionResponse("Command '" + userCommand[0] + "' not found. Use 'help' for more information.", false);
         }catch (IOException e){
-            return new ExecutionResponse("Server is unavailable for command '" + userCommand[0] + "'", false);
+            return new ExecutionResponse("Server is unavailable. Retry later." , false);
         }
 
         return new ExecutionResponse("", true);
@@ -115,11 +113,11 @@ public class Runner {
             console.printError("File is not exists");
             return new ExecutionResponse("File is not exists",false);
         }
-        String line;
         try (FileReader filereader = new FileReader(fileName); BufferedReader bufferedReader = new BufferedReader(filereader)) {
+            String line;
             do{
                 line = bufferedReader.readLine();
-                userCommand = (line.trim()+ " ").split(" ", 2);
+                userCommand = line.trim().split(" ", 2);
                 userCommand[1] = userCommand[1].trim();
                 boolean needLaunch = true;
                 if (userCommand[0].equals("execute_script")) {
@@ -137,7 +135,6 @@ public class Runner {
                             }
                             if (i > recStart + lengthRecursion || i > 500)
                                 needLaunch = false;
-
                         }
                     }
                 }
@@ -145,8 +142,11 @@ public class Runner {
                 commandStatus = needLaunch ?  launchCommand(userCommand) : new ExecutionResponse("Recursion depth exceeded!", false);
 
                 String answer = commandStatus.getResponse();
-                if(commandStatus.isSuccess()) console.print(answer + (answer.isEmpty() ? "" : "\n"));
-                else console.printError(answer);
+
+                if(commandStatus.isSuccess())
+                    console.print(answer + (answer.isEmpty() ? "" : "\n"));
+                else
+                    console.printError(answer);
             }
             while (commandStatus.isSuccess() || !commandStatus.getResponse().equals("exit"));
 

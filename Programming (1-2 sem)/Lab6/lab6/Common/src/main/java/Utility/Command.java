@@ -26,6 +26,7 @@ public abstract class Command{
      * @param arg аргументы команд
      */
     abstract public ExecutionResponse execute(Object arg);
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

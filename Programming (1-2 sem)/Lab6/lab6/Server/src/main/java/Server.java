@@ -11,12 +11,12 @@ import static Utility.ConnectionStarter.run;
 import static Utility.Path.getJsonPath;
 
 
-class main {
+class Server {
     public static void main(String[] args) {
-        var console = new StandardConsole();
-        var dumpManager = new DumpManager(getJsonPath(), console);
-        final var collectionManager = new CollectionManager(dumpManager);
-
+        StandardConsole console = new StandardConsole();
+        DumpManager dumpManager = new DumpManager(getJsonPath(), console);
+        final CollectionManager collectionManager = new CollectionManager(dumpManager);
+        collectionManager.init();
         var commandManager = new CommandManager() {{
             register("help", new Help(console, this));
             register("add", new Add(collectionManager));

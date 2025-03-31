@@ -9,7 +9,6 @@ import model.Route;
 import Command.CommandType;
 
 public class ConnectionStarter {
-    private static StandardConsole console;
     public static void run(int port, CommandManager commandManager, StandardConsole console) {
 
         try {
