@@ -4,6 +4,7 @@ import Utility.Command;
 import Utility.StandardConsole;
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
+import Command.CommandWithArgs;
 
 /**
  * Команда remove_by_id id: удаляет элемент из коллекции по его id.
@@ -20,10 +21,10 @@ public class RemoveById extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(Object arg) {
+    public ExecutionResponse execute(CommandWithArgs command) {
         try{
 
-            String[] args = new String(arg.toString()).split(" ");
+            String[] args = command.getArgs().split(" ");
             if(args.length < 1){
                 return new ExecutionResponse("Illegal number of arguments!", false);
             }
@@ -34,7 +35,7 @@ public class RemoveById extends Command {
                 }
                 console.println("Remove a Route by Id: " + s);
             }
-            return new ExecutionResponse("Routes with id " + arg + " was deleted", true);
+            return new ExecutionResponse("Routes with id " + command.getArgs() + " was deleted", true);
         } catch (NumberFormatException  e){
             return new ExecutionResponse( "Id isn't defined!", false);
         }

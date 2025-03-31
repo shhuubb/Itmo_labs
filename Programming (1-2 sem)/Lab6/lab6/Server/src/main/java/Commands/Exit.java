@@ -3,7 +3,7 @@ package Commands;
 import Managers.CollectionManager;
 import Utility.Command;
 import Utility.ExecutionResponse;
-
+import Command.CommandWithArgs;
 /**
  * Команда save: сохраняет коллекцию в файл.
  * @author sh_ub
@@ -17,8 +17,8 @@ public class Exit extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(Object arg) {
-        if (arg != null){
+    public ExecutionResponse execute(CommandWithArgs command) {
+        if (command.getArgs() != null) {
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
         collectionManager.saveCollection();

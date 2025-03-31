@@ -3,6 +3,7 @@ package Commands;
 import Managers.CollectionManager;
 import Utility.Command;
 import Utility.ExecutionResponse;
+import Command.CommandWithArgs;
 
 /**
  * Команда clear: очищает коллекцию.
@@ -17,9 +18,9 @@ public class Clear extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(Object arg) {
+    public ExecutionResponse execute(CommandWithArgs command) {
 
-        if (arg != null){
+        if (command.getArgs() != null){
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
         collectionManager.clear();

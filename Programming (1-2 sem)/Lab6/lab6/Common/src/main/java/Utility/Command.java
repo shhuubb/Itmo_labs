@@ -1,5 +1,6 @@
 package Utility;
 
+import Command.CommandWithArgs;
 /**
  * Абстрактный класс для всех команд
  * @author sh_ub
@@ -23,9 +24,9 @@ public abstract class Command{
 
     /**
      * Абстрактный метод для выполнения команды
-     * @param arg аргументы команд
+     * @param args аргументы команд
      */
-    abstract public ExecutionResponse execute(Object arg);
+    abstract public ExecutionResponse execute(CommandWithArgs args);
 
     @Override
     public boolean equals(Object obj) {

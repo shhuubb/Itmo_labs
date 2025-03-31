@@ -1,5 +1,6 @@
 package model;
 
+import Command.CommandType;
 import Utility.AskBreak;
 import Utility.StandardConsole;
 
@@ -15,27 +16,29 @@ import java.util.regex.Pattern;
  * @author sh_ub
  */
 public class Ask {
-    public static Route AskRoute(StandardConsole console, String[] args) throws AskBreak {
-        Pattern FileRoute = Pattern.compile("\\s*\\{([А-Яа-яA-Za-z]+|\\d+|\\d+,\\d+)(,\\s*([А-Яа-яA-Za-z]+|\\d+|\\d+,\\d+))*\\}\\s*");
-        if (args.length == 1){
+    public static Route AskRoute(StandardConsole console, String args, CommandType command) throws AskBreak {
+        Pattern FileRoute = Pattern.compile("\\{.+}");
+
+        Pattern FileRouteWithId = Pattern.compile("\\d+\\s+\\{.+}");
+        if (command == CommandType.ADD && args.isEmpty()) {
             return AskRoute(console);
         }
-        else if (args.length == 2 && FileRoute.matcher(args[0]).matches())
-            return AskRoute(console, args[0]);
+        else if (command == CommandType.ADD && FileRoute.matcher(args).matches()){
+            return AskRoute(console, args);}
 
-        else if (args.length == 2){
+        else if (command == CommandType.UPDATE && FileRouteWithId.matcher(args).matches()) {
             try{
-                Long id = Long.parseLong(args[0]);
-                return AskRoute(console, id);
+                String[] argList = args.split(" ", 2);
+                Long id = Long.parseLong(argList[0]);
+                return AskRoute(console, argList[1], id);
             } catch (NumberFormatException e) {
                 return null;
             }
         }
-
-        else if(args.length == 3 && FileRoute.matcher(args[1]).matches()){
+        else if(command == CommandType.UPDATE){
             try{
-                Long id = Long.parseLong(args[0]);
-                return AskRoute(console, args[1], id);
+                Long id = Long.parseLong(args);
+                return AskRoute(console, id);
             } catch (NumberFormatException e) {
                 return null;
             }
@@ -80,7 +83,7 @@ public class Ask {
             Location to = AskLocation(console, list.get(7), list.get(8), list.get(9), list.get(10));
             int distance = AskDistance(console, list.get(11));
             return new Route(0L, name, coordinates, ZonedDateTime.now(), from, to, distance);
-        } catch (NoSuchElementException | ArrayIndexOutOfBoundsException e){
+        } catch (NoSuchElementException | IndexOutOfBoundsException e){
             return null;
         }
     }
@@ -152,7 +155,7 @@ public class Ask {
         }
     }
 
-    private static Coordinates AskCoordinates(StandardConsole console, String lineX, String lineY) throws AskBreak{
+    private static Coordinates AskCoordinates(StandardConsole console, String lineX, String lineY) {
 
         double x = 0;
         if (!lineX.isEmpty()) {
@@ -260,7 +263,7 @@ public class Ask {
         }
     }
 
-    private static Location AskLocation(StandardConsole console, String LocationName, String coordinateX, String coordinateY, String coordinateZ) throws AskBreak{
+    private static Location AskLocation(StandardConsole console, String LocationName, String coordinateX, String coordinateY, String coordinateZ) {
 
         String name = "";
         if (!LocationName.isEmpty()){

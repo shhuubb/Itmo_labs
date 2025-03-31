@@ -76,7 +76,7 @@ public class JsonSerialization {
     private static String LocationToJson(Location object) {
         return """
                 {
-                      "LocationName": "%s",
+                      "LocationName": %s,
                       "x": %d,
                       "y": %d,
                       "z": %s

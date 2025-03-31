@@ -2,6 +2,8 @@ package Commands;
 
 import Utility.Command;
 import Utility.ExecutionResponse;
+import Command.CommandWithArgs;
+
 /**
  * Команда execute_script file_name: считывает и исполняет скрипт из указанного файла.
  * В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
@@ -15,10 +17,10 @@ public class ExecuteScript extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(Object arg) {
-        if (arg!= null) {
+    public ExecutionResponse execute(CommandWithArgs command) {
+        if (command.getArgs()!= null) {
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
-        return new ExecutionResponse("Выполнение скрипта '" + arg + "'...", true);
+        return new ExecutionResponse("Выполнение скрипта '" + command.getArgs() + "'...", true);
     }
 }

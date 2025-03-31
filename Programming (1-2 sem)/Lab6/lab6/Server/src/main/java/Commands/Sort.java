@@ -4,6 +4,7 @@ import Utility.Command;
 import Utility.StandardConsole;
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
+import Command.CommandWithArgs;
 
 /**
  * Команда sort: сортирует коллекцию в естественном порядке.
@@ -13,14 +14,14 @@ public class Sort extends Command {
 
     private final CollectionManager collectionManager;
 
-    public Sort(StandardConsole console, CollectionManager collectionManager) {
+    public Sort(CollectionManager collectionManager) {
         super("sort", "отсортировать коллекцию в естественном порядке");
         this.collectionManager = collectionManager;
     }
 
     @Override
-    public ExecutionResponse execute(Object arg) {
-        if(arg!= null)
+    public ExecutionResponse execute(CommandWithArgs command) {
+        if(command.getArgs()!= null)
             return new ExecutionResponse("Illegal number of arguments!", false);
 
         collectionManager.sort();

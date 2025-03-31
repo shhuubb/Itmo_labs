@@ -4,6 +4,8 @@ import Managers.CollectionManager;
 import Utility.Command;
 import Utility.ExecutionResponse;
 import model.Route;
+import Command.CommandWithArgs;
+
 
 import java.util.Vector;
 import java.util.stream.Collectors;
@@ -20,8 +22,8 @@ public class PrintFieldAscendingDistance extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(Object arg) {
-        if(arg != null) {
+    public ExecutionResponse execute(CommandWithArgs command) {
+        if(command.getArgs() != null) {
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
         if(collectionManager.getCollection().isEmpty()) {

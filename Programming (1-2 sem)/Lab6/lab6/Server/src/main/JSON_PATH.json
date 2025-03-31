@@ -1,59 +1,31 @@
 [
 {
     "id": 1,
-    "name": "213",
+    "name": "f",
     "coordinates": {
-      "x": 23.00000,
-      "y": 23.00000
+      "x": 3.00000,
+      "y": 4.00000
  },
     "creationDate": {
       "year": 2025,
-      "month": 3,
-      "day": 25,
-      "hour": 19,
-      "minute": 12
+      "month": 4,
+      "day": 1,
+      "hour": 0,
+      "minute": 39
  },
     "from": {
-      "LocationName": ""23"",
-      "x": 23,
-      "y": 23,
-      "z": 23.00000
+      "LocationName": 5,
+      "x": 6,
+      "y": 7,
+      "z": 8.00000
  },
     "to" : {
-      "LocationName": ""23"",
-      "x": 23,
-      "y": 23,
-      "z": 23.00000
+      "LocationName": 98,
+      "x": 9,
+      "y": 8,
+      "z": 8.00000
  },
-    "distance": 23
-}
-,{
-    "id": 2,
-    "name": "dsd",
-    "coordinates": {
-      "x": 12.00000,
-      "y": 12.00000
- },
-    "creationDate": {
-      "year": 2025,
-      "month": 3,
-      "day": 31,
-      "hour": 21,
-      "minute": 19
- },
-    "from": {
-      "LocationName": "sds",
-      "x": 1,
-      "y": 23,
-      "z": 32.00000
- },
-    "to" : {
-      "LocationName": "fgsds",
-      "x": 12,
-      "y": 12,
-      "z": 1.00000
- },
-    "distance": 1223
+    "distance": 67
 }
 
 ]

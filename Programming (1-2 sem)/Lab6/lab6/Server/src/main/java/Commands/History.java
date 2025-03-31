@@ -4,6 +4,7 @@ import Utility.Command;
 import Utility.StandardConsole;
 import Managers.CommandManager;
 import Utility.ExecutionResponse;
+import Command.CommandWithArgs;
 
 import java.util.ArrayList;
 /**
@@ -14,16 +15,16 @@ public class History extends Command {
     CommandManager commandmanager;
     StandardConsole console;
 
-    public History(CommandManager commandmanager, StandardConsole console) {
+    public History(StandardConsole console, CommandManager commandmanager) {
         super("history", "вывести последние 7 команд (без их аргументов)");
-        this.commandmanager = commandmanager;
         this.console = console;
+        this.commandmanager = commandmanager;
     }
 
     @Override
-    public ExecutionResponse execute(Object arg) {
+    public ExecutionResponse execute(CommandWithArgs command) {
 
-        if (arg != null) {
+        if (command.getArgs() != null) {
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
         var list = commandmanager.getCommandHistory();

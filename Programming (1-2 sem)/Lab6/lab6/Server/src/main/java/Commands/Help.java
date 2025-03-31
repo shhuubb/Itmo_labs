@@ -4,7 +4,7 @@ import Utility.Command;
 import Utility.StandardConsole;
 import Managers.CommandManager;
 import Utility.ExecutionResponse;
-
+import Command.CommandWithArgs;
 import java.util.stream.Collectors;
 
 /**
@@ -23,9 +23,9 @@ public class Help extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(Object arg) {
+    public ExecutionResponse execute(CommandWithArgs CommandArgs) {
 
-        if (arg!= null)
+        if (CommandArgs.getArgs()!= null)
             return new ExecutionResponse("Illegal number of arguments!",false);
         return new ExecutionResponse(commandmanager.getCommands().values().stream().map(command -> console.printTable(command.getName(), command.getDescription())).collect(Collectors.joining("\n")), true);
     }

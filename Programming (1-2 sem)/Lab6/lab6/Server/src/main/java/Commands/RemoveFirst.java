@@ -3,6 +3,7 @@ package Commands;
 import Managers.CollectionManager;
 import Utility.Command;
 import Utility.ExecutionResponse;
+import Command.CommandWithArgs;
 
 /**
  * Команда remove_first: удаляет первый элемент из коллекции.
@@ -17,11 +18,11 @@ public class RemoveFirst extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(Object arg) {
-        if(arg != null)
+    public ExecutionResponse execute(CommandWithArgs command) {
+        if(command.getArgs() != null)
             return new ExecutionResponse("Illegal number of arguments!", false);
 
-        var id = collectionManager.getCollection().get(0).getId();
+        Long id = collectionManager.getCollection().get(0).getId();
 
         if(!collectionManager.remove(id))
             return new ExecutionResponse("Element with this Id is not found", false);

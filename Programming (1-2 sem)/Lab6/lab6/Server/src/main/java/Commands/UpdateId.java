@@ -1,5 +1,6 @@
 package Commands;
 
+import Command.CommandWithArgs;
 import Managers.CollectionManager;
 import Utility.ExecutionResponse;
 import model.Route;
@@ -19,9 +20,15 @@ public class UpdateId extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(Object arg) {
-        Route a = (Route) arg;
-        if (!collectionManager.update(a))
+    public ExecutionResponse execute(CommandWithArgs args) {
+        Route a = args.getRoute();
+
+        if (a == null)
+            return new ExecutionResponse("Illegal arguments!", false);
+        else if (!a.validate())
+            return new ExecutionResponse("Route is not valid!", false);
+
+        else if (!collectionManager.update(a))
             return new ExecutionResponse("The route with this id was not found.", false);
         return new ExecutionResponse("Route was successfully updated", true);
     }

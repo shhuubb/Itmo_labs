@@ -4,7 +4,7 @@ import Managers.CollectionManager;
 import Utility.ExecutionResponse;
 import Utility.Command;
 import model.Route;
-
+import Command.CommandWithArgs;
 /**
  * Команда add {element}: добавляет новый элемент в коллекцию.
  * {element} - Элемент, который нужно добавить в коллекцию.
@@ -18,11 +18,11 @@ public class Add extends Command{
         this.collectionManager = collectionManager;
     }
 
-    public ExecutionResponse execute(Object arg) {
-        Route a = (Route) arg;
-        a.setId(collectionManager.getCurrentId());
+    public ExecutionResponse execute(CommandWithArgs command) {
+        Route a = command.getRoute();
         try{
             if (a.validate()){
+                a.setId(collectionManager.getCurrentId());
                 collectionManager.add(a);
                 return new ExecutionResponse("Object Route is successfully added!!", true);
             }

@@ -3,6 +3,7 @@ package Commands;
 import Managers.CollectionManager;
 import Utility.Command;
 import Utility.ExecutionResponse;
+import Command.CommandWithArgs;
 
 import java.time.LocalDateTime;
 
@@ -20,14 +21,14 @@ public class Info extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(Object arg) {
-        if(arg != null)
+    public ExecutionResponse execute(CommandWithArgs command) {
+        if(command.getArgs() != null)
             return new ExecutionResponse("Illegal number of arguments!", false);
 
         LocalDateTime lastInitTime = collectionManager.getLastInitTime();
         LocalDateTime lastSaveTime = collectionManager.getLastSaveTime();
 
-        var r = """
+        String r = """
                 Information about collection: Type, lastInitTime, lastSaveTime and count of elements:
                 Type: %s,
                 LastInitTime: %s

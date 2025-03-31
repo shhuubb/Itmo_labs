@@ -3,6 +3,7 @@ package Commands;
 import Managers.CollectionManager;
 import Utility.Command;
 import Utility.ExecutionResponse;
+import Command.CommandWithArgs;
 
 /**
  * Команда show: выводит все элементы коллекции в строковом представлении.
@@ -18,9 +19,9 @@ public class Show extends Command {
     }
 
     @Override
-    public ExecutionResponse execute(Object arg) {
+    public ExecutionResponse execute(CommandWithArgs command) {
 
-        if (arg != null)
+        if (command.getArgs() != null)
             return new ExecutionResponse("Illegal number of arguments!", false);
 
         return new ExecutionResponse(collectionManager.toString(), true);

@@ -75,7 +75,7 @@ public class Runner {
             }
             else {
                 if (command == CommandType.ADD || command == CommandType.UPDATE)
-                    commandWithArgs = new CommandWithArgs(command, AskRoute(console, userCommand[1].split(" ")));
+                    commandWithArgs = new CommandWithArgs(command, AskRoute(console, userCommand[1].trim(), command));
 
                 else if (command == CommandType.FILTER_CONTAINS_NAME || command == CommandType.REMOVE_BY_ID)
                     commandWithArgs = new CommandWithArgs(command, userCommand[1].trim());
@@ -83,7 +83,7 @@ public class Runner {
                     Exit ex = new Exit(console);
                     commandWithArgs = new CommandWithArgs(command);
                     connection.send(connection.serializeObject(commandWithArgs));
-                    ex.execute(null);
+                    ex.execute(commandWithArgs);
                 } else
                     commandWithArgs = new CommandWithArgs(command);
                 connection.send(connection.serializeObject(commandWithArgs));
@@ -110,14 +110,13 @@ public class Runner {
         ExecutionResponse commandStatus;
         scriptStack.add(fileName);
         if (!new File(fileName).exists()) {
-            console.printError("File is not exists");
             return new ExecutionResponse("File is not exists",false);
         }
         try (FileReader filereader = new FileReader(fileName); BufferedReader bufferedReader = new BufferedReader(filereader)) {
             String line;
             do{
                 line = bufferedReader.readLine();
-                userCommand = line.trim().split(" ", 2);
+                userCommand = (line.trim()+ " ").split(" ", 2);
                 userCommand[1] = userCommand[1].trim();
                 boolean needLaunch = true;
                 if (userCommand[0].equals("execute_script")) {
@@ -159,7 +158,6 @@ public class Runner {
             console.printError("File is empty");
         }catch (IllegalStateException exception) {
             console.printError("Error");
-            System.exit(0);
         } catch (IOException e) {
             console.printError("Error while reading a file");
         } finally {
