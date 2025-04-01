@@ -15,6 +15,7 @@ public class ConnectionStarter {
                 byte[] data = cm.receive();
                 CommandWithArgs command = cm.deserialize(data);
                 ExecutionResponse response = commandManager.getCommands().get(command.getCommand().toString().toLowerCase()).execute(command);
+                commandManager.addToHistory(command.getCommand().toString().toLowerCase());
                 cm.send(cm.serializeObject(response));
                 }
             }

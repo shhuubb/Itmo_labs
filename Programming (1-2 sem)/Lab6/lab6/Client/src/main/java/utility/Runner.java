@@ -66,7 +66,6 @@ public class Runner {
      * @return ExecutionResponse выбора
      */
     private ExecutionResponse launchCommand(String[] userCommand) throws AskBreak {
-        if (userCommand[0].isEmpty()) return new ExecutionResponse("", true);
         try {
             CommandType command = CommandType.valueOf(userCommand[0].toUpperCase());
             CommandWithArgs commandWithArgs;
@@ -87,6 +86,7 @@ public class Runner {
                 } else
                     commandWithArgs = new CommandWithArgs(command);
                 connection.send(connection.serializeObject(commandWithArgs));
+
                 ExecutionResponse commandStatus = connection.deserializeObject(connection.receive());
                 return commandStatus;
             }

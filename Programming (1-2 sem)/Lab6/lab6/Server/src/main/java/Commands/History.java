@@ -41,8 +41,8 @@ public class History extends Command {
         StringBuilder sb = new StringBuilder();
         int firstIndex = list.size()>=8? list.size()-8 : 0 ;
         int lastIndex = list.size()-1;
-        for (; firstIndex < lastIndex; lastIndex--) {
-            sb.append(list.get(lastIndex-1)).append(lastIndex-firstIndex==1 ? "" : "\n");
+        for (; firstIndex <= lastIndex; lastIndex--) {
+            sb.append(list.get(lastIndex)).append(lastIndex-firstIndex==0 ? "" : "\n");
         }
         return sb.toString();
     }

@@ -260,3 +260,202 @@
 2025-04-01 00:46:25.959 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
 2025-04-01 00:48:59.362 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
 2025-04-01 00:48:59.364 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:40:48.809 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-01 11:40:48.811 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:41:06.183 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:61928 (207 bytes)
+2025-04-01 11:41:06.184 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:41:06.197 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@30ee2816
+2025-04-01 11:41:06.197 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:41:06.199 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:61928 (92 bytes)
+2025-04-01 11:41:06.199 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:41:06.199 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:41:12.454 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:61928 (204 bytes)
+2025-04-01 11:41:12.454 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:41:12.455 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@3d74bf60
+2025-04-01 11:41:12.455 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:41:12.455 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:61928 (339 bytes)
+2025-04-01 11:41:12.456 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:41:12.456 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:41:16.606 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:61928 (207 bytes)
+2025-04-01 11:41:16.606 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:41:16.606 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@72f926e6
+2025-04-01 11:41:16.606 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:41:16.606 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:61928 (92 bytes)
+2025-04-01 11:41:16.606 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:41:16.606 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:45:25.259 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-01 11:45:25.262 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:45:37.987 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53776 (204 bytes)
+2025-04-01 11:45:37.987 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:45:37.999 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@30ee2816
+2025-04-01 11:45:38.007 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:45:38.009 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53776 (280 bytes)
+2025-04-01 11:45:38.009 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:45:38.009 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:45:40.099 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53776 (204 bytes)
+2025-04-01 11:45:40.100 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:45:40.100 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@56620197
+2025-04-01 11:45:40.100 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:45:40.101 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53776 (339 bytes)
+2025-04-01 11:45:40.101 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:45:40.101 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:45:42.793 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53776 (207 bytes)
+2025-04-01 11:45:42.794 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:45:42.794 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@72057ecf
+2025-04-01 11:45:42.794 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:45:42.794 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53776 (96 bytes)
+2025-04-01 11:45:42.794 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:45:42.794 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:45:53.350 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53776 (204 bytes)
+2025-04-01 11:45:53.350 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:45:53.350 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@1ab3a8c8
+2025-04-01 11:45:53.350 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:45:53.350 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53776 (339 bytes)
+2025-04-01 11:45:53.351 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:45:53.351 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:45:58.243 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53776 (207 bytes)
+2025-04-01 11:45:58.244 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:45:58.244 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@479d31f3
+2025-04-01 11:45:58.244 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:45:58.244 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53776 (109 bytes)
+2025-04-01 11:45:58.244 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:45:58.244 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:46:59.207 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53785 (204 bytes)
+2025-04-01 11:46:59.207 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:46:59.208 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@6e171cd7
+2025-04-01 11:46:59.208 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:46:59.208 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53785 (280 bytes)
+2025-04-01 11:46:59.208 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:46:59.208 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:47:01.601 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53785 (204 bytes)
+2025-04-01 11:47:01.601 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:47:01.601 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@59fd97a8
+2025-04-01 11:47:01.601 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:47:01.601 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53785 (280 bytes)
+2025-04-01 11:47:01.601 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:47:01.602 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:47:05.255 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53785 (207 bytes)
+2025-04-01 11:47:05.255 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:47:05.256 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@dbf57b3
+2025-04-01 11:47:05.256 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:47:05.256 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53785 (127 bytes)
+2025-04-01 11:47:05.256 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:47:05.256 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:47:33.403 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53785 (204 bytes)
+2025-04-01 11:47:33.403 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:47:33.404 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@441772e
+2025-04-01 11:47:33.404 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:47:33.404 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53785 (339 bytes)
+2025-04-01 11:47:33.404 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:47:33.404 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:47:36.848 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53785 (205 bytes)
+2025-04-01 11:47:36.849 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:47:36.849 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@4d9e68d0
+2025-04-01 11:47:36.849 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:47:36.849 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53785 (124 bytes)
+2025-04-01 11:47:36.849 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:47:36.849 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:47:40.686 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53785 (207 bytes)
+2025-04-01 11:47:40.687 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:47:40.687 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@52e6fdee
+2025-04-01 11:47:40.687 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:47:40.687 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53785 (135 bytes)
+2025-04-01 11:47:40.687 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:47:40.687 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:48:29.410 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-01 11:48:29.412 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:48:32.703 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53786 (204 bytes)
+2025-04-01 11:48:32.704 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:48:32.715 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@30ee2816
+2025-04-01 11:48:32.716 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:48:32.718 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53786 (339 bytes)
+2025-04-01 11:48:32.718 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:48:32.718 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:48:41.415 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53786 (878 bytes)
+2025-04-01 11:48:41.415 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:48:41.419 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@2c767a52
+2025-04-01 11:48:41.419 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:48:41.419 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53786 (128 bytes)
+2025-04-01 11:48:41.419 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:48:41.419 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:48:44.364 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53786 (204 bytes)
+2025-04-01 11:48:44.365 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:48:44.365 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@68999068
+2025-04-01 11:48:44.373 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:48:44.373 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53786 (481 bytes)
+2025-04-01 11:48:44.373 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:48:44.373 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:48:48.034 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53786 (207 bytes)
+2025-04-01 11:48:48.034 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:48:48.034 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@7334aada
+2025-04-01 11:48:48.034 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:48:48.035 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53786 (100 bytes)
+2025-04-01 11:48:48.035 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:48:48.035 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:49:29.063 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-01 11:49:29.065 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:49:33.095 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53786 (207 bytes)
+2025-04-01 11:49:33.095 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:49:33.107 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@30ee2816
+2025-04-01 11:49:33.108 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:49:33.109 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53786 (92 bytes)
+2025-04-01 11:49:33.110 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:49:33.110 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:49:46.128 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53786 (868 bytes)
+2025-04-01 11:49:46.128 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:49:46.133 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@c33b74f
+2025-04-01 11:49:46.133 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:49:46.133 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53786 (128 bytes)
+2025-04-01 11:49:46.133 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:49:46.133 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:49:50.207 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53786 (207 bytes)
+2025-04-01 11:49:50.208 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:49:50.208 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@619713e5
+2025-04-01 11:49:50.208 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:49:50.208 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53786 (103 bytes)
+2025-04-01 11:49:50.208 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:49:50.208 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:50:36.955 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53790 (204 bytes)
+2025-04-01 11:50:36.955 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:50:36.955 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@7722c3c3
+2025-04-01 11:50:36.956 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:50:36.957 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53790 (2029 bytes)
+2025-04-01 11:50:36.957 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:50:36.957 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:50:40.906 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53790 (207 bytes)
+2025-04-01 11:50:40.906 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:50:40.906 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@16ec5519
+2025-04-01 11:50:40.906 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:50:40.906 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53790 (116 bytes)
+2025-04-01 11:50:40.906 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:50:40.906 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:50:52.149 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-01 11:50:52.150 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:50:55.099 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53790 (204 bytes)
+2025-04-01 11:50:55.100 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:50:55.112 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@30ee2816
+2025-04-01 11:50:55.113 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:50:55.115 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53790 (2029 bytes)
+2025-04-01 11:50:55.115 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:50:55.115 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:51:04.088 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53790 (211 bytes)
+2025-04-01 11:51:04.088 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:51:04.088 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@2145b572
+2025-04-01 11:51:04.089 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:51:04.090 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53790 (93 bytes)
+2025-04-01 11:51:04.090 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:51:04.090 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:51:09.661 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53790 (207 bytes)
+2025-04-01 11:51:09.661 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:51:09.661 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@647e447
+2025-04-01 11:51:09.661 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:51:09.661 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53790 (108 bytes)
+2025-04-01 11:51:09.661 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:51:09.661 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-01 11:51:13.581 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:53790 (204 bytes)
+2025-04-01 11:51:13.581 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-01 11:51:13.581 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@35ef1869
+2025-04-01 11:51:13.583 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-01 11:51:13.583 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:53790 (109 bytes)
+2025-04-01 11:51:13.583 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-01 11:51:13.583 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
