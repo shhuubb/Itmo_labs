@@ -12,7 +12,7 @@ START:
 	LD StartAddr
 	ST CurAddr
 
-LOAD:
+LOADING:
 	LD #0x02
 	ST Count
 	LD(CurAddr)+
@@ -23,7 +23,7 @@ LOAD:
 		POP
 		LOOP Count
 		JUMP CALLING
-	JUMP LOAD
+	JUMP LOADING
 
 SYMBOL:
 	IN 7
