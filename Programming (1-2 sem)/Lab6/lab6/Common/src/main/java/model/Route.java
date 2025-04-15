@@ -2,6 +2,7 @@ package model;
 
 import Utility.Element;
 import Utility.Validatable;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -11,12 +12,19 @@ import java.util.Objects;
  * @author sh_ub
  */
 public class Route extends Element implements Validatable, Serializable, Comparable<Route> {
-    private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    @JsonProperty("id")
+    private Long id;//Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    @JsonProperty("name")
     private String name; //Поле не может быть null, Строка не может быть пустой
+    @JsonProperty("coordinates")
     private Coordinates coordinates; //Поле не может быть null
+    @JsonProperty("creationDate")
     private ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    @JsonProperty("from")
     private Location from; //Поле может быть null
+    @JsonProperty("to")
     private Location to; //Поле может быть null
+    @JsonProperty("distance")
     private int distance; //Значение поля должно быть больше 1
 
     public Route(Long id, String name, Coordinates coordinates, ZonedDateTime creationDate,
@@ -30,10 +38,12 @@ public class Route extends Element implements Validatable, Serializable, Compara
         this.distance = distance;
     }
 
+    public Route() {}
+
+
     public Route(Long id, String name, Coordinates coordinates, Location from, Location to, int distance) {
         this(id, name, coordinates, ZonedDateTime.now(), from, to, distance);
     }
-
     public Long getId() {
         return id;
     }

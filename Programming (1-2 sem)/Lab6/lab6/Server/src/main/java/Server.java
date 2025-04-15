@@ -1,4 +1,3 @@
-
 import Commands.Add;
 import Commands.*;
 import Managers.CollectionManager;
@@ -6,10 +5,8 @@ import Managers.CommandManager;
 import Managers.DumpManager;
 import Utility.StandardConsole;
 
-
 import static Utility.ConnectionStarter.run;
 import static Utility.Path.getJsonPath;
-
 
 class Server {
     public static void main(String[] args) {

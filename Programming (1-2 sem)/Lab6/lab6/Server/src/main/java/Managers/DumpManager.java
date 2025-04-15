@@ -1,13 +1,16 @@
 package Managers;
 
 import Utility.StandardConsole;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.util.StdDateFormat;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import model.Route;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Vector;
-
-import static Utility.JsonParser.parseJson;
-import static Utility.JsonSerialization.ToJson;
 /**
  * Класс для записи и чтения данных из файла
  * @author sh_ub
@@ -15,21 +18,26 @@ import static Utility.JsonSerialization.ToJson;
 public class DumpManager {
     private final String fileName;
     private final StandardConsole console;
+    private final File file ;
+
 
     public DumpManager(String fileName, StandardConsole console) {
         this.fileName = fileName;
         this.console = console;
+        file = new File(fileName);
     }
     /**
      * Записывает данные в файл
      * @param collection коллекция
      */
     public void dump(Vector<Route> collection) {
-        try (OutputStream outputStream = new FileOutputStream(fileName, false);
-             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream)) {
+        try {
 
-            outputStreamWriter.write(ToJson(collection)); // Записываем данные в файл
-            outputStreamWriter.flush(); // Обеспечиваем, что данные записаны
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            mapper.enable(SerializationFeature.INDENT_OUTPUT);
+            mapper.setDateFormat(new StdDateFormat().withColonInTimeZone(true));
+            mapper.writeValue(file, collection);
 
         } catch (IOException e) {
             console.printError("File " + fileName + " could not be opened or written.");
@@ -40,30 +48,24 @@ public class DumpManager {
      * @return коллекцию
      */
     public Vector<Route> read() {
-        if (fileName != null && !fileName.isEmpty()){
+        if (!fileName.isEmpty()){
+            ObjectMapper mapper = new ObjectMapper();
             try {
-                BufferedReader reader = new BufferedReader(new FileReader(fileName));
+                Path path = Path.of(fileName);
+                String content = Files.readString(path).trim();
 
-                var jsonString = new StringBuilder();
+                if (content.isEmpty())
+                    Files.write(path, "[]".getBytes());
 
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    line = line.trim();
-                    if (!line.isEmpty())
-                        jsonString.append(line);
-                }
-                if (!jsonString.toString().trim().isEmpty()) {
-                    if (jsonString.substring(1, jsonString.length() - 1).trim().isEmpty()) {
-                        return new Vector<>();
-                    }
-                    return parseJson(jsonString.toString());
-                }
-                return new Vector<>();
-
+                mapper.registerModule(new JavaTimeModule());
+                return mapper.readValue(
+                        new File(fileName),
+                        mapper.getTypeFactory().constructCollectionType(Vector.class, Route.class)
+                );
             } catch (FileNotFoundException e) {
                 console.printError("File " + fileName + " could not be opened.");
             } catch (IOException e) {
-                console.printError("Error in reading file " + fileName + ".");
+                e.printStackTrace();
                 System.exit(0);
             }
         } else
