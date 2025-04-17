@@ -148,6 +148,11 @@ BEGIN
         RAISE EXCEPTION 'Действие должно длиться больше % секунд!', time_fraction;
     END IF;
 
+    IF TG_OP = 'UPDATE' THEN    
+        PERFORM calculate_percentage_of_time(roww.ObjectId, roww.PlaceId)
+        FROM (SELECT * FROM Stats WHERE ObjectId = NEW.ObjectId OR PlaceId = NEW.PlaceId) roww;
+    END IF;
+
     PERFORM calculate_percentage_of_time(NEW.ObjectId, NEW.PlaceId);
 
     PERFORM calculate_percentage_of_time(NEW.ObjectId, rec.PlaceId)
