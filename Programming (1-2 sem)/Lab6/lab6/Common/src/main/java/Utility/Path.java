@@ -13,7 +13,6 @@ public class Path {
 
     public static String getJsonPath() {
         String jsonPath = System.getenv("JSON_PATH");
-
-        return jsonPath == null || jsonPath.isEmpty() ? "/home/studs/s468125/history.txt" : jsonPath;
+        return jsonPath;
     }
 }

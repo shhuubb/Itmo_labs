@@ -7,6 +7,9 @@ import Utility.ExecutionResponse;
 import Command.CommandWithArgs;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
 /**
  * Команда history: выводит последние 7 команд (без их аргументов).
  * @author sh_ub
@@ -28,22 +31,23 @@ public class History extends Command {
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
         var list = commandmanager.getCommandHistory();
-
         return new ExecutionResponse(GettingHistory(list), true);
     }
 
     /**
      * Получение истории запросов
-     * @param list список запросов
+     * @param history список запросов
      * @return последние 7 комманд
      */
-    public String GettingHistory(ArrayList<String> list) {
-        StringBuilder sb = new StringBuilder();
-        int firstIndex = list.size()>=8? list.size()-8 : 0 ;
-        int lastIndex = list.size()-1;
-        for (; firstIndex <= lastIndex; lastIndex--) {
-            sb.append(list.get(lastIndex)).append(lastIndex-firstIndex==0 ? "" : "\n");
-        }
-        return sb.toString();
+    public String GettingHistory(ArrayList<String> history) {
+        return history.stream()
+                .skip(Math.max(0, history.size() - 7))  // Take last 7 (or less if not enough)
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        list -> {
+                            Collections.reverse(list);  // Reverse to show newest first
+                            return String.join("\n", list);
+                        }
+                ));
     }
 }

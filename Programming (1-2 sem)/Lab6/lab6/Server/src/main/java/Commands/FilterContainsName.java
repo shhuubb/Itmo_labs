@@ -9,7 +9,10 @@ import model.Route;
 import Command.CommandWithArgs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Vector;
+import java.util.stream.Collectors;
+
 /**
  * Команда filter_contains_name name: выводит элементы, значение поля name которых содержит заданную подстроку.
  * Name Подстрока, которую нужно искать в поле name.
@@ -29,31 +32,15 @@ public class FilterContainsName extends Command {
         if (substring.isEmpty())
             return new ExecutionResponse("Substring is empty", false);
 
-        ArrayList<Route> list = GettingMatches(collectionManager.getCollection(), substring);
+        String matches = collectionManager.getCollection().stream()
+                .filter(route -> route.getName().toLowerCase().contains(substring))
+                .map(Route::toString)
+                .collect(Collectors.joining("\n"));
 
-        StringBuilder answer = new StringBuilder();
+        String result = matches.isEmpty()
+                ? "0 matches found."
+                : matches + "\n" + matches.split("\n").length + " matches found.";
 
-        for (var match : list)
-            answer.append(match.toString()).append("\n");
-
-        answer.append(list.size()).append(" matches found.");
-
-        return new ExecutionResponse(answer.toString(), true);
-    }
-
-    /**
-     * Фильтрация значений
-     * @param list коллекция элементов
-     * @param substring подстрока
-     * @return ArrayList<Route>
-     */
-    private ArrayList<Route> GettingMatches(Vector<Route> list, String substring) {
-        ArrayList<Route> matches = new ArrayList<>();
-        for (Route route : list) {
-            if (route.getName().toLowerCase().contains(substring)) {
-                matches.add(route);
-            }
-        }
-        return matches;
+        return new ExecutionResponse(result, true);
     }
 }
