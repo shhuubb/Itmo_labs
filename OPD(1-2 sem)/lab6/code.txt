@@ -1,0 +1,74 @@
+ORG 0x0
+V0: WORD $default, 0x180
+V1: WORD $INT1, 0x180
+V2: WORD $default, 0x180
+V3: WORD $INT3, 0x180
+V4: WORD $default, 0x180
+V5: WORD $default, 0x180
+V6: WORD $default, 0x180
+V7: WORD $default, 0x180
+
+ORG 0x00F
+default: IRET
+
+ORG 0x044
+X: WORD 0x0000
+MIN: WORD 0xFFE6
+MAX: WORD 0x0018
+
+ORG 0x070
+START:
+    DI
+    CLA
+    OUT 0x001
+    OUT 0x005
+    OUT 0x00B
+    OUT 0x00E
+    OUT 0x012
+    OUT 0x016
+    OUT 0x01E
+    LD #0x9
+    OUT 0x3
+    LD #0xB
+    OUT 0x7
+
+
+MAIN:
+    EI
+    CLA
+    LD X
+    ADD #0x3
+    CALL $CHECK
+    ST X
+   JUMP MAIN
+
+CHECK:
+    CMP MIN
+    BLT RETURN_MIN
+    CMP MAX
+    BGE RETURN_MIN
+    JUMP RETURN  
+    RETURN_MIN: LD $MIN 
+    RETURN: RET
+   	
+
+INT1:
+    DI
+    LD X
+    NOP
+    ASL
+    ASL
+    ADD X
+    ADD #0x4
+    OUT 0x2
+    NOP
+    IRET
+    
+INT3:
+    DI
+    IN 0x6
+    NOP
+    AND X
+    ST X
+    NOP
+    IRET
