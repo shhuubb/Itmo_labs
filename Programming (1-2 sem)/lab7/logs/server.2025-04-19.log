@@ -1,0 +1,253 @@
+2025-04-19 00:06:15.638 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 00:06:15.643 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-19 00:06:32.256 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 00:06:32.257 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-19 14:55:33.987 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 14:55:33.989 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-19 14:56:07.163 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:63676 (204 bytes)
+2025-04-19 14:56:07.163 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-19 14:56:07.182 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@7a3793c7
+2025-04-19 14:56:07.189 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 14:56:07.191 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:63676 (841 bytes)
+2025-04-19 14:56:07.192 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-19 14:56:07.192 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-19 14:56:15.553 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:63676 (877 bytes)
+2025-04-19 14:56:15.553 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-19 14:56:15.555 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@f14a7d4
+2025-04-19 14:56:15.555 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 14:56:15.555 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:63676 (128 bytes)
+2025-04-19 14:56:15.555 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-19 14:56:15.555 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-19 14:56:18.817 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:63676 (204 bytes)
+2025-04-19 14:56:18.817 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-19 14:56:18.817 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@79c97cb
+2025-04-19 14:56:18.817 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 14:56:18.818 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:63676 (1040 bytes)
+2025-04-19 14:56:18.818 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-19 14:56:18.818 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-19 14:56:22.183 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:63676 (204 bytes)
+2025-04-19 14:56:22.184 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-19 14:56:22.184 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@44a59da3
+2025-04-19 14:56:22.184 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 14:56:22.184 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:63676 (339 bytes)
+2025-04-19 14:56:22.184 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-19 14:56:22.185 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-19 14:56:41.551 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:63676 (215 bytes)
+2025-04-19 14:56:41.551 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-19 14:56:41.551 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@4f704591
+2025-04-19 14:56:41.552 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 14:56:41.552 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:63676 (120 bytes)
+2025-04-19 14:56:41.552 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-19 14:56:41.552 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-19 14:56:44.390 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:63676 (204 bytes)
+2025-04-19 14:56:44.390 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-19 14:56:44.390 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@3ddc6915
+2025-04-19 14:56:44.390 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 14:56:44.390 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:63676 (848 bytes)
+2025-04-19 14:56:44.390 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-19 14:56:44.390 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-19 14:56:47.006 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:63676 (204 bytes)
+2025-04-19 14:56:47.006 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-19 14:56:47.006 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@404bbcbd
+2025-04-19 14:56:47.023 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 14:56:47.023 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:63676 (109 bytes)
+2025-04-19 14:56:47.023 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-19 14:56:47.023 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-19 14:56:59.013 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:64913 (204 bytes)
+2025-04-19 14:56:59.013 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-19 14:56:59.013 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@30bce90b
+2025-04-19 14:56:59.014 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 14:56:59.014 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:64913 (848 bytes)
+2025-04-19 14:56:59.014 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-19 14:56:59.014 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-19 14:57:01.904 [main] INFO  Managers.ConnectionManager - Received datagram from /127.0.0.1:64913 (204 bytes)
+2025-04-19 14:57:01.904 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 65535)
+2025-04-19 14:57:01.904 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@2474f125
+2025-04-19 14:57:01.907 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 14:57:01.907 [main] DEBUG Managers.ConnectionManager - Sending response to /127.0.0.1:64913 (109 bytes)
+2025-04-19 14:57:01.907 [main] DEBUG Managers.ConnectionManager - Response sent successfully
+2025-04-19 14:57:01.907 [main] DEBUG Managers.ConnectionManager - Waiting for incoming datagram...
+2025-04-19 16:04:16.469 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 16:04:16.471 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:14:09.110 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50376
+2025-04-19 16:14:14.404 [main] DEBUG Managers.ConnectionManager - Received command: []
+2025-04-19 16:14:14.404 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 0)
+2025-04-19 16:14:14.404 [main] ERROR Managers.ConnectionManager - Deserialization error: null
+java.io.EOFException: null
+	at java.base/java.io.ObjectInputStream$PeekInputStream.readFully(ObjectInputStream.java:2940)
+	at java.base/java.io.ObjectInputStream$BlockDataInputStream.readShort(ObjectInputStream.java:3437)
+	at java.base/java.io.ObjectInputStream.readStreamHeader(ObjectInputStream.java:973)
+	at java.base/java.io.ObjectInputStream.<init>(ObjectInputStream.java:404)
+	at Managers.ConnectionManager.deserialize(ConnectionManager.java:44)
+	at Utility.ConnectionStarter.run(ConnectionStarter.java:17)
+	at Server.main(Server.java:33)
+2025-04-19 16:15:37.613 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 16:15:37.615 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:15:46.807 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50396
+2025-04-19 16:15:51.291 [main] DEBUG Managers.ConnectionManager - Received command: []
+2025-04-19 16:15:51.291 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 0)
+2025-04-19 16:15:51.291 [main] ERROR Managers.ConnectionManager - Deserialization error: null
+java.io.EOFException: null
+	at java.base/java.io.ObjectInputStream$PeekInputStream.readFully(ObjectInputStream.java:2940)
+	at java.base/java.io.ObjectInputStream$BlockDataInputStream.readShort(ObjectInputStream.java:3437)
+	at java.base/java.io.ObjectInputStream.readStreamHeader(ObjectInputStream.java:973)
+	at java.base/java.io.ObjectInputStream.<init>(ObjectInputStream.java:404)
+	at Managers.ConnectionManager.deserialize(ConnectionManager.java:43)
+	at Utility.ConnectionStarter.run(ConnectionStarter.java:17)
+	at Server.main(Server.java:33)
+2025-04-19 16:21:59.586 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 16:21:59.587 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:22:03.017 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50453
+2025-04-19 16:22:10.680 [main] DEBUG Managers.ConnectionManager - Received command: []
+2025-04-19 16:22:10.680 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 0)
+2025-04-19 16:22:10.680 [main] ERROR Managers.ConnectionManager - Deserialization error: null
+java.io.EOFException: null
+	at java.base/java.io.ObjectInputStream$PeekInputStream.readFully(ObjectInputStream.java:2940)
+	at java.base/java.io.ObjectInputStream$BlockDataInputStream.readShort(ObjectInputStream.java:3437)
+	at java.base/java.io.ObjectInputStream.readStreamHeader(ObjectInputStream.java:973)
+	at java.base/java.io.ObjectInputStream.<init>(ObjectInputStream.java:404)
+	at Managers.ConnectionManager.deserialize(ConnectionManager.java:43)
+	at Utility.ConnectionStarter.run(ConnectionStarter.java:17)
+	at Server.main(Server.java:33)
+2025-04-19 16:23:02.501 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 16:23:02.503 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:23:05.309 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50470
+2025-04-19 16:23:10.159 [main] DEBUG Managers.ConnectionManager - Received command: []
+2025-04-19 16:23:10.160 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 0)
+2025-04-19 16:23:10.160 [main] ERROR Managers.ConnectionManager - Deserialization error: null
+java.io.EOFException: null
+	at java.base/java.io.ObjectInputStream$PeekInputStream.readFully(ObjectInputStream.java:2940)
+	at java.base/java.io.ObjectInputStream$BlockDataInputStream.readShort(ObjectInputStream.java:3437)
+	at java.base/java.io.ObjectInputStream.readStreamHeader(ObjectInputStream.java:973)
+	at java.base/java.io.ObjectInputStream.<init>(ObjectInputStream.java:404)
+	at Managers.ConnectionManager.deserialize(ConnectionManager.java:43)
+	at Utility.ConnectionStarter.run(ConnectionStarter.java:18)
+	at Server.main(Server.java:33)
+2025-04-19 16:24:55.376 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 16:24:55.377 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:24:59.221 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50494
+2025-04-19 16:25:03.743 [main] DEBUG Managers.ConnectionManager - Received command: [-84, -19, 0, 5, 115, 114, 0, 23, 67, 111, 109, 109, 97, 110, 100, 46, 67, 111, 109, 109, 97, 110, 100, 87, 105, 116, 104, 65, 114, 103, 115, 4, -96, 7, -73, 88, -4, 117, -96, 2, 0, 3, 76, 0, 4, 97, 114, 103, 115, 116, 0, 18, 76, 106, 97, 118, 97, 47, 108, 97, 110, 103, 47, 83, 116, 114, 105, 110, 103, 59, 76, 0, 7, 99, 111, 109, 109, 97, 110, 100, 116, 0, 21, 76, 67, 111, 109, 109, 97, 110, 100, 47, 67, 111, 109, 109, 97, 110, 100, 84, 121, 112, 101, 59, 76, 0, 5, 114, 111, 117, 116, 101, 116, 0, 13, 76, 109, 111, 100, 101, 108, 47, 82, 111, 117, 116, 101, 59, 120, 112, 112, 126, 114, 0, 19, 67, 111, 109, 109, 97, 110, 100, 46, 67, 111, 109, 109, 97, 110, 100, 84, 121, 112, 101, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 120, 114, 0, 14, 106, 97, 118, 97, 46, 108, 97, 110, 103, 46, 69, 110, 117, 109, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 120, 112, 116, 0, 4, 72, 69, 76, 80, 112]
+2025-04-19 16:25:03.744 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 204)
+2025-04-19 16:25:03.759 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@1df8b5b8
+2025-04-19 16:25:03.760 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:25:03.762 [main] DEBUG Managers.ConnectionManager - Sent object: [-84, -19, 0, 5, 115, 114, 0, 25, 85, 116, 105, 108, 105, 116, 121, 46, 69, 120, 101, 99, 117, 116, 105, 111, 110, 82, 101, 115, 112, 111, 110, 115, 101, 76, 23, -20, -46, 50, -92, 108, -89, 2, 0, 2, 90, 0, 7, 115, 117, 99, 99, 101, 115, 115, 76, 0, 8, 114, 101, 115, 112, 111, 110, 115, 101, 116, 0, 18, 76, 106, 97, 118, 97, 47, 108, 97, 110, 103, 47, 83, 116, 114, 105, 110, 103, 59, 120, 112, 1, 116, 7, -111, 32, 104, 101, 108, 112, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, -48, -78, -47, -117, -48, -78, -48, -75, -47, -127, -47, -126, -48, -72, 32, -47, -127, -48, -65, -47, -128, -48, -80, -48, -78, -48, -70, -47, -125, 32, -48, -65, -48, -66, 32, -48, -76, -48, -66, -47, -127, -47, -126, -47, -125, -48, -65, -48, -67, -47, -117, -48, -68, 32, -48, -70, -48, -66, -48, -68, -48, -80, -48, -67, -48, -76, -48, -80, -48, -68, 13, 10, 10, 32, 104, 105, 115, 116, 111, 114, 121, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, -48, -78, -47, -117, -48, -78, -48, -75, -47, -127, -47, -126, -48, -72, 32, -48, -65, -48, -66, -47, -127, -48, -69, -48, -75, -48, -76, -48, -67, -48, -72, -48, -75, 32, 55, 32, -48, -70, -48, -66, -48, -68, -48, -80, -48, -67, -48, -76, 32, 40, -48, -79, -48, -75, -48, -73, 32, -48, -72, -47, -123, 32, -48, -80, -47, -128, -48, -77, -47, -125, -48, -68, -48, -75, -48, -67, -47, -126, -48, -66, -48, -78, 41, 13, 10, 10, 32, 97, 100, 100, 32, 123, 101, 108, 101, 109, 101, 110, 116, 125, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, -48, -76, -48, -66, -48, -79, -48, -80, -48, -78, -48, -72, -47, -126, -47, -116, 32, -48, -67, -48, -66, -48, -78, -47, -117, -48, -71, 32, -47, -115, -48, -69, -48, -75, -48, -68, -48, -75, -48, -67, -47, -126, 32, -48, -78, 32, -48, -70, -48, -66, -48, -69, -48, -69, -48, -75, -48, -70, -47, -122, -48, -72, -47, -114, 13, 10, 10, 32, 105, 110, 102, 111, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, -48, -110, -47, -117, -48, -78, -48, -75, -47, -127, -47, -126, -48, -72, 32, -48, -78, 32, -47, -127, -47, -126, -48, -80, -48, -67, -48, -76, -48, -80, -47, -128, -47, -126, -48, -67, -47, -117, -48, -71, 32, -48, -65, -48, -66, -47, -126, -48, -66, -48, -70, 32, -48, -78, -47, -117, -48, -78, -48, -66, -48, -76, -48, -80, 32, -48, -72, -48, -67, -47, -124, -48, -66, -47, -128, -48, -68, -48, -80, -47, -122, -48, -72, -47, -114, 32, -48, -66, 32, -48, -70, -48, -66, -48, -69, -48, -69, -48, -75, -48, -70, -47, -122, -48, -72, -48, -72, 32, 40, -47, -126, -48, -72, -48, -65, 44, 32, -48, -76, -48, -80, -47, -126, -48, -80, 32, -48, -72, -48, -67, -48, -72, -47, -122, -48, -72, -48, -80, -48, -69, -48, -72, -48, -73, -48, -80, -47, -122, -48, -72, -48, -72, 44, 32, -48, -70, -48, -66, -48, -69, -48, -72, -47, -121, -48, -75, -47, -127, -47, -126, -48, -78, -48, -66, 32, -47, -115, -48, -69, -48, -75, -48, -68, -48, -75, -48, -67, -47, -126, -48, -66, -48, -78, 32, -48, -72, 32, -47, -126, 46, -48, -76, 46, 41, 13, 10, 10, 32, 115, 104, 111, 119, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, -48, -78, -47, -117, -48, -78, -48, -75, -47, -127, -47, -126, -48, -72, 32, -48, -78, 32, -47, -127, -47, -126, -48, -80, -48, -67, -48, -76, -48, -80, -47, -128, -47, -126, -48, -67, -47, -117, -48, -71, 32, -48, -65, -48, -66, -47, -126, -48, -66, -48, -70, 32, -48, -78, -47, -117, -48, -78, -48, -66, -48, -76, -48, -80, 32, -48, -78, -47, -127, -48, -75, 32, -47, -115, -48, -69, -48, -75, -48, -68, -48, -75, -48, -67, -47, -126, -47, -117, 32, -48, -70, -48, -66, -48, -69, -48, -69, -48, -75, -48, -70, -47, -122, -48, -72, -48, -72, 32, -48, -78, 32, -47, -127, -47, -126, -47, -128, -48, -66, -48, -70, -48, -66, -48, -78, -48, -66, -48, -68, 32, -48, -65, -47, -128, -48, -75, -48, -76, -47, -127, -47, -126, -48, -80, -48, -78, -48, -69, -48, -75, -48, -67, -48, -72, -48, -72, 13, 10, 10, 32, 114, 101, 109, 111, 118, 101, 95, 98, 121, 95, 105, 100, 32, 105, 100, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, -47, -125, -48, -76, -48, -80, -48, -69, -48, -72, -47, -126, -47, -116, 32, -47, -115, -48, -69, -48, -75, -48, -68, -48, -75, -48, -67, -47, -126, 32, -48, -72, -48, -73, 32, -48, -70, -48, -66, -48, -69, -48, -69, -48, -75, -48, -70, -47, -122, -48, -72, -48, -72, 32, -48, -65, -48, -66, 32, -48, -75, -48, -77, -48, -66, 32, 105, 100, 13, 10, 10, 32, 99, 108, 101, 97, 114, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, -48, -66, -47, -121, -48, -72, -47, -127, -47, -126, -48, -72, -47, -126, -47, -116, 32, -48, -70, -48, -66, -48, -69, -48, -69, -48, -75, -48, -70, -47, -122, -48, -72, -47, -114, 13, 10, 10, 32, 114, 101, 109, 111, 118, 101, 95, 102, 105, 114, 115, 116, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, -47, -125, -48, -76, -48, -80, -48, -69, -48, -72, -47, -126, -47, -116, 32, -48, -65, -48, -75, -47, -128, -48, -78, -47, -117, -48, -71, 32, -47, -115, -48, -69, -48, -75, -48, -68, -48, -75, -48, -67, -47, -126, 32, -48, -72, -48, -73, 32, -48, -70, -48, -66, -48, -69, -48, -69, -48, -75, -48, -70, -47, -122, -48, -72, -48, -72, 13, 10, 10, 32, 115, 111, 114, 116, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, -48, -66, -47, -126, -47, -127, -48, -66, -47, -128, -47, -126, -48, -72, -47, -128, -48, -66, -48, -78, -48, -80, -47, -126, -47, -116, 32, -48, -70, -48, -66, -48, -69, -48, -69, -48, -75, -48, -70, -47, -122, -48, -72, -47, -114, 32, -48, -78, 32, -48, -75, -47, -127, -47, -126, -48, -75, -47, -127, -47, -126, -48, -78, -48, -75, -48, -67, -48, -67, -48, -66, -48, -68, 32, -48, -65, -48, -66, -47, -128, -47, -113, -48, -76, -48, -70, -48, -75, 13, 10, 10, 32, 109, 97, 120, 95, 98, 121, 95, 110, 97, 109, 101, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, -48, -110, -47, -117, -48, -78, -48, -75, -47, -127, -47, -126, -48, -72, 32, -48, -69, -47, -114, -48, -79, -48, -66, -48, -71, 32, -48, -66, -48, -79, -47, -118, -48, -75, -48, -70, -47, -126, 32, -48, -72, -48, -73, 32, -48, -70, -48, -66, -48, -69, -48, -69, -48, -75, -48, -70, -47, -122, -48, -72, -48, -72, 44, 32, -48, -73, -48, -67, -48, -80, -47, -121, -48, -75, -48, -67, -48, -72, -48, -75, 32, -48, -65, -48, -66, -48, -69, -47, -113, 32, 110, 97, 109, 101, 32, -48, -70, -48, -66, -47, -126, -48, -66, -47, -128, -48, -66, -48, -77, -48, -66, 32, -47, -113, -48, -78, -48, -69, -47, -113, -48, -75, -47, -126, -47, -127, -47, -113, 32, -48, -68, -48, -80, -48, -70, -47, -127, -48, -72, -48, -68, -48, -80, -48, -69, -47, -116, -48, -67, -47, -117, -48, -68, 13, 10, 10, 32, 102, 105, 108, 116, 101, 114, 95, 99, 111, 110, 116, 97, 105, 110, 115, 95, 110, 97, 109, 101, 32, 110, 97, 109, 101, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, -48, -78, -47, -117, -48, -78, -48, -75, -47, -127, -47, -126, -48, -72, 32, -47, -115, -48, -69, -48, -75, -48, -68, -48, -75, -48, -67, -47, -126, -47, -117, 44, 32, -48, -73, -48, -67, -48, -80, -47, -121, -48, -75, -48, -67, -48, -72, -48, -75, 32, -48, -65, -48, -66, -48, -69, -47, -113, 32, 110, 97, 109, 101, 32, -48, -70, -48, -66, -47, -126, -48, -66, -47, -128, -47, -117, -47, -123, 32, -47, -127, -48, -66, -48, -76, -48, -75, -47, -128, -48, -74, -48, -72, -47, -126, 32, -48, -73, -48, -80, -48, -76, -48, -80, -48, -67, -48, -67, -47, -125, -47, -114, 32, -48, -65, -48, -66, -48, -76, -47, -127, -47, -126, -47, -128, -48, -66, -48, -70, -47, -125, 13, 10, 10, 32, 112, 114, 105, 110, 116, 95, 102, 105, 101, 108, 100, 95, 97, 115, 99, 101, 110, 100, 105, 110, 103, 95, 100, 105, 115, 116, 97, 110, 99, 101, 32, 32, 32, 32, 32, -48, -78, -47, -117, -48, -78, -48, -75, -47, -127, -47, -126, -48, -72, 32, -48, -73, -48, -67, -48, -80, -47, -121, -48, -75, -48, -67, -48, -72, -47, -113, 32, -48, -65, -48, -66, -48, -69, -47, -113, 32, 100, 105, 115, 116, 97, 110, 99, 101, 32, -48, -78, -47, -127, -48, -75, -47, -123, 32, -47, -115, -48, -69, -48, -75, -48, -68, -48, -75, -48, -67, -47, -126, -48, -66, -48, -78, 32, -48, -78, 32, -48, -65, -48, -66, -47, -128, -47, -113, -48, -76, -48, -70, -48, -75, 32, -48, -78, -48, -66, -48, -73, -47, -128, -48, -80, -47, -127, -47, -126, -48, -80, -48, -67, -48, -72, -47, -113, 13, 10, 10, 32, 117, 112, 100, 97, 116, 101, 32, 105, 100, 32, 123, 101, 108, 101, 109, 101, 110, 116, 125, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, -48, -66, -48, -79, -48, -67, -48, -66, -48, -78, -48, -72, -47, -126, -47, -116, 32, -48, -73, -48, -67, -48, -80, -47, -121, -48, -75, -48, -67, -48, -72, -47, -113, 32, -47, -115, -48, -69, -48, -75, -48, -68, -48, -75, -48, -67, -47, -126, -48, -66, -48, -78, 32, -48, -70, -48, -66, -48, -69, -48, -69, -48, -75, -48, -70, -47, -122, -48, -72, -48, -72, 44, 32, 105, 100, 32, -48, -70, -48, -66, -47, -126, -48, -66, -47, -128, -48, -66, -48, -77, -48, -66, 32, -47, -128, -48, -80, -48, -78, -48, -67, -47, -117, 32, -48, -73, -48, -80, -48, -76, -48, -80, -48, -67, -48, -67, -47, -117, -48, -68, 13, 10, 10, 32, 101, 120, 105, 116, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, -48, -78, -47, -117, -48, -71, -47, -126, -48, -72, 32, -48, -72, -48, -73, 32, -48, -65, -47, -128, -48, -72, -48, -69, -48, -66, -48, -74, -48, -75, -48, -67, -48, -72, -47, -113, 13, 10]
+2025-04-19 16:26:41.910 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 16:26:41.911 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:26:56.835 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50512
+2025-04-19 16:27:10.209 [main] ERROR Managers.ConnectionManager - Receiving error: Connection reset
+2025-04-19 16:28:18.923 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 16:28:18.924 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:28:25.766 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50523
+2025-04-19 16:29:22.351 [main] ERROR Managers.ConnectionManager - Receiving error: Connection reset
+2025-04-19 16:30:02.567 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 16:30:02.569 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:30:11.676 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50540
+2025-04-19 16:30:16.332 [main] DEBUG Managers.ConnectionManager - Received command: []
+2025-04-19 16:30:16.332 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 0)
+2025-04-19 16:30:16.332 [main] ERROR Managers.ConnectionManager - Deserialization error: null
+java.io.EOFException: null
+	at java.base/java.io.ObjectInputStream$PeekInputStream.readFully(ObjectInputStream.java:2940)
+	at java.base/java.io.ObjectInputStream$BlockDataInputStream.readShort(ObjectInputStream.java:3437)
+	at java.base/java.io.ObjectInputStream.readStreamHeader(ObjectInputStream.java:973)
+	at java.base/java.io.ObjectInputStream.<init>(ObjectInputStream.java:404)
+	at Managers.ConnectionManager.deserialize(ConnectionManager.java:43)
+	at Utility.ConnectionStarter.run(ConnectionStarter.java:18)
+	at Server.main(Server.java:33)
+2025-04-19 16:31:42.437 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 16:31:42.439 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:31:47.144 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50555
+2025-04-19 16:31:53.347 [main] DEBUG Managers.ConnectionManager - Received command: [-84, -19, 0, 5, 115, 114, 0, 23, 67, 111, 109, 109, 97, 110, 100, 46, 67, 111, 109, 109, 97, 110, 100, 87, 105, 116, 104, 65, 114, 103, 115, 4, -96, 7, -73, 88, -4, 117, -96, 2, 0, 3, 76, 0, 4, 97, 114, 103, 115, 116, 0, 18, 76, 106, 97, 118, 97, 47, 108, 97, 110, 103, 47, 83, 116, 114, 105, 110, 103, 59, 76, 0, 7, 99, 111, 109, 109, 97, 110, 100, 116, 0, 21, 76, 67, 111, 109, 109, 97, 110, 100, 47, 67, 111, 109, 109, 97, 110, 100, 84, 121, 112, 101, 59, 76, 0, 5, 114, 111, 117, 116, 101, 116, 0, 13, 76, 109, 111, 100, 101, 108, 47, 82, 111, 117, 116, 101, 59, 120, 112, 112, 126, 114, 0, 19, 67, 111, 109, 109, 97, 110, 100, 46, 67, 111, 109, 109, 97, 110, 100, 84, 121, 112, 101, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 120, 114, 0, 14, 106, 97, 118, 97, 46, 108, 97, 110, 103, 46, 69, 110, 117, 109, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 120, 112, 116, 0, 4, 72, 69, 76, 80, 112]
+2025-04-19 16:31:53.347 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 204)
+2025-04-19 16:31:53.362 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@1df8b5b8
+2025-04-19 16:31:53.364 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:31:53.365 [main] DEBUG Managers.ConnectionManager - Sent object
+2025-04-19 16:32:49.504 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 16:32:49.506 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:33:15.813 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50569
+2025-04-19 16:33:20.232 [main] DEBUG Managers.ConnectionManager - Received command: 204
+2025-04-19 16:33:20.233 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 204)
+2025-04-19 16:33:20.249 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@1df8b5b8
+2025-04-19 16:33:20.265 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:33:20.269 [main] ERROR Managers.ConnectionManager - Sending error: Connection reset by peer
+2025-04-19 16:33:20.269 [main] ERROR Managers.ConnectionManager - Receiving error: Connection reset
+2025-04-19 16:34:46.817 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 16:34:46.818 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:34:55.945 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50588
+2025-04-19 16:35:29.446 [main] DEBUG Managers.ConnectionManager - Received command: 204
+2025-04-19 16:35:29.446 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 204)
+2025-04-19 16:35:29.461 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@1df8b5b8
+2025-04-19 16:35:29.462 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:35:29.464 [main] DEBUG Managers.ConnectionManager - Sent object
+2025-04-19 16:35:41.595 [main] DEBUG Managers.ConnectionManager - Received command: 877
+2025-04-19 16:35:41.596 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 877)
+2025-04-19 16:35:41.599 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@3116c353
+2025-04-19 16:35:41.599 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:35:41.599 [main] DEBUG Managers.ConnectionManager - Sent object
+2025-04-19 16:35:43.883 [main] DEBUG Managers.ConnectionManager - Received command: 204
+2025-04-19 16:35:43.884 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 204)
+2025-04-19 16:35:43.884 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@3224a577
+2025-04-19 16:35:43.891 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:35:43.891 [main] DEBUG Managers.ConnectionManager - Sent object
+2025-04-19 16:35:49.225 [main] DEBUG Managers.ConnectionManager - Received command: 204
+2025-04-19 16:35:49.225 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 204)
+2025-04-19 16:35:49.226 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@24c4ddae
+2025-04-19 16:35:49.226 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:35:49.226 [main] DEBUG Managers.ConnectionManager - Sent object
+2025-04-19 16:35:53.080 [main] DEBUG Managers.ConnectionManager - Received command: 204
+2025-04-19 16:35:53.080 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 204)
+2025-04-19 16:35:53.080 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@51c693d
+2025-04-19 16:35:53.081 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:35:53.081 [main] DEBUG Managers.ConnectionManager - Sent object
+2025-04-19 16:39:25.670 [main] DEBUG Managers.ConnectionManager - Received command: 204
+2025-04-19 16:39:25.671 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 204)
+2025-04-19 16:39:25.671 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@28b46423
+2025-04-19 16:39:25.688 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:39:25.691 [main] ERROR Managers.ConnectionManager - Sending error: Connection reset by peer
+2025-04-19 16:39:25.691 [main] ERROR Managers.ConnectionManager - Receiving error: Connection reset
+2025-04-19 16:41:23.658 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 16:41:55.812 [main] INFO  Managers.ConnectionManager - ConnectionManager initialized on port 1234
+2025-04-19 16:41:55.813 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:42:06.324 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50648
+2025-04-19 16:42:25.293 [main] DEBUG Managers.ConnectionManager - Received command: 204
+2025-04-19 16:42:25.293 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 204)
+2025-04-19 16:42:25.307 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@1df8b5b8
+2025-04-19 16:42:25.309 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:42:25.311 [main] DEBUG Managers.ConnectionManager - Sent object
+2025-04-19 16:42:25.311 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:42:25.311 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50653
+2025-04-19 16:42:52.538 [main] DEBUG Managers.ConnectionManager - Received command: 204
+2025-04-19 16:42:52.538 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 204)
+2025-04-19 16:42:52.538 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@6ea2bc93
+2025-04-19 16:42:52.539 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:42:52.539 [main] DEBUG Managers.ConnectionManager - Sent object
+2025-04-19 16:42:52.539 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:42:52.539 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50657
+2025-04-19 16:42:58.903 [main] DEBUG Managers.ConnectionManager - Received command: 204
+2025-04-19 16:42:58.903 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 204)
+2025-04-19 16:42:58.903 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@352ff4da
+2025-04-19 16:42:58.921 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:42:58.923 [main] ERROR Managers.ConnectionManager - Sending error: Connection reset by peer
+2025-04-19 16:42:58.923 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:43:08.976 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50663
+2025-04-19 16:43:29.938 [main] DEBUG Managers.ConnectionManager - Received command: 878
+2025-04-19 16:43:29.938 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 878)
+2025-04-19 16:43:29.941 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@45ac5f9b
+2025-04-19 16:43:29.941 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:43:29.941 [main] DEBUG Managers.ConnectionManager - Sent object
+2025-04-19 16:43:29.941 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:43:45.122 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50669
+2025-04-19 16:43:50.057 [main] DEBUG Managers.ConnectionManager - Received command: 204
+2025-04-19 16:43:50.057 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 204)
+2025-04-19 16:43:50.057 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@4f74980d
+2025-04-19 16:43:50.064 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:43:50.065 [main] DEBUG Managers.ConnectionManager - Sent object
+2025-04-19 16:43:50.065 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:44:11.182 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50675
+2025-04-19 16:44:20.252 [main] DEBUG Managers.ConnectionManager - Received command: 204
+2025-04-19 16:44:20.252 [main] DEBUG Managers.ConnectionManager - Deserializing command from byte array (length: 204)
+2025-04-19 16:44:20.252 [main] DEBUG Managers.ConnectionManager - Deserialized command: Command.CommandWithArgs@3eb81efb
+2025-04-19 16:44:20.252 [main] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-04-19 16:44:20.253 [main] DEBUG Managers.ConnectionManager - Sent object
+2025-04-19 16:44:20.253 [main] INFO  Managers.ConnectionManager - Starting TCP server...
+2025-04-19 16:45:23.103 [main] INFO  Managers.ConnectionManager - Client connected: /127.0.0.1:50681
+2025-04-19 16:45:29.830 [main] ERROR Managers.ConnectionManager - Receiving error: Connection reset
