@@ -1,4 +1,0 @@
-rootProject.name = 'lab7'
-include 'Client'
-include 'Common'
-include 'Server'
