@@ -3,12 +3,12 @@ package Managers;
 
 import model.Route;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 import java.util.stream.Collectors;
+
+
 
 /**
  * Класс для управления коллекцией
@@ -17,15 +17,15 @@ import java.util.stream.Collectors;
 public class CollectionManager {
     private static Long currentId = 1L;
     private static Map<Long, Route> routes = new HashMap<>();
-    private static Vector<Route> collection = new Vector<>();
+    static ArrayList<Route> collection = new ArrayList<>();
     private LocalDateTime lastInitTime;
     private LocalDateTime lastSaveTime;
-    private DumpManager dumpManager;
+    private DbRoutesManager dbRoutesManager;
 
-    public CollectionManager(DumpManager dumpManager) {
+    public CollectionManager(DbRoutesManager dbRoutesManager) {
         this.lastInitTime = null;
         this.lastSaveTime = null;
-        this.dumpManager = dumpManager;
+        this.dbRoutesManager = dbRoutesManager;
     }
 
     public LocalDateTime getLastInitTime() {
@@ -46,19 +46,12 @@ public class CollectionManager {
         return currentId;
     }
 
-    /**
-     * Метод для сохранения коллекции в файл
-     */
-    public void saveCollection() {
-        dumpManager.dump(collection);
-        lastSaveTime = LocalDateTime.now();
-    }
 
     /**
      * Метод для добавления маршрута в коллекцию
      * @param r маршрут
      */
-    public boolean add(Route r) {
+    public synchronized boolean add(Route r) {
         if (isContain(r)) return false;
         routes.put(r.getId(), r);
         collection.add(r);
@@ -70,11 +63,12 @@ public class CollectionManager {
      * Метод для удаления маршрута из коллекции по id
      * @param id маршрут
      */
-    public boolean remove(Long id) {
+    public synchronized boolean remove(Long id) {
         var r = routes.get(id);
         if (r == null) return false;
         routes.remove(r.getId());
         collection.remove(r);
+        dbRoutesManager.deleteRoute(r.getId());
         sort();
         return true;
     }
@@ -82,15 +76,16 @@ public class CollectionManager {
     /**
      * Метод для сортировки коллекции
      */
-    public void sort(){
+    public synchronized void sort(){
         Collections.sort(collection);
     }
 
-    public boolean update(Route r) {
+    public synchronized boolean update(Route r) {
         if (!isContain(r)) return false;
         collection.remove(routes.get(r.getId()));
         routes.put(r.getId(), r);
         collection.add(r);
+        dbRoutesManager.updateRoute(r);
         sort();
         return true;
     }
@@ -98,20 +93,13 @@ public class CollectionManager {
     /**
      * Метод для инициализации коллекции
      */
-    public boolean init(){
+    public synchronized boolean init()  {
         collection.clear();
         lastInitTime = LocalDateTime.now();
+        collection = dbRoutesManager.loadCollection();
 
-        collection = dumpManager.read();
-        for (var e : collection)
-            if (routes.get(e.getId()) != null) {
-                collection.clear();
-                routes.clear();
-                return false;
-            } else {
-                if (e.getId()>currentId) currentId = e.getId();
-                routes.put(e.getId(), e);
-            }
+        collection.forEach(r -> routes.put(r.getId(), r));
+
         sort();
         return true;
     }
@@ -119,12 +107,13 @@ public class CollectionManager {
     /**
      * Метод для очищения коллекции
      */
-    public void clear() {
+    public synchronized void clear() {
         collection.clear();
         routes.clear();
+        dbRoutesManager.clearTables();
         lastInitTime = LocalDateTime.now();
     }
-    public Vector<Route> getCollection() {
+    public ArrayList<Route> getCollection() {
         return collection;
     }
 

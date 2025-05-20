@@ -26,17 +26,14 @@ public class Info extends Command {
             return new ExecutionResponse("Illegal number of arguments!", false);
 
         LocalDateTime lastInitTime = collectionManager.getLastInitTime();
-        LocalDateTime lastSaveTime = collectionManager.getLastSaveTime();
 
         String r = """
                 Information about collection: Type, lastInitTime, lastSaveTime and count of elements:
                 Type: %s,
                 LastInitTime: %s
-                LastSaveTime: %s
                 CountOfElements: %d"""
                 .formatted(collectionManager.getCollection().getClass(),
                 lastInitTime==null ? "The collection has not been updated in this session yet.": lastInitTime,
-                lastSaveTime==null ? "The collection has not been saved in this session yet.": lastSaveTime,
                 collectionManager.getCollection().size());
 
         return new ExecutionResponse(r, true);

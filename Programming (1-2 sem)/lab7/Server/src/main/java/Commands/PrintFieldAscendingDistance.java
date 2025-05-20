@@ -7,6 +7,7 @@ import model.Route;
 import Command.CommandWithArgs;
 
 
+import java.util.Collection;
 import java.util.Vector;
 import java.util.stream.Collectors;
 /**
@@ -37,7 +38,7 @@ public class PrintFieldAscendingDistance extends Command {
      * @return String список дистанций
      * @author sh_ub
      */
-    private String GettingDistances(Vector<Route> routes) {
+    private String GettingDistances(Collection<Route> routes) {
         return routes.stream()
                 .map(Route::getDistance)
                 .sorted()

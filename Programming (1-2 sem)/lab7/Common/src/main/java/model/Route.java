@@ -114,8 +114,15 @@ public class Route extends Element implements Validatable, Serializable, Compara
         return distance > 1;
     }
     public String toString() {
-        return "Route : {\"id\" : "+id+", \"name\" : " + name + ", \"coordinates\" : " + coordinates +", \"creationDate\" : "
-                + creationDate + ", \"from\" : " + from + ", \"to\" : " + to + ", \"distance\" : " + distance + "}";
+        return """
+                Route with id %d:
+                Name: %s
+                Coordinates: %s
+                Creation Date: %s
+                From: %s
+                To: %s
+                Distance: %d
+                """.formatted(id, name, coordinates, creationDate, from, to, distance);
     }
 
     @Override

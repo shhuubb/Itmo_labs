@@ -1,0 +1,172 @@
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LAB-5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%>>>>>>>>>>>>>>>>>>>>>>>>>> ПЕРЕМЕННЫЕ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+%\newcommand{\year}{2021 г.}  % Год устанавливается автоматически
+\newcommand{\city}{Санкт-Петербург}  %  Футер, нижний колонтитул на титульном листе
+\newcommand{\university}{Национальный исследовательский университет ИТМО}  % первая строка
+\newcommand{\department}{Факультет программной инженерии и компьютерной техники}  % Вторая строка
+\newcommand{\major}{Направление программная инженерия}
+
+\newcommand{\education}{Образовательная программа системное и прикладное программное обеспечение}  % четвертая строка
+
+%<<<<< Информация о кафедре
+
+%>>>>> Назание работы
+\newcommand{\reporttype}{ОТЧЕТ ПО ЛАБОРАТОРНОЙ РАБОТЕ} % тип работы, (главный заголовок титульного листа)
+\newcommand{\lab}{Лабораторная работа}          % вид работы
+\newcommand{\labnumber}{№ 3}                    % порядковый номер работы
+\newcommand{\subject}{Базы данных}         % учебный предмет   
+\newcommand{\variant}{№ 1909}                % номер варианта работы
+\newcommand{\student}{Шубин Егор Вячеславович}    % определение ФИО студента
+\newcommand{\studygroup}{P3109}                 % определение учебной группы 
+\newcommand{\teacher}{% принимающий
+    Лектор: Николаев Владимир Вячеславович,\\[1mm]% ФИО лектора
+    Практик: Воронина Дарья Сергеевна % ФИО практика
+}
+
+\include{preamble}
+\begin{document}
+\def\contentsname{Содержание} 
+
+
+\tableofcontents
+
+\setcounter{page}{2}
+
+\newpage
+\Chapter{\lab\ \labnumber}{}{}
+\Section{Задание варианта \variant}
+
+
+Для отношений, полученных при построении предметной области из лабораторной работы №1, выполните следующие действия:
+
+\begin{itemize}
+
+\item Опишите функциональные зависимости для отношений полученной схемы (минимальное множество);
+
+\item Приведите отношения в 3NF (как минимум). Постройте схему на основеNF (как минимум). 
+
+\item Опишите изменения в функциональных зависимостях, произошедшие после преобразования в 3NF (как минимум). Постройте схему на основеNF;
+Преобразуйте отношения в BCNF. Докажите, что полученные отношения представлены в BCNF. Если ваша схема находится уже в BCNF, докажите это;
+
+\item Какие денормализации будут полезны для вашей схемы? Приведите подробное описание.
+
+\end{itemize}
+Придумайте триггер и связанную с ним функцию, относящиеся к вашей предметной области, согласуйте их с преподавателем и реализуйте на языке PL/pgSQL.
+\newpage
+\Section{Выполнение задания:}
+\Subsection{Инфологическая модель:}
+
+\Subsection{Опиcание функциональных зависимостей:}
+\begin{itemize}
+    \item ActionScene: \(id \rightarrow (PlaceId, ObjectId, ActionId)\)
+    \item Place: \(id \rightarrow PlaceName\)
+    \item Objects: \(id \rightarrow ObjectType, Characteristic\)
+    \item Actions: \(id \rightarrow (ActionName, DirectionId, Purpose)\)
+    \item ActionDescription: \(id \rightarrow Description\)
+    \item ActionToType: \((ActionId, ActionDescribeId) \rightarrow 
+ \varnothing\)
+    \item Animal: \(id \rightarrow (ObjectId, Nickname, Age, AnimalSize)\)
+    \item Human: \(id \rightarrow (ObjectId, HumanName, Age, Gender)\)
+\end{itemize}
+\Subsection{Нормализация:}
+\begin{itemize}
+    \item 1NF: Отношения находятся в 1НФ, т.к. все атрибуты являются простыми. Все домены содержат только скалярные значения, повторяющихся доменов в таблице нет.
+    \item 2NF: Отношение находится во 2НФ, т.к. каждый не ключевой атрибут неприводимо зависит от Первичного Ключа(ПК).
+    \item 3NF: В сущности Objects атрибут ObjectType может относится к разным кортежам в таблице, например значение атрибута "Человек" может относится к нескольким объектам, нужно вынести ObjectType в отдельную сущность.
+    \item BCNF: Отношение удовлетворяет данной форме, т.к. у сущностей нет составных ключей, у каждой сущности единственный суперключ.
+\end{itemize}
+\Subsection{Нормализованная модель:}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{normal.png}
+    \caption{Нормализованная модель}
+    \label{fig:enter-label}
+\end{figure}
+\newpage
+\Subsection{Денормализация}
+Сущности можно денормализовать путем упрощения и соединения нескольких сущностей для того чтобы упростить запросы и увеличить производительность за счет уменьшения JOIN-запросов. Например можно не выносить ObjectType или ActionDescription в отдельную сущность.
+
+\newpage
+\Subsection{Функция и триггер на языке PL/pgSQL}
+
+\begin{lstlisting}
+CREATE OR REPLACE FUNCTION trigger_function_calculate_percentage_of_time()
+    RETURNS TRIGGER AS
+$$
+DECLARE
+    time_fraction NUMERIC := EXTRACT(EPOCH FROM NEW.EndTime - NEW.StartTime);
+BEGIN
+    IF (time_fraction <= 0) THEN
+        RAISE EXCEPTION 'Duration of action must be more then % seconds!', time_fraction;
+    END IF;
+    IF TG_OP = 'UPDATE' THEN    
+        PERFORM calculate_percentage_of_time(roww.ObjectId, roww.PlaceId)
+        FROM (SELECT * FROM Stats WHERE ObjectId = NEW.ObjectId OR PlaceId = NEW.PlaceId) roww;
+    END IF;
+
+    PERFORM calculate_percentage_of_time(NEW.ObjectId, NEW.PlaceId);
+
+    PERFORM calculate_percentage_of_time(NEW.ObjectId, rec.PlaceId)
+    FROM (SELECT DISTINCT PlaceId FROM Stats WHERE ObjectId = NEW.ObjectId) rec;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION calculate_percentage_of_time(
+    Object INT,
+    Place INT
+) RETURNS VOID AS
+$$
+DECLARE
+    total_time_seconds NUMERIC;
+    place_time_seconds NUMERIC;
+    percentage NUMERIC;
+BEGIN
+    SELECT EXTRACT(EPOCH FROM SUM(EndTime - StartTime))
+    INTO total_time_seconds
+    FROM ActionScene
+    WHERE ObjectId = Object;
+
+    SELECT EXTRACT(EPOCH FROM SUM(EndTime - StartTime))
+    INTO place_time_seconds
+    FROM ActionScene
+    WHERE ObjectId = Object AND PlaceId = Place;
+
+    percentage := (place_time_seconds / total_time_seconds) * 100;
+
+    INSERT INTO Stats(ObjectId, PlaceId, Fraction)
+    VALUES (
+               Object,
+               Place,
+               substring((percentage::TEXT) FROM '\d+\.\d\d') || ' %'
+           )
+    ON CONFLICT (ObjectId, PlaceId)
+        DO UPDATE SET Fraction = EXCLUDED.Fraction;
+END;
+$$ LANGUAGE plpgsql;
+\end{lstlisting}
+\newpage
+\begin{lstlisting}
+CREATE OR REPLACE TRIGGER calculate_percentage_of_time_trigger_on_insert
+AFTER INSERT ON ActionScene
+FOR EACH ROW
+EXECUTE FUNCTION trigger_function_calculate_percentage_of_time();
+
+CREATE OR REPLACE TRIGGER calculate_percentage_of_time_trigger_on_update
+AFTER UPDATE OF StartTime, EndTime, PlaceId, ObjectId ON ActionScene
+FOR EACH ROW 
+WHEN (
+    (NEW.EndTime != OLD.EndTime) OR 
+    (NEW.StartTime != OLD.StartTime) OR 
+    (NEW.PlaceId != OLD.PlaceId) OR 
+    (NEW.ObjectId != OLD.ObjectId)
+)
+EXECUTE FUNCTION trigger_function_calculate_percentage_of_time();
+\end{lstlisting}
+
+\Section{Вывод}
+В ходе лабораторной работы была проведена нормализация схемы базы данных до 3NF и BCNF, что устранило избыточность данных и аномалии обновления. Разработаны триггеры на PL/pgSQL для автоматического расчета статистики времени действий, обеспечивающие целостность данных. Выполнена частичная денормализация для оптимизации частых запросов, что улучшило производительность без потери согласованности данных.
+\end{document}

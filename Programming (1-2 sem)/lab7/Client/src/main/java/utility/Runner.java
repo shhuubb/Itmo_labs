@@ -1,5 +1,6 @@
 package utility;
 
+import Authentication.User;
 import Command.CommandType;
 import Command.CommandWithArgs;
 
@@ -22,10 +23,11 @@ import static model.Ask.AskRoute;
 
 
 public class Runner {
-    private StandardConsole console;
-    private  List<String> scriptStack = new ArrayList<>();
+    private final StandardConsole console;
+    private final List<String> scriptStack = new ArrayList<>();
     private int lengthRecursion = -1;
-    private ConnectionClient connection = new ConnectionClient(1234, "localhost");
+    private final ConnectionClient connection = new ConnectionClient(1234, "localhost");
+    private User user;
 
     public Runner(StandardConsole console) {
         this.console = console;
@@ -35,7 +37,7 @@ public class Runner {
         final int MAX_ATTEMPTS = 5;
         final int RETRY_DELAY_MS = 5000;
 
-        ExecutionResponse response = null;
+        ExecutionResponse response;
         boolean connected = false;
 
         for (int attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
@@ -46,8 +48,7 @@ public class Runner {
                 break;
             }
 
-            console.println(String.format("Connection attempt %d/%d failed: %s",
-                    attempt, MAX_ATTEMPTS, response.getResponse()));
+            console.println(String.format("Connection attempt %d/%d failed: %s", attempt, MAX_ATTEMPTS, response.getResponse()));
 
             if (attempt < MAX_ATTEMPTS) {
                 Thread.sleep(RETRY_DELAY_MS);
@@ -63,17 +64,29 @@ public class Runner {
     /**
      * Режим чтения команд из консоли
      */
-    public void interactiveMode() throws AskBreak, ClassNotFoundException, InterruptedException {
+    public void interactiveMode() throws AskBreak, ClassNotFoundException, InterruptedException, IOException {
         try {
+            AskAuth ask = new AskAuth(console);
+
+            do {
+                do {
+                    user = ask.askCredentials();
+                } while (user== null);
+                checkConnection();
+                connection.send(connection.serializeObject(user));
+                ExecutionResponse response = connection.deserializeObject(connection.receive());
+                console.println(response.getResponse());
+                if (response.isSuccess()) {
+                    break;
+                }
+            }while (true);
+
             ExecutionResponse commandStatus;
             String[] userCommand;
-            checkConnection();
             console.prompt();
             do {
                 userCommand = (console.readln().trim().toLowerCase() + " ").split(" ", 2);
                 userCommand[1] = userCommand[1].trim();
-
-
                 commandStatus = launchCommand(userCommand);
                 String answer = commandStatus.getResponse();
 
@@ -106,10 +119,14 @@ public class Runner {
             }
             else {
                 if (command == CommandType.ADD || command == CommandType.UPDATE)
-                    commandWithArgs = new CommandWithArgs(command, AskRoute(console, userCommand[1].trim(), command));
+                    commandWithArgs = new CommandWithArgs(command, AskRoute(console, userCommand[1].trim(), command), user);
 
-                else if (command == CommandType.FILTER_CONTAINS_NAME || command == CommandType.REMOVE_BY_ID)
+                else if (command == CommandType.FILTER_CONTAINS_NAME)
                     commandWithArgs = new CommandWithArgs(command, userCommand[1].trim());
+                else if ( command == CommandType.REMOVE_BY_ID)
+                    commandWithArgs = new CommandWithArgs(command, userCommand[1].trim(), user);
+                else if (command == CommandType.REMOVE_FIRST || command == CommandType.CLEAR)
+                    commandWithArgs = new CommandWithArgs(command, user);
                 else if (command == CommandType.EXIT) {
                     Exit ex = new Exit(console);
                     commandWithArgs = new CommandWithArgs(command);

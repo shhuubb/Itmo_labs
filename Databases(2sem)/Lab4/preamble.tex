@@ -1,0 +1,374 @@
+%>>>>>>>>>>>>>>>>>> ПРЕАМБУЛА >>>>>>>>>>>>>>>>>>>>
+\documentclass[14pt,final,oneside]{extreport}% класс документа, характеристики
+%>>>>> Разметка документа
+\usepackage[a4paper, mag=1000, left=3cm, right=1.5cm, top=2cm, bottom=2cm, headsep=0.7cm, footskip=1cm]{geometry} % По ГОСТу: left>=3cm, right=1cm, top=2cm, bottom=2cm,
+%>>>>> babel c языковым пакетом НЕ должны быть первым импортируемым пакетом
+\usepackage[utf8]{inputenc}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[russian]{babel}
+%<<<<<
+
+
+%>>>...>> прочие полезные пакеты
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtext}
+\usepackage{braket}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{float}
+\graphicspath{{/home/ivan/itmo/informatics/latex}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+%\usepackage{bookmark}
+\usepackage{courier}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}  % Использование ссылок
+\hypersetup{%  % Настройка разметки ссылок
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=magenta,
+    %pdftitle={Overleaf Example},
+    %pdfpagemode=FullScreen,
+}
+
+\usepackage{diagbox}
+\usepackage[letterspace=150]{microtype} % Спэйсинг (межбуквенный интервал для саголовка) \lsstyle
+% \usepackage{csvsimple} %импорт содержимого таблицы из csv
+
+%>>> верстка в 2 колонки
+\usepackage{multicol} % многоколоночная верстка
+\setlength{\columnsep}{.15\textwidth} % определение ширины разделителя между колонками
+
+\usepackage{tikz} % пакет для векторной графики, чтобы рисовать красивый разделитель колонок
+% %> кастомный разделитель колонок
+% \usetikzlibrary{arrows.meta,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+% \usepackage{multicolrule} % Для кастомизации разделителя колонок
+% \SetMCRule{                     % кастомизация разделителя колонок multicolrule
+%     width=2pt,
+%     custom-line={               % Tikz код для кастомизации линии разделителя
+%         \draw [                 % Рисовать
+%             decorate,           % декорированную (требуются спец настройки пакетов tikz (см. импорт выше)
+%             decoration={        % вид декорирования
+%                 snake, % Тип - змейка (волнистая)
+%                 amplitude=.5mm, % ширина волн
+%                 pre length=0mm, % участок прямой линии от начала
+%                 %segment length=0mm, % учасок волнистой линии
+%                 post length=0mm % участок прямой линии от конца
+%             },
+%             line width=1pt,
+%             step=10pt
+%         ] 
+%         (TOP) to (BOT); % сверху и до низа колонки
+%     }, 
+%     extend-top=-5pt, % Вылезти за верхнюю границу колонки 
+%     extend-bot=-7pt % Вылезти за нижнюю границу колонки  
+% }
+%% < кастомный разделитель колонок
+%%<<< верстка в 2 колонки
+
+%>>>>> Использование листингов
+\usepackage{listings} 
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}} 
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white} % Настройка вида описаний
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4,
+    frame=single,
+    rulecolor=\color{black},
+    language=SQL,
+    morekeywords={BEGIN, SET, CREATE, TABLE, IF, NOT, EXISTS, PRIMARY, KEY, SERIAL, VARCHAR, INT, REFERENCES, TEXT, CHECK, INSERT, INTO, VALUES, SELECT, FROM, WHERE, AND, OR, NULL, DEFAULT, NOW, TIMESTAMPTZ, UNIQUE, SMALLINT}
+}
+
+\lstset{style=mystyle}
+%<<<<< Использование листингов
+
+
+\sloppy % Решение проблем с переносами (с. 119 книга Львовского)
+\emergencystretch=25pt
+
+
+%>>>>>>>>>>>>>>>> ДОПОЛНИТЕЛЬНЫЕ КОМАНДЫ {Для соответствия ГОСТ} >>>>>>>>>>>>>>
+%>>>>>> математические функции для удобства
+\newcommand{\tx}{\text}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\limit}{\displaystyle\lim}
+\newcommand{\oo}{\infty}
+\newcommand{\De}{\Delta}
+\newcommand{\cd}{\cdot}
+\newcommand{\df}{\partial}
+\newcommand{\ndash}{\textendash}
+\newcommand{\mdash}{\textemdash}
+
+%>>>>> Аннотирование
+\newcommand{\note}[2]{\overbrace{#1}^{#2}}% скобка сверху для комментария
+% \overset{}{}% для указания символа над другим смиволом
+% \underset{}{}% для указания символа под другим смиволом
+%<<<<< Аннотирование
+
+%>>>>>> Матрицы
+\DeclareMathOperator{\rank}{rank}
+\newcommand{\tvec}[1]{\mathbfit{#1}}% "text vector"
+\newcommand{\mtx}[1]{\mathrm{#1}}
+\newcommand{\transposed}[1]{{#1}^{\mathrm{T}}}
+%>>>>>> Матрицы
+
+%>>>>> Скобки
+\newcommand{\lt}{\left}
+\newcommand{\rt}{\right}
+\newcommand{\la}{\langle}% '<'
+\newcommand{\ra}{\rangle}% '>'
+\newcommand{\avg}[1]{\langle{#1}\rangle}% '<X>'
+%<<<<< Скобки
+
+%>>>>> Дроби
+\newcommand{\cf}[2]{\cfrac{#1}{#2}}
+\newcommand{\fr}[2]{\frac{#1}{#2}}
+%<<<<< Дроби
+
+
+%>>>>> Стрелки
+\newcommand{\Rarr}{\Rightarrow}% ⇒ следствие | лучше использовать \implies
+\newcommand{\LRarr}{\Leftrightarrow}% равносильно | лучше  использовать \iff
+\newcommand{\rarr}{\xrightarrow{}}% → стрелка вправо
+\newcommand{\nwarr}{\nwarrow}% ↖ север-запад стрелка
+\newcommand{\nearr}{\nearrow}% ↗ север-восток стрелка
+\newcommand{\swarr}{\swarrow}% ↙ юг-запад стрелка
+\newcommand{\searr}{\searrow}% ↘ юг-восток стрелка
+
+\newcommand{\raises}{\nwarrow}% возрастает
+\newcommand{\increases}{\nwarrow}% возрастает
+\newcommand{\falls}{\swarrow}% убывает
+\newcommand{\decreases}{\swarrow}% убывает
+
+%{{{
+\makeatletter
+\newcommand{\impliesby}[2][]{\ext@arrow 0359\Leftrightarrowfill@{#1}{#2}}% следствие с надписью
+\makeatother
+%}}}
+
+%{{{
+\makeatletter
+\newcommand{\iffby}[2][]{\ext@arrow 0359\Rightarrowfill@{#1}{#2}}% равносильность с надписью
+\makeatother
+%}}}
+%<<<<< Стрелки
+
+% Функции для удобного описания формул: https://tex.stackexchange.com/questions/95838/how-to-write-a-perfect-equation-parameters-description
+
+
+
+%<<<<<< математические функции для удобства
+%>>>>>> Стиль текста
+\newcommand{\hex}[1]{\texttt{0{\footnotesize{x}}#1}}
+\newcommand{\ttt}[1]{\texttt{#1}}
+%<<<<<< Стиль текста
+
+\newcommand\Chapter[3]{%
+    % Принимает 3 аргумента - название главы и дополнительный заголовок и множитель ширины загловка (можно ничего)
+    \refstepcounter{chapter}%
+    \chapter*{%
+        %\hfill % заполнение отступом пространства до заголовка
+        \begin{minipage}{#3\textwidth} % Можно изменить ширину министраницы (заголовка)
+            \flushleft % Выранивание заголовка по левому краю параграфа (заголовка)
+            %\flushright % Выранивание заголовка по правому краю параграфа (заголовка)
+            \begin{huge}%
+                % Отключена нумерация глав в тексте:
+                % \textbf{\chaptername\ \arabic{chapter}\\}
+                \textbf{#1}% Первый заголовок
+            \end{huge}%
+            \\% Перенос сторки
+            \begin{Huge}
+                #2% Второй заголовок
+            \end{Huge}
+        \end{minipage}
+    }%
+    % Отключена нумерация для chapter в toc (table of contents), т.е. Оглавлении (Содержании):
+    % \addcontentsline{toc}{chapter}{\arabic{chapter}. #1}
+    % Представление главы в содержании:
+    \addcontentsline{toc}{chapter}{#1. #2}%
+}
+
+\newcommand\Section[1]{
+    % Принимает 1 аргумент - название секции
+    \refstepcounter{section}
+    \section*{%
+        \raggedright
+        % Отключена дополнительная нумерация chapter в section в тексте документа:
+        % \arabic{chapter}.\arabic{section}. #1}
+        % Отключена любая нумарация section в тексте документа: 
+        \arabic{section}. #1%
+    }
+    
+    % Отключена дополнительная нумерация chapter в section в toc (table of contents) Оглавлении (Содержании):
+    % \addcontentsline{toc}{section}{\arabic{chapter}.\arabic{section}. #1}
+    \addcontentsline{toc}{section}{\arabic{section}. #1} 
+}
+
+
+\newcommand\Subsection[1]{
+    % Принимает 1 аргумент - название подсекции
+    \refstepcounter{subsection}
+    \subsection*{%
+        \raggedright%
+        % Отключена дополнительная нумерация chapter в section в тексте документа (можно добавить отступ с помощью \hspace*{12pt}):
+        % \arabic{chapter}.\arabic{section}.\arabic{subsection}. #1}
+        \arabic{section}. \arabic{subsection}. #1
+    }
+    % Отключена дополнительная нумерация chapter в section в Оглавлении (Содержании):
+    %\addcontentsline{toc}{subsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}. #1}
+    \addcontentsline{toc}{subsection}{\arabic{subsection}. #1}
+}
+
+
+\newcommand\Figure[4]{
+    % Принимает 4 аргумента - название файла изображения, ее размер в тексте, описание, лэйбл (псевдоним в формате "fig:name") 
+    %
+    \refstepcounter{figure}
+    \begin{figure}[H] %- \usepackage {float} %[h]
+        \begin{center}
+            \fbox{
+                \includegraphics[width=#2]{#1}
+            }
+        \end{center}
+        \begin{center}
+            Рис.~\arabic{figure}. #3.
+        \end{center}
+        %\caption{#3}
+        \label{fig:#4}
+    \end{figure}
+}
+
+
+\newcommand\Table[3]{
+    % Принимает 3 аргумента --- лэйбл name(#1) (псевдоним в формате "tab:name"), ее описание(#2), содержание таблицы(#3)
+    % ВАЖНО!: от этого способа страдает нумерация описаний, можно использовать создание таблиц через googlesheet
+    %
+    \renewcommand{\arraystretch}{1.2} % Установка высоты строки таблицы по умолчанию, увеличенное на 0.2 пункта
+    % \refstepcounter{table}% увеличение счетчика таблиц
+    \begin{table}[Htpb]% "right Here", "top", "new page", "bottom"
+        \label{tab:#1}% лэйбл таблицы, для ссылок
+        \resizebox{\columnwidth}{!}{% сжимает очень широкие таблицы, чтобы вместить на страницу
+             #3% Содержимое таблицы
+        }
+        % 
+        \caption{#2}% Описание стандартными средствами для используемого окружения (table)
+        % \captionof{table}{#2}% Описание стандартными средствами
+        % \captionof*{figure}{\flushleft \textsc\textbf{Рис. 1.}}% Описание стандартными средствами, как рисунка
+        %
+        %%> кастомное описание
+        % \begin{flushleft}% Кастомное описание
+        %     % \textsf{%
+        %         \textbf{%
+        %             \\[2mm]
+        %             #2% Описание к картинке
+        %         }%
+        %         % \\[8mm]% Отступ
+        %     % }%
+        % \end{flushleft}
+        %%< кастомное описание
+    \end{table}
+    \renewcommand{\arraystretch}{1} % возврат установка высоты строки таблицы по умолчанию на 1
+}
+
+
+\newcommand\CustomFigure[4]{ % multicols не умеют в table и figure, поэтому приходится извращаться % вставка таблицы с меткой рисунка
+    % Принимает 4 аргумента - название файла изображения, ее размер в тексте, описание, лэйбл (псевдоним в формате "fig:name") 
+    %
+    \refstepcounter{figure}
+    \begin{figure}[ht]% "here", "top"
+        \begin{center}
+            \includegraphics[width=#2]{#1}
+        \end{center}
+        %
+        %\caption{#3}
+        \captionof{figure}{#3}% описание стандартными средствами
+        % \begin{center}
+        \begin{flushleft} % Кастомное описание
+            \textbf{%
+                #3% Текст описания
+            }
+        \end{flushleft}
+        % \end{center}
+        %
+        \label{fig:#4}% Лэйбл, для ссылок
+    \end{figure}
+}
+
+
+\newcommand\CustomTableFigure[3]{% multicols не умеют в table и figure, поэтому приходится извращаться % вставка таблицы с меткой рисунка
+    %
+    % Принимает 3 аргумента --- лэйбл name(#1) (псевдоним в формате "tab:name"), ее описание(#2), содержание таблицы(#3) 
+    %
+    \begin{center}
+        \refstepcounter{figure}
+        \label{tab:#1}% лэйбл таблицы, для ссылок
+        \resizebox{\columnwidth}{!}{% сжимает очень широкие таблицы, чтобы вместить на страницу
+            #3% Содержание таблицы
+        }
+        % 
+        \captionof{figure}{#2}% Описание стандартными средствами
+        % \captionof*{figure}{\flushleft \textsc\textbf{Рис. 1.}}% Описание стандартными средствами
+        %
+        \begin{flushleft}% Кастомное описание
+            % \textsf{%
+                \textbf{%
+                    \\[2mm]
+                    #2% Описание к картинке
+                }%
+                % \\[8mm]% Отступ
+            % }%
+        \end{flushleft}
+    \end{center}
+}
+
+
+\newcommand{\InkscapeFigure}[4]{% Вставки иллюстраций из Inkscape (pdf+latex)
+    %
+    % Принимает 4 параметра: #1 название файла, #2 описание, #3 лейбл #4 размер
+    %
+    % \begin{minipage}{#4}
+        \begin{figure}[htbp]
+            \centering
+            \def\svgwidth{#4}
+            \import{./figures/}{#1.pdf_tex}
+            \caption{#2}
+            \label{fig:#3}
+        \end{figure}
+    % \end{minipage}
+}
+
+
+\newcommand\Equation[3]{% Кастомное оформление выражений
+    %
+    % Принимает 3 аргумента --- лэйбл name (#1) (псевдоним в формате "tab:name"), его описание(#2), содержание выражения (#3) 
+    %
+    \textbf{#2}% описание
+    \begin{equation}
+        #3% содержимое выражений
+        \label{eq:#1}% лэйбл
+    \end{equation}
+}

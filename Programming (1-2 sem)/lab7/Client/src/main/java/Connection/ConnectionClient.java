@@ -42,8 +42,7 @@ public class ConnectionClient {
     }
 
     public byte[] receive() throws IOException, ClassNotFoundException {
-        byte[] arr =  (byte[]) inputStream.readObject();
-        return arr;
+        return (byte[]) inputStream.readObject();
     }
 
     public ExecutionResponse start()  {

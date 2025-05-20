@@ -21,7 +21,6 @@ public class Exit extends Command {
         if (command.getArgs() != null) {
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
-        collectionManager.saveCollection();
         return new ExecutionResponse("Connection closed", true);
     }
 }

@@ -4,5 +4,5 @@ package Utility;
  * @author sh_ub
  */
 public interface Validatable {
-    public boolean validate();
+    boolean validate();
 }

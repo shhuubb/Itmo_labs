@@ -7,6 +7,7 @@ import model.Route;
 import Command.CommandWithArgs;
 
 
+import java.util.Collection;
 import java.util.Vector;
 
 /**
@@ -25,7 +26,7 @@ public class MaxByName extends Command {
      * Метод для получения объекта из коллекции, значение поля name которого является максимальным.
      * @param collection коллекция
      */
-    public String GettingMaxName(Vector<Route> collection){
+    public String GettingMaxName(Collection<Route> collection){
         return collection.stream()
                 .map(Route::getName)
                 .max(String::compareTo)

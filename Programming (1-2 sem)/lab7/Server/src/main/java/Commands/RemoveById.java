@@ -1,5 +1,6 @@
 package Commands;
 
+import Managers.DbRoutesManager;
 import Utility.Command;
 import Utility.StandardConsole;
 import Managers.CollectionManager;
@@ -11,29 +12,30 @@ import Command.CommandWithArgs;
  * @author sh_ub
  */
 public class RemoveById extends Command {
-    private final StandardConsole console;
     private final CollectionManager collectionManager;
+    private final DbRoutesManager dbRoutesManager;
 
-    public RemoveById(StandardConsole console, CollectionManager collectionManager) {
+    public RemoveById(CollectionManager collectionManager, DbRoutesManager dbRoutesManager) {
         super("remove_by_id id ", "удалить элемент из коллекции по его id");
-        this.console = console;
         this.collectionManager = collectionManager;
+        this.dbRoutesManager = dbRoutesManager;
     }
 
     @Override
     public ExecutionResponse execute(CommandWithArgs command) {
-        try{
-
+        try {
             String[] args = command.getArgs().split(" ");
-            if(args.length < 1){
+            if (args.length < 1)
                 return new ExecutionResponse("Illegal number of arguments!", false);
-            }
+
             for (String s : args) {
                 Long id = Long.parseLong(s);
-                if(!collectionManager.remove(id)){
+
+                if (!dbRoutesManager.getOwner(id).equals(command.getUser().getLogin()))
+                    return new ExecutionResponse("Permission denied!", false);
+
+                if (!collectionManager.remove(id))
                     return new ExecutionResponse("The route with this id was not found.", false);
-                }
-                console.println("Remove a Route by Id: " + s);
             }
             return new ExecutionResponse("Routes with id " + command.getArgs() + " was deleted", true);
         } catch (NumberFormatException  e){
