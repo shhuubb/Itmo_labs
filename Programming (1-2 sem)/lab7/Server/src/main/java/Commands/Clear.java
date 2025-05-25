@@ -23,7 +23,7 @@ public class Clear extends Command {
         if (command.getArgs() != null){
             return new ExecutionResponse("Illegal number of arguments!", false);
         }
-        collectionManager.clear();
+        collectionManager.clear(command.getUser().getLogin());
         return new ExecutionResponse("Collection successfully cleared!", true);
     }
 }

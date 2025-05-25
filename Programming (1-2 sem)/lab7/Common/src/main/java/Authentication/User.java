@@ -6,11 +6,11 @@ import java.security.NoSuchAlgorithmException;
 
 public class User implements Serializable {
     private final String login;
-    private final String passwordHash;
+    private String passwordHash;
 
     public User(String login, String password) {
         this.login = login;
-        this.passwordHash = hashPassword(password);
+        passwordHash = password == null ? null : hashPassword(password);
     }
 
     private String hashPassword(String password) {
@@ -28,7 +28,7 @@ public class User implements Serializable {
     }
 
     public boolean validatePassword(String password) {
-        return this.passwordHash.equals(hashPassword(password));
+        return this.passwordHash.equals(password);
     }
 
     public String getLogin() {
@@ -37,5 +37,8 @@ public class User implements Serializable {
 
     public String getPasswordHash() {
         return passwordHash;
+    }
+    public void setPassword(String password) {
+        this.passwordHash = password;
     }
 }

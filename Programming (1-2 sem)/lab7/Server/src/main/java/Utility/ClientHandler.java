@@ -32,40 +32,44 @@ public class ClientHandler implements Runnable {
     public void run() {
         connectionManager.start(socket);
         try {
-            byte[] userData = connectionManager.receive();
-            User user = connectionManager.deserialize(userData, User.class);
-            ExecutionResponse answer = register(user);
-            connectionManager.send(connectionManager.serializeObject(answer));
             while (true) {
                 byte[] data = connectionManager.receive();
-
-                if (data == null) {
-                    logger.info("Client exits from socket {}", socket.getRemoteSocketAddress());
-                    break;
-                }
-                CommandWithArgs commandWithArgs = connectionManager.deserialize(data, CommandWithArgs.class);
-
-                String commandName = commandWithArgs.getCommand().toString().toLowerCase();
-
-                Command command = commandManager.getCommands().get(commandName);
-
-                if (commandManager.getCommands().containsKey(commandName)) {
-
-                    ForkJoinTask<ExecutionResponse> task = new CommandExecutionTask(command, commandWithArgs);
-
-                    try {
-                        ExecutionResponse response = forkJoinPool.invoke(task);
-                        commandManager.addToHistory(commandName);
-
-                        sendPool.submit(() -> {
-                            byte[] serializedResponse = connectionManager.serializeObject(response);
-                            connectionManager.send(serializedResponse);
-                        });
-                    } catch (NullPointerException e) {
-                        logger.error("Could not connect to database!");
-                        System.exit(1);
+                try {
+                    if (data == null) {
+                        logger.info("Client exits from socket {}", socket.getRemoteSocketAddress());
+                        break;
                     }
+                    CommandWithArgs commandWithArgs = connectionManager.deserialize(data, CommandWithArgs.class);
+
+                    String commandName = commandWithArgs.getCommand().toString().toLowerCase();
+
+                    Command command = commandManager.getCommands().get(commandName);
+
+                    if (commandManager.getCommands().containsKey(commandName)) {
+
+                        ForkJoinTask<ExecutionResponse> task = new CommandExecutionTask(command, commandWithArgs);
+
+                        try {
+                            ExecutionResponse response = forkJoinPool.invoke(task);
+                            commandManager.addToHistory(commandName);
+
+                            sendPool.submit(() -> {
+                                byte[] serializedResponse = connectionManager.serializeObject(response);
+                                connectionManager.send(serializedResponse);
+                            });
+                        } catch (NullPointerException e) {
+                            logger.error("Could not connect to database!");
+                            System.exit(1);
+                        }
+                    }
+
+                } catch (Exception e) {
+                    User user = connectionManager.deserialize(data, User.class);
+                    ExecutionResponse answer = register(user);
+                    connectionManager.send(connectionManager.serializeObject(answer));
                 }
+
+
             }
         } finally {
             connectionManager.close();

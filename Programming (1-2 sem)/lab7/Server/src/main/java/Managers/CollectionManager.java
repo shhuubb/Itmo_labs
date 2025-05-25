@@ -3,7 +3,6 @@ package Managers;
 
 import model.Route;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -15,12 +14,11 @@ import java.util.stream.Collectors;
  * @author sh_ub
  */
 public class CollectionManager {
-    private static Long currentId = 1L;
-    private static Map<Long, Route> routes = new HashMap<>();
+    private static final Map<Long, Route> routes = new HashMap<>();
     static ArrayList<Route> collection = new ArrayList<>();
     private LocalDateTime lastInitTime;
-    private LocalDateTime lastSaveTime;
-    private DbRoutesManager dbRoutesManager;
+    private final LocalDateTime lastSaveTime;
+    private final DbRoutesManager dbRoutesManager;
 
     public CollectionManager(DbRoutesManager dbRoutesManager) {
         this.lastInitTime = null;
@@ -40,18 +38,11 @@ public class CollectionManager {
         return routes.containsKey(route.getId());
     }
 
-    public Long getCurrentId() {
-        currentId = 1L;
-        while(routes.get(currentId) != null) currentId++;
-        return currentId;
-    }
-
-
     /**
      * Метод для добавления маршрута в коллекцию
      * @param r маршрут
      */
-    public synchronized boolean add(Route r) {
+    public boolean add(Route r) {
         if (isContain(r)) return false;
         routes.put(r.getId(), r);
         collection.add(r);
@@ -63,7 +54,7 @@ public class CollectionManager {
      * Метод для удаления маршрута из коллекции по id
      * @param id маршрут
      */
-    public synchronized boolean remove(Long id) {
+    public boolean remove(Long id) {
         var r = routes.get(id);
         if (r == null) return false;
         routes.remove(r.getId());
@@ -76,11 +67,11 @@ public class CollectionManager {
     /**
      * Метод для сортировки коллекции
      */
-    public synchronized void sort(){
+    public void sort(){
         Collections.sort(collection);
     }
 
-    public synchronized boolean update(Route r) {
+    public boolean update(Route r) {
         if (!isContain(r)) return false;
         collection.remove(routes.get(r.getId()));
         routes.put(r.getId(), r);
@@ -97,7 +88,6 @@ public class CollectionManager {
         collection.clear();
         lastInitTime = LocalDateTime.now();
         collection = dbRoutesManager.loadCollection();
-
         collection.forEach(r -> routes.put(r.getId(), r));
 
         sort();
@@ -107,11 +97,11 @@ public class CollectionManager {
     /**
      * Метод для очищения коллекции
      */
-    public synchronized void clear() {
-        collection.clear();
-        routes.clear();
-        dbRoutesManager.clearTables();
-        lastInitTime = LocalDateTime.now();
+    public void clear(String ownerId) {
+        dbRoutesManager.clearTables(ownerId);
+        collection = dbRoutesManager.loadCollection();
+        collection.forEach(r -> routes.put(r.getId(), r));
+
     }
     public ArrayList<Route> getCollection() {
         return collection;

@@ -4,7 +4,6 @@ import Authentication.User;
 import Command.CommandType;
 import Command.CommandWithArgs;
 
-import Commands.Exit;
 import Connection.ConnectionClient;
 
 import Utility.AskBreak;
@@ -87,6 +86,7 @@ public class Runner {
             do {
                 userCommand = (console.readln().trim().toLowerCase() + " ").split(" ", 2);
                 userCommand[1] = userCommand[1].trim();
+                checkConnection();
                 commandStatus = launchCommand(userCommand);
                 String answer = commandStatus.getResponse();
 
@@ -113,32 +113,18 @@ public class Runner {
     private ExecutionResponse launchCommand(String[] userCommand) throws AskBreak, ClassNotFoundException, InterruptedException {
         try {
             CommandType command = CommandType.valueOf(userCommand[0].toUpperCase());
-            CommandWithArgs commandWithArgs;
-            if (command == CommandType.EXECUTE_SCRIPT) {
+            CommandWithArgs commandWithArgs = null;
+            if (command == CommandType.EXECUTE_SCRIPT)
                 ScriptMode(userCommand[1]);
+            else if (command == CommandType.ADD || command == CommandType.UPDATE)
+                commandWithArgs = new CommandWithArgs(command, AskRoute(console, userCommand[1].trim(), command), user);
+            else{
+                commandWithArgs = new CommandWithArgs(command, userCommand[1].isEmpty() ? null : userCommand[1].trim(), user);
             }
-            else {
-                if (command == CommandType.ADD || command == CommandType.UPDATE)
-                    commandWithArgs = new CommandWithArgs(command, AskRoute(console, userCommand[1].trim(), command), user);
 
-                else if (command == CommandType.FILTER_CONTAINS_NAME)
-                    commandWithArgs = new CommandWithArgs(command, userCommand[1].trim());
-                else if ( command == CommandType.REMOVE_BY_ID)
-                    commandWithArgs = new CommandWithArgs(command, userCommand[1].trim(), user);
-                else if (command == CommandType.REMOVE_FIRST || command == CommandType.CLEAR)
-                    commandWithArgs = new CommandWithArgs(command, user);
-                else if (command == CommandType.EXIT) {
-                    Exit ex = new Exit(console);
-                    commandWithArgs = new CommandWithArgs(command);
-                    connection.send(connection.serializeObject(commandWithArgs));
-                    ex.execute(commandWithArgs);
-                } else
-                    commandWithArgs = new CommandWithArgs(command);
-                connection.send(connection.serializeObject(commandWithArgs));
+            connection.send(connection.serializeObject(commandWithArgs));
+            return connection.deserializeObject(connection.receive());
 
-                ExecutionResponse commandStatus = connection.deserializeObject(connection.receive());
-                return commandStatus;
-            }
         }
         catch (IllegalArgumentException e) {
             return new ExecutionResponse("Command '" + userCommand[0] + "' not found. Use 'help' for more information.", false);
@@ -151,15 +137,15 @@ public class Runner {
 
     /**
      * Режим чтения команд из файла
+     *
      * @param fileName имя файла
-     * @return ExecutionResponse результат выполнения
      */
-    private ExecutionResponse ScriptMode(String fileName) throws AskBreak, ClassNotFoundException, InterruptedException {
+    private void ScriptMode(String fileName) throws AskBreak, ClassNotFoundException, InterruptedException {
         String[] userCommand;
         ExecutionResponse commandStatus;
         scriptStack.add(fileName);
         if (!new File(fileName).exists()) {
-            return new ExecutionResponse("File is not exists",false);
+            return;
         }
         try (FileReader filereader = new FileReader(fileName); BufferedReader bufferedReader = new BufferedReader(filereader)) {
             String line;
@@ -198,8 +184,6 @@ public class Runner {
             }
             while (commandStatus.isSuccess() || !commandStatus.getResponse().equals("exit"));
 
-        } catch (NullPointerException exception) {
-            return new ExecutionResponse("---------------Script succesfully executed---------------", true);
         }
         catch (FileNotFoundException exception) {
             console.printError("File is not found");
@@ -212,6 +196,5 @@ public class Runner {
         } finally {
             scriptStack.remove(scriptStack.size()-1);
         }
-        return new ExecutionResponse("", true);
     }
 }
