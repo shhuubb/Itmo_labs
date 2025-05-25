@@ -1,0 +1,131 @@
+CREATE TABLE IF NOT EXISTS coordinates (
+    id INT PRIMARY KEY,
+    x DOUBLE PRECISION NOT NULL CHECK (x > -605),
+    y REAL NOT NULL CHECK (y <= 243),
+    unique (x, y)
+);
+
+-- Таблица Location
+CREATE TABLE IF NOT EXISTS location (
+    id INT PRIMARY KEY,
+    x BIGINT NOT NULL,
+    y BIGINT NOT NULL,
+    z DOUBLE PRECISION NOT NULL,
+    name VARCHAR(318),
+    unique (x, y, z, name)
+);
+
+CREATE TABLE IF NOT EXISTS Users(
+    username VARCHAR primary key NOT NULL,
+    password VARCHAR NOT NULL CHECK (length(password) > 10)
+);
+
+-- Таблица Route
+CREATE TABLE IF NOT EXISTS route (
+    id INT PRIMARY KEY,
+    name VARCHAR NOT NULL CHECK (name <> ''),
+    coordinates_id INTEGER REFERENCES coordinates(id) ON DELETE CASCADE,
+    creation_date TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    from_id INTEGER REFERENCES location(id) ON DELETE CASCADE,
+    to_id INTEGER REFERENCES location(id) ON DELETE CASCADE,
+    distance INTEGER NOT NULL CHECK (distance > 1),
+    owner_login varchar references Users(username)
+);
+
+
+CREATE OR REPLACE FUNCTION find_free_id(table_name TEXT)
+    RETURNS INTEGER AS $$
+DECLARE
+    first_free_id INTEGER;
+BEGIN
+    -- Поиск минимального свободного ID
+    EXECUTE format('
+        SELECT MIN(id)
+        FROM (
+            SELECT generate_series(1, COALESCE((SELECT MAX(id) FROM %I), 0) + 1) AS id
+        ) AS all_ids
+        WHERE NOT EXISTS (SELECT 1 FROM %I WHERE id = all_ids.id)',
+                   table_name, table_name)
+        INTO first_free_id;
+
+    -- Если свободный ID не найден, используем следующий после максимального
+    IF first_free_id IS NULL THEN
+        EXECUTE format('SELECT COALESCE(MAX(id), 0) + 1 FROM %I', table_name) INTO first_free_id;
+    END IF;
+
+    RETURN first_free_id;
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE EXCEPTION 'Error in find_free_id for table %: %', table_name, SQLERRM;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Триггерная функция для таблицы route
+CREATE OR REPLACE FUNCTION set_free_route_id()
+    RETURNS TRIGGER AS $$
+BEGIN
+    NEW.id := find_free_id('route');
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Триггер для route
+CREATE OR REPLACE TRIGGER route_free_id_trigger
+    BEFORE INSERT ON route
+    FOR EACH ROW
+EXECUTE FUNCTION set_free_route_id();
+
+-- Триггерная функция для таблицы location
+CREATE OR REPLACE FUNCTION set_free_location_id()
+    RETURNS TRIGGER AS $$
+BEGIN
+    NEW.id := find_free_id('location');
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Триггер для location
+CREATE OR REPLACE TRIGGER location_free_id_trigger
+    BEFORE INSERT ON location
+    FOR EACH ROW
+EXECUTE FUNCTION set_free_location_id();
+
+-- Триггерная функция для таблицы coordinates
+CREATE OR REPLACE FUNCTION set_free_coordinates_id()
+    RETURNS TRIGGER AS $$
+BEGIN
+    NEW.id := find_free_id('coordinates');
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Триггер для coordinates
+CREATE OR REPLACE TRIGGER coordinates_free_id_trigger
+    BEFORE INSERT ON coordinates
+    FOR EACH ROW
+EXECUTE FUNCTION set_free_coordinates_id();
+
+CREATE OR REPLACE FUNCTION delete_route()
+    RETURNS TRIGGER AS $$
+DECLARE
+    count_from_id INTEGER;
+    count_to_id INTEGER;
+    count_coordinates_id INTEGER;
+BEGIN
+    SELECT count(*) INTO count_from_id FROM route r WHERE OLD.from_id = r.from_id or OLD.from_id = r.to_id;
+    SELECT count(*) INTO count_to_id FROM route r WHERE OLD.to_id = r.from_id or OLD.to_id = r.to_id;
+    SELECT count(*) INTO count_coordinates_id FROM route r WHERE OLD.coordinates_id = r.coordinates_id;
+
+    IF count_from_id=0 THEN DELETE FROM location WHERE id = OLD.from_id; END IF;
+    IF count_to_id=0 THEN DELETE FROM location WHERE id = OLD.to_id; END IF;
+    IF count_coordinates_id=0 THEN DELETE FROM coordinates WHERE id = OLD.coordinates_id; END IF;
+
+    return OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER delete_route_trigger
+    AFTER DELETE ON route
+    FOR EACH ROW
+EXECUTE FUNCTION delete_route();
+
