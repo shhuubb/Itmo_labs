@@ -107,8 +107,8 @@ public class DbRoutesManager {
             statement.setObject(5, fromId);
             statement.setObject(6, toId);
             statement.setDouble(7, route.getDistance());
+            statement.execute();
 
-            statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
 
             if (resultSet.next()) {
@@ -261,22 +261,19 @@ public class DbRoutesManager {
      *
      * @author sh_ub
      */
-    public void clearTables(){
+    public void clearTables(String ownerLogin){
         try {
             boolean autoCommit = connection.getAutoCommit();
             connection.setAutoCommit(false);
 
-            try (Statement statement = connection.createStatement()) {
-                statement.executeUpdate("DELETE FROM route");
-                statement.executeUpdate("DELETE FROM location");
-                statement.executeUpdate("DELETE FROM coordinates" );
-
+            try (PreparedStatement statement = connection.prepareStatement("DELETE FROM route where owner_login = ?")) {
+                statement.setString(1, ownerLogin);
+                statement.executeUpdate();
                 connection.commit();
                 logger.info("Successfully cleared tables: route, location, coordinates");
             } catch (SQLException e) {
                 connection.rollback();
                 logger.error("Failed to clear tables due to database error: {}", e.getMessage());
-                throw e;
             } finally {
                 connection.setAutoCommit(autoCommit);
             }

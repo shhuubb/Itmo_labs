@@ -20,27 +20,6 @@ public class DbUsersManager {
     private static final Logger logger = LoggerFactory.getLogger(DbUsersManager.class);
 
     /**
-     * Loads all users from the database.
-     *
-     * @return an {@link ArrayList} of {@link User} objects loaded from the database
-     * @author sh_ub
-     */
-    public ArrayList<User> loadUsers() {
-        ArrayList<User> users = new ArrayList<>();
-        String query = "SELECT username, password FROM users";
-        try (PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet rs = statement.executeQuery()) {
-            while (rs.next()) {
-                users.add(new User(rs.getString("username"), rs.getString("password")));
-            }
-            logger.info("Successfully loaded {} users from the database", users.size());
-        } catch (SQLException e) {
-            logger.error("Failed to load users from the database: {}", e.getMessage());
-        }
-        return users;
-    }
-
-    /**
      * Adds a new user to the database.
      *
      * @param user the {@link User} to add
@@ -89,7 +68,9 @@ public class DbUsersManager {
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
                     logger.debug("Found user with username {}", username);
-                    return new User(rs.getString("username"), rs.getString("password"));
+                    User user = new User(rs.getString("username"), null);
+                    user.setPassword(rs.getString("password"));
+                    return user;
                 }
             }
         } catch (SQLException e) {

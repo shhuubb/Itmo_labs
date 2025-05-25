@@ -13,7 +13,7 @@ public class AskAuth {
         this.console = console;
     }
 
-    public User askCredentials() throws AskBreak {
+    public User askCredentials(){
         try {
             console.println("Введите логин:");
             console.print("> ");
