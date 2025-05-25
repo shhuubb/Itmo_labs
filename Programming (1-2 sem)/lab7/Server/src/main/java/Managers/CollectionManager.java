@@ -1,46 +1,55 @@
 package Managers;
 
-
 import model.Route;
-
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
-
 /**
- * Класс для управления коллекцией
+ * A class for managing a collection of Route objects.
+ *
  * @author sh_ub
  */
 public class CollectionManager {
     private static final Map<Long, Route> routes = new HashMap<>();
     static ArrayList<Route> collection = new ArrayList<>();
     private LocalDateTime lastInitTime;
-    private final LocalDateTime lastSaveTime;
     private final DbRoutesManager dbRoutesManager;
 
+    /**
+     * Constructor for CollectionManager.
+     *
+     * @param dbRoutesManager the database manager for routes
+     */
     public CollectionManager(DbRoutesManager dbRoutesManager) {
         this.lastInitTime = null;
-        this.lastSaveTime = null;
         this.dbRoutesManager = dbRoutesManager;
     }
 
+    /**
+     * Gets the last initialization time.
+     *
+     * @return the last initialization time
+     */
     public LocalDateTime getLastInitTime() {
         return lastInitTime;
     }
 
-    public LocalDateTime getLastSaveTime() {
-        return lastSaveTime;
-    }
-
+    /**
+     * Checks if the collection contains a specific route.
+     *
+     * @param route the route to check
+     * @return true if the collection contains the route, false otherwise
+     */
     public boolean isContain(Route route) {
         return routes.containsKey(route.getId());
     }
 
     /**
-     * Метод для добавления маршрута в коллекцию
-     * @param r маршрут
+     * Adds a route to the collection.
+     *
+     * @param r the route to add
+     * @return true if the route was added, false if it already exists
      */
     public boolean add(Route r) {
         if (isContain(r)) return false;
@@ -51,8 +60,10 @@ public class CollectionManager {
     }
 
     /**
-     * Метод для удаления маршрута из коллекции по id
-     * @param id маршрут
+     * Removes a route from the collection by its ID.
+     *
+     * @param id the ID of the route to remove
+     * @return true if the route was removed, false if it does not exist
      */
     public boolean remove(Long id) {
         var r = routes.get(id);
@@ -65,12 +76,18 @@ public class CollectionManager {
     }
 
     /**
-     * Метод для сортировки коллекции
+     * Sorts the collection of routes.
      */
     public void sort(){
         Collections.sort(collection);
     }
 
+    /**
+     * Updates a route in the collection.
+     *
+     * @param r the route to update
+     * @return true if the route was updated, false if it does not exist
+     */
     public boolean update(Route r) {
         if (!isContain(r)) return false;
         collection.remove(routes.get(r.getId()));
@@ -82,27 +99,32 @@ public class CollectionManager {
     }
 
     /**
-     * Метод для инициализации коллекции
+     * Initializes the collection by loading routes from the database.
      */
-    public synchronized boolean init()  {
+    public synchronized void init()  {
         collection.clear();
         lastInitTime = LocalDateTime.now();
         collection = dbRoutesManager.loadCollection();
         collection.forEach(r -> routes.put(r.getId(), r));
-
         sort();
-        return true;
     }
 
     /**
-     * Метод для очищения коллекции
+     * Clears the collection for a specific owner.
+     *
+     * @param ownerId the ID of the owner
      */
     public void clear(String ownerId) {
         dbRoutesManager.clearTables(ownerId);
         collection = dbRoutesManager.loadCollection();
         collection.forEach(r -> routes.put(r.getId(), r));
-
     }
+
+    /**
+     * Gets the collection of routes.
+     *
+     * @return the collection of routes
+     */
     public ArrayList<Route> getCollection() {
         return collection;
     }

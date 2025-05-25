@@ -8,9 +8,7 @@ import Utility.ExecutionResponse;
 import model.Route;
 import Command.CommandWithArgs;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Vector;
+
 import java.util.stream.Collectors;
 
 /**
@@ -33,8 +31,8 @@ public class FilterContainsName extends Command {
             return new ExecutionResponse("Substring is empty", false);
 
         String matches = collectionManager.getCollection().stream()
-                .filter(route -> route.getName().toLowerCase().contains(substring))
-                .map(Route::toString)
+                .map(Route::getName)
+                .filter(name -> name.toLowerCase().contains(substring))
                 .collect(Collectors.joining("\n"));
 
         String result = matches.isEmpty()
