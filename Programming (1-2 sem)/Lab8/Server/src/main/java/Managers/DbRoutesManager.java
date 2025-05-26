@@ -100,6 +100,8 @@ public class DbRoutesManager {
 
             if (route.getId() != null)
                 statement.setLong(1, route.getId());
+            else
+                statement.setNull(1, Types.BIGINT);
 
             statement.setString(2, route.getName());
             statement.setObject(3, coordId);
@@ -245,15 +247,24 @@ public class DbRoutesManager {
      * @param id the ID of the route to delete
      * @author sh_ub
      */
-    public void deleteRoute(Long id) {
+    public String deleteRoute(Long id) {
         try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM route WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM route WHERE id = ? returning owner_login");
             statement.setLong(1, id);
-            statement.executeUpdate();
-            logger.info("Successfully deleted route with ID {}", id);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                logger.debug("Successfully updated route with ID {}", id);
+                return rs.getString("owner_login");
+            } else {
+                logger.debug("Route with ID {} not found", id);
+                return null;
+            }
+
         } catch (SQLException e){
             logger.error("Failed to delete route with ID {}: {}", id, e.getMessage());
         }
+        return null;
     }
 
     /**
@@ -289,8 +300,9 @@ public class DbRoutesManager {
      * @author sh_ub
      */
     public void updateRoute(Route route) {
-        deleteRoute(route.getId());
+        String owner = deleteRoute(route.getId());
         Long newId = addRoute(route);
+        setOwner(owner, newId);
         if (newId != null) {
             logger.info("Successfully updated route with ID {} to new ID {}", route.getId(), newId);
         } else {

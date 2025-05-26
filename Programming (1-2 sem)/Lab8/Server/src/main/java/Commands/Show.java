@@ -20,10 +20,9 @@ public class Show extends Command {
 
     @Override
     public ExecutionResponse execute(CommandWithArgs command) {
-        System.out.println(command.getArgs());
         if (command.getArgs() != null)
             return new ExecutionResponse("Illegal number of arguments!", false);
 
-        return new ExecutionResponse(collectionManager.toString(), true);
+        return new ExecutionResponse(collectionManager.getCollection(), true);
     }
 }

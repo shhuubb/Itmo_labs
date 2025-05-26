@@ -105,7 +105,6 @@ public class Route extends Element implements Validatable, Serializable, Compara
      */
     @Override
     public boolean validate() {
-        if (id == null || id < 0) return false;
         if (name == null || name.isEmpty()) return false;
         if (coordinates == null) return false;
         if (creationDate == null) return false;

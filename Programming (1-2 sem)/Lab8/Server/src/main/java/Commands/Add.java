@@ -25,6 +25,7 @@ public class Add extends Command{
     @Override
     public ExecutionResponse execute(CommandWithArgs command) {
         Route a = command.getRoute();
+
         try {
             if (a.validate()){
                 Long id = dbRoutesManager.addRoute(a);

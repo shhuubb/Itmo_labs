@@ -34,9 +34,9 @@ public class UpdateId extends Command {
         else if (!dbRoutesManager.getOwner(a.getId()).equals(command.getUser().getLogin()))
             return new ExecutionResponse("Permission denied!", false);
 
-        else if (!collectionManager.update(a))
-            return new ExecutionResponse("The route with this id was not found.", false);
-        return new ExecutionResponse("Route was successfully updated", true);
+        else if (collectionManager.update(a))
+            return new ExecutionResponse("Route was successfully updated", true);
+        return new ExecutionResponse("The route with this id was not found.", false);
     }
 }
 

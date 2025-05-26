@@ -4,6 +4,7 @@ import Authentication.User;
 import Command.CommandType;
 import Command.CommandWithArgs;
 
+import Commands.Exit;
 import Connection.ConnectionClient;
 
 import Utility.AskBreak;
@@ -22,17 +23,17 @@ import static model.Ask.AskRoute;
 
 
 public class Runner {
-    private final StandardConsole console;
+    private static StandardConsole console = new StandardConsole();
     private final List<String> scriptStack = new ArrayList<>();
     private int lengthRecursion = -1;
-    private final ConnectionClient connection = new ConnectionClient(1234, "localhost");
+    private static final ConnectionClient connection = new ConnectionClient(1234, "localhost");
     private User user;
 
     public Runner(StandardConsole console) {
         this.console = console;
     }
 
-    private void checkConnection() throws InterruptedException {
+    public static void checkConnection() throws InterruptedException {
         final int MAX_ATTEMPTS = 5;
         final int RETRY_DELAY_MS = 5000;
 
@@ -118,9 +119,16 @@ public class Runner {
                 ScriptMode(userCommand[1]);
             else if (command == CommandType.ADD || command == CommandType.UPDATE)
                 commandWithArgs = new CommandWithArgs(command, AskRoute(console, userCommand[1].trim(), command), user);
-            else{
-                commandWithArgs = new CommandWithArgs(command, userCommand[1].isEmpty() ? null : userCommand[1].trim(), user);
+            else if(command == CommandType.EXIT){
+                commandWithArgs = new CommandWithArgs(command);
+                connection.send(connection.serializeObject(commandWithArgs));
+                Exit exit = new Exit(console);
+                exit.execute(commandWithArgs);
             }
+
+            else
+                commandWithArgs = new CommandWithArgs(command, userCommand[1].isEmpty() ? null : userCommand[1].trim(), user);
+
 
             connection.send(connection.serializeObject(commandWithArgs));
             return connection.deserializeObject(connection.receive());

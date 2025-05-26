@@ -10,13 +10,9 @@ import java.io.Serializable;
  * @author sh_ub
  */
 public class Location implements Validatable, Serializable {
-    @JsonProperty("x")
     private Long x; //Поле не может быть null
-    @JsonProperty("y")
     private long y;
-    @JsonProperty("z")
     private Double z; //Поле не может быть null
-    @JsonProperty("LocationName")
     private String name; //Длина строки не должна быть больше 318, Поле может быть null
 
     public Location(Long x, long y, Double z, String name) {

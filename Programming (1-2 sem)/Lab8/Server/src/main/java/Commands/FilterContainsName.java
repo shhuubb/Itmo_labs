@@ -30,15 +30,6 @@ public class FilterContainsName extends Command {
         if (substring.isEmpty())
             return new ExecutionResponse("Substring is empty", false);
 
-        String matches = collectionManager.getCollection().stream()
-                .map(Route::getName)
-                .filter(name -> name.toLowerCase().contains(substring))
-                .collect(Collectors.joining("\n"));
-
-        String result = matches.isEmpty()
-                ? "0 matches found."
-                : matches + "\n" + matches.split("\n").length + " matches found.";
-
-        return new ExecutionResponse(result, true);
+        return new ExecutionResponse(collectionManager.getCollection().stream().filter(route -> route.getName().toLowerCase().contains(substring.toLowerCase())).collect(Collectors.toList()), true);
     }
 }

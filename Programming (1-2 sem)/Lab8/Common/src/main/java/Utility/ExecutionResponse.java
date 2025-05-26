@@ -1,6 +1,9 @@
 package Utility;
 
+import model.Route;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Класс для хранения результата выполнения
@@ -9,15 +12,24 @@ import java.io.Serializable;
 public class ExecutionResponse implements Serializable {
 
     private String response; // сообщение о выполнение
-    private boolean success; // флаг выполнения
+    private boolean success;
+    private List<Route> routes;// флаг выполнения
 
     public ExecutionResponse(String response, boolean success) {
         this.response = response;
         this.success = success;
     }
 
+    public ExecutionResponse(List<Route> routes, boolean success) {
+        this.routes = routes;
+        this.success = success;
+    }
+
     public String getResponse() {
         return response;
+    }
+    public List<Route> getRoutes() {
+        return routes;
     }
 
     public boolean isSuccess() {
@@ -28,4 +40,5 @@ public class ExecutionResponse implements Serializable {
     public String toString() {
         return String.format("ExecutionResponse [response=%s, success=%s]", response, success);
     }
+
 }
