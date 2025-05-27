@@ -23,7 +23,7 @@ public class AuthForm {
     private ResourceBundle bundle;
     private Stage stage;
     private ConnectionClient networkClient;
-    
+
     // UI Components
     private TextField usernameField;
     private PasswordField passwordField;
@@ -36,7 +36,7 @@ public class AuthForm {
     private Label confirmPasswordLabel;
     private Label errorLabel;
     private ComboBox<String> languageSelector;
-    
+
     private boolean isLoginMode = true;
     private String currentError = null;
 
@@ -122,17 +122,17 @@ public class AuthForm {
         switchModeButton.setOnMouseExited(e -> switchModeButton.setStyle("-fx-background-color: transparent; -fx-text-fill: #007aff;"));
 
         authCard.getChildren().addAll(
-            langBox,
-            titleLabel,
-            usernameLabel,
-            usernameField,
-            passwordLabel,
-            passwordField,
-            confirmPasswordLabel,
-            confirmPasswordField,
-            errorLabel,
-            submitButton,
-            switchModeButton
+                langBox,
+                titleLabel,
+                usernameLabel,
+                usernameField,
+                passwordLabel,
+                passwordField,
+                confirmPasswordLabel,
+                confirmPasswordField,
+                errorLabel,
+                submitButton,
+                switchModeButton
         );
 
         StackPane root = new StackPane(authCard);
@@ -164,7 +164,7 @@ public class AuthForm {
 
         try {
             networkClient.start();
-            networkClient.send(networkClient.serializeObject(new User(username, password)));
+            networkClient.send(networkClient.serializeObject(new User(username, password, isLoginMode ? "login" : "registration")));
             ExecutionResponse response = networkClient.deserializeObject(networkClient.receive());
 
             if (response.isSuccess()) {
@@ -174,16 +174,21 @@ public class AuthForm {
                 MainWindow mainWindow = new MainWindow(bundle, username, new User(username, password));
                 mainWindow.show();
             } else {
-                showError(isLoginMode ? "invalid_credentials" : "registration_failed");
+                showError(response.getResponse());
             }
         } catch (IOException | ClassNotFoundException e) {
             showError("connection_error");
         }
     }
 
-    private void showError(String errorKey) {
-        currentError = errorKey;
-        errorLabel.setText(getResourceString(errorKey, "Error"));
+    private void showError(String messageOrKey) {
+        String errorMessage;
+        switch (messageOrKey) {
+            case "empty_fields", "passwords_dont_match", "connection_error"-> errorMessage = getResourceString(messageOrKey, "Error");
+            default -> errorMessage = messageOrKey;
+        }
+        currentError = messageOrKey; // Store the original key/message
+        errorLabel.setText(errorMessage);
         errorLabel.setVisible(true);
     }
 
@@ -224,7 +229,7 @@ public class AuthForm {
         bundle = LocalizationManager.getResourceBundle(newLocale);
         stage.setTitle(getResourceString("app_title", "Collection Client"));
         updateUIText();
-        
+
         // Update error message if there is one
         if (currentError != null) {
             errorLabel.setText(getResourceString(currentError, "Error"));
@@ -240,15 +245,15 @@ public class AuthForm {
     }
 
     private void updateUIText() {
-        titleLabel.setText(getResourceString(isLoginMode ? "login_title" : "registration_title", 
-            isLoginMode ? "Sign In" : "Registration"));
+        titleLabel.setText(getResourceString(isLoginMode ? "login_title" : "registration_title",
+                isLoginMode ? "Sign In" : "Registration"));
         usernameLabel.setText(getResourceString("username", "Username"));
         passwordLabel.setText(getResourceString("password", "Password"));
         confirmPasswordLabel.setText(getResourceString("confirm_password", "Confirm Password"));
-        submitButton.setText(getResourceString(isLoginMode ? "login" : "register", 
-            isLoginMode ? "Sign In" : "Register"));
+        submitButton.setText(getResourceString(isLoginMode ? "login" : "register",
+                isLoginMode ? "Sign In" : "Register"));
         switchModeButton.setText(getResourceString(isLoginMode ? "switch_to_register" : "switch_to_login",
-            isLoginMode ? "Create Account" : "Back to Login"));
+                isLoginMode ? "Create Account" : "Back to Login"));
         usernameField.setPromptText(getResourceString("username", "Username"));
         passwordField.setPromptText(getResourceString("password", "Password"));
         confirmPasswordField.setPromptText(getResourceString("confirm_password", "Confirm Password"));

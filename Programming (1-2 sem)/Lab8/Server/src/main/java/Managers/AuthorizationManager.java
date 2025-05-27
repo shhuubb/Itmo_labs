@@ -31,8 +31,8 @@ public class AuthorizationManager {
         String login = user.getLogin();
 
         if (isAuthorize(login)) {
-            logger.info("User {} already exists, attempting login", login);
-            return login(user);
+            logger.info("User {} already exists", login);
+            return new ExecutionResponse("User " + login + " already exists", false);
         }
 
         try {
@@ -53,7 +53,12 @@ public class AuthorizationManager {
      * @author sh_ub
      */
     public static ExecutionResponse login(User user) {
-        if (dbUsersManager.findUser(user.getLogin()).validatePassword(user.getPasswordHash())) {
+        User databaseUser = dbUsersManager.findUser(user.getLogin());
+
+        if (databaseUser == null) return new ExecutionResponse("User " + user.getLogin() + " not found", false);
+
+
+        if (databaseUser.validatePassword(user.getPasswordHash())) {
             logger.info("User {} successfully logged in", user.getLogin());
             return new ExecutionResponse(String.format("User %s successfully logged in", user.getLogin()), true);
         } else {
