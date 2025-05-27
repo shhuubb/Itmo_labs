@@ -164,7 +164,7 @@ public class AuthForm {
 
         try {
             networkClient.start();
-            networkClient.send(networkClient.serializeObject(new User(username, password)));
+            networkClient.send(networkClient.serializeObject(new User(username, password, isLoginMode ? "login" : "registration")));
             ExecutionResponse response = networkClient.deserializeObject(networkClient.receive());
 
             if (response.isSuccess()) {
@@ -174,16 +174,21 @@ public class AuthForm {
                 MainWindow mainWindow = new MainWindow(bundle, username, new User(username, password));
                 mainWindow.show();
             } else {
-                showError(isLoginMode ? "invalid_credentials" : "registration_failed");
+                showError(response.getResponse());
             }
         } catch (IOException | ClassNotFoundException e) {
             showError("connection_error");
         }
     }
 
-    private void showError(String errorKey) {
-        currentError = errorKey;
-        errorLabel.setText(getResourceString(errorKey, "Error"));
+    private void showError(String messageOrKey) {
+        String errorMessage;
+        switch (messageOrKey) {
+            case "empty_fields", "passwords_dont_match", "connection_error"-> errorMessage = getResourceString(messageOrKey, "Error");
+            default -> errorMessage = messageOrKey;
+        }
+        currentError = messageOrKey; // Store the original key/message
+        errorLabel.setText(errorMessage);
         errorLabel.setVisible(true);
     }
 

@@ -10,6 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 
+import static Managers.AuthorizationManager.login;
 import static Managers.ConnectionManager.logger;
 import static Managers.AuthorizationManager.register;
 
@@ -65,7 +66,7 @@ public class ClientHandler implements Runnable {
 
                 } catch (Exception e) {
                     User user = connectionManager.deserialize(data, User.class);
-                    ExecutionResponse answer = register(user);
+                    ExecutionResponse answer = user.getType().equals("registration") ? register(user) : login(user);
                     connectionManager.send(connectionManager.serializeObject(answer));
                 }
 
