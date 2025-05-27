@@ -1,7 +1,0 @@
-2025-05-24 23:25:38.843 [main] ERROR Managers.ConnectionManager - Failed to connect to database!
-2025-05-24 23:26:13.480 [main] ERROR Managers.ConnectionManager - Failed to connect to database!
-2025-05-24 23:26:46.354 [main] INFO  Managers.ConnectionManager - Successfully connected to database: PostgreSQL!
-2025-05-24 23:26:46.469 [main] INFO  Managers.ConnectionManager - Successfully loaded 6 routes from the database
-2025-05-24 23:36:37.497 [main] INFO  Managers.ConnectionManager - Successfully connected to database: PostgreSQL!
-2025-05-24 23:36:37.608 [main] INFO  Managers.ConnectionManager - Successfully loaded 6 routes from the database
-2025-05-24 23:55:22.831 [main] ERROR Managers.ConnectionManager - Failed to connect to database!
