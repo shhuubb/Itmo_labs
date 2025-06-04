@@ -1,0 +1,99 @@
+2025-05-27 15:28:04.533 [main] INFO  Managers.ConnectionManager - Successfully connected to database: PostgreSQL!
+2025-05-27 15:28:04.557 [main] INFO  Managers.ConnectionManager - Successfully loaded 2 routes from the database
+2025-05-27 15:28:19.496 [Thread-0] INFO  Managers.ConnectionManager - New client connected from: /127.0.0.1:61618
+2025-05-27 15:28:19.507 [Thread-0] DEBUG Managers.ConnectionManager - Successfully received 245 bytes
+2025-05-27 15:28:19.507 [Thread-0] DEBUG Managers.ConnectionManager - Deserializing 245 bytes into class Command.CommandWithArgs
+2025-05-27 15:28:19.512 [Thread-0] ERROR Managers.ConnectionManager - Deserialized object type mismatch. Expected: Command.CommandWithArgs, Got: Authentication.User
+2025-05-27 15:28:19.519 [Thread-0] DEBUG Managers.ConnectionManager - Deserializing 245 bytes into class Authentication.User
+2025-05-27 15:28:19.519 [Thread-0] DEBUG Managers.ConnectionManager - Successfully deserialized object: Authentication.User@22c7f565
+2025-05-27 15:28:19.528 [Thread-0] INFO  Managers.AuthorizationManager - User 23 successfully logged in
+2025-05-27 15:28:19.529 [Thread-0] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-05-27 15:28:19.532 [Thread-0] DEBUG Managers.ConnectionManager - Successfully serialized object, size: 151 bytes
+2025-05-27 15:28:19.533 [Thread-0] DEBUG Managers.ConnectionManager - Successfully sent 151 bytes
+2025-05-27 15:28:19.638 [Thread-1] INFO  Managers.ConnectionManager - New client connected from: /127.0.0.1:61619
+2025-05-27 15:28:19.641 [Thread-1] DEBUG Managers.ConnectionManager - Successfully received 453 bytes
+2025-05-27 15:28:19.641 [Thread-1] DEBUG Managers.ConnectionManager - Deserializing 453 bytes into class Command.CommandWithArgs
+2025-05-27 15:28:19.643 [Thread-1] DEBUG Managers.ConnectionManager - Successfully deserialized object: Command.CommandWithArgs@52322466
+2025-05-27 15:28:19.645 [pool-1-thread-1] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-05-27 15:28:19.652 [pool-1-thread-1] DEBUG Managers.ConnectionManager - Successfully serialized object, size: 1021 bytes
+2025-05-27 15:28:19.652 [pool-1-thread-1] DEBUG Managers.ConnectionManager - Successfully sent 1021 bytes
+2025-05-27 15:28:22.877 [Thread-1] ERROR Managers.ConnectionManager - Failed to receive data: Connection reset
+2025-05-27 15:28:22.877 [Thread-0] ERROR Managers.ConnectionManager - Failed to receive data: Connection reset
+2025-05-27 15:28:22.877 [Thread-1] INFO  Managers.ConnectionManager - Client exits from socket /127.0.0.1:61619
+2025-05-27 15:28:22.877 [Thread-0] INFO  Managers.ConnectionManager - Client exits from socket /127.0.0.1:61618
+2025-05-27 15:28:22.877 [Thread-1] INFO  Managers.ConnectionManager - Successfully closed connection streams
+2025-05-27 15:28:22.877 [Thread-0] INFO  Managers.ConnectionManager - Successfully closed connection streams
+2025-05-27 15:28:22.877 [Thread-1] INFO  Managers.ConnectionManager - Socket /127.0.0.1:61619 was closed.
+2025-05-27 15:28:22.877 [Thread-0] INFO  Managers.ConnectionManager - Socket /127.0.0.1:61618 was closed.
+2025-05-27 15:29:45.693 [main] INFO  Managers.ConnectionManager - Successfully connected to database: PostgreSQL!
+2025-05-27 15:29:45.715 [main] INFO  Managers.ConnectionManager - Successfully loaded 2 routes from the database
+2025-05-27 15:29:58.364 [Thread-0] INFO  Managers.ConnectionManager - New client connected from: /127.0.0.1:61690
+2025-05-27 15:29:58.375 [Thread-0] DEBUG Managers.ConnectionManager - Successfully received 248 bytes
+2025-05-27 15:29:58.376 [Thread-0] DEBUG Managers.ConnectionManager - Deserializing 248 bytes into class Command.CommandWithArgs
+2025-05-27 15:29:58.379 [Thread-0] ERROR Managers.ConnectionManager - Deserialized object type mismatch. Expected: Command.CommandWithArgs, Got: Authentication.User
+2025-05-27 15:29:58.379 [Thread-0] DEBUG Managers.ConnectionManager - Deserializing 248 bytes into class Authentication.User
+2025-05-27 15:29:58.379 [Thread-0] DEBUG Managers.ConnectionManager - Successfully deserialized object: Authentication.User@22c7f565
+2025-05-27 15:29:58.388 [Thread-0] INFO  Managers.AuthorizationManager - User sh_ub successfully logged in
+2025-05-27 15:29:58.389 [Thread-0] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-05-27 15:29:58.392 [Thread-0] DEBUG Managers.ConnectionManager - Successfully serialized object, size: 154 bytes
+2025-05-27 15:29:58.392 [Thread-0] DEBUG Managers.ConnectionManager - Successfully sent 154 bytes
+2025-05-27 15:29:58.491 [Thread-1] INFO  Managers.ConnectionManager - New client connected from: /127.0.0.1:61691
+2025-05-27 15:29:58.493 [Thread-1] DEBUG Managers.ConnectionManager - Successfully received 456 bytes
+2025-05-27 15:29:58.494 [Thread-1] DEBUG Managers.ConnectionManager - Deserializing 456 bytes into class Command.CommandWithArgs
+2025-05-27 15:29:58.495 [Thread-1] DEBUG Managers.ConnectionManager - Successfully deserialized object: Command.CommandWithArgs@52322466
+2025-05-27 15:29:58.498 [pool-1-thread-1] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-05-27 15:29:58.504 [pool-1-thread-1] DEBUG Managers.ConnectionManager - Successfully serialized object, size: 1021 bytes
+2025-05-27 15:29:58.504 [pool-1-thread-1] DEBUG Managers.ConnectionManager - Successfully sent 1021 bytes
+2025-05-27 15:30:01.095 [Thread-0] ERROR Managers.ConnectionManager - Failed to receive data: Connection reset
+2025-05-27 15:30:01.095 [Thread-1] ERROR Managers.ConnectionManager - Failed to receive data: Connection reset
+2025-05-27 15:30:01.095 [Thread-0] INFO  Managers.ConnectionManager - Client exits from socket /127.0.0.1:61690
+2025-05-27 15:30:01.095 [Thread-1] INFO  Managers.ConnectionManager - Client exits from socket /127.0.0.1:61691
+2025-05-27 15:30:01.096 [Thread-1] INFO  Managers.ConnectionManager - Successfully closed connection streams
+2025-05-27 15:30:01.096 [Thread-0] INFO  Managers.ConnectionManager - Successfully closed connection streams
+2025-05-27 15:30:01.096 [Thread-1] INFO  Managers.ConnectionManager - Socket /127.0.0.1:61691 was closed.
+2025-05-27 15:30:01.096 [Thread-0] INFO  Managers.ConnectionManager - Socket /127.0.0.1:61690 was closed.
+2025-05-27 15:30:08.874 [Thread-2] INFO  Managers.ConnectionManager - New client connected from: /127.0.0.1:61717
+2025-05-27 15:30:08.884 [Thread-2] DEBUG Managers.ConnectionManager - Successfully received 255 bytes
+2025-05-27 15:30:08.884 [Thread-2] DEBUG Managers.ConnectionManager - Deserializing 255 bytes into class Command.CommandWithArgs
+2025-05-27 15:30:08.884 [Thread-2] ERROR Managers.ConnectionManager - Deserialized object type mismatch. Expected: Command.CommandWithArgs, Got: Authentication.User
+2025-05-27 15:30:08.884 [Thread-2] DEBUG Managers.ConnectionManager - Deserializing 255 bytes into class Authentication.User
+2025-05-27 15:30:08.884 [Thread-2] DEBUG Managers.ConnectionManager - Successfully deserialized object: Authentication.User@1c8fd3a2
+2025-05-27 15:30:08.889 [Thread-2] INFO  Managers.AuthorizationManager - User sh_ub already exists
+2025-05-27 15:30:08.889 [Thread-2] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-05-27 15:30:08.889 [Thread-2] DEBUG Managers.ConnectionManager - Successfully serialized object, size: 146 bytes
+2025-05-27 15:30:08.889 [Thread-2] DEBUG Managers.ConnectionManager - Successfully sent 146 bytes
+2025-05-27 15:30:12.548 [Thread-2] ERROR Managers.ConnectionManager - Failed to receive data: Connection reset
+2025-05-27 15:30:12.548 [Thread-2] INFO  Managers.ConnectionManager - Client exits from socket /127.0.0.1:61717
+2025-05-27 15:30:12.548 [Thread-2] INFO  Managers.ConnectionManager - Successfully closed connection streams
+2025-05-27 15:30:12.548 [Thread-2] INFO  Managers.ConnectionManager - Socket /127.0.0.1:61717 was closed.
+2025-05-27 16:16:37.993 [main] INFO  Managers.ConnectionManager - Successfully connected to database: PostgreSQL!
+2025-05-27 16:16:38.016 [main] INFO  Managers.ConnectionManager - Successfully loaded 2 routes from the database
+2025-05-27 16:25:53.195 [main] INFO  Managers.ConnectionManager - Successfully connected to database: PostgreSQL!
+2025-05-27 16:25:53.216 [main] INFO  Managers.ConnectionManager - Successfully loaded 2 routes from the database
+2025-05-27 16:37:06.402 [main] INFO  Managers.ConnectionManager - Successfully connected to database: PostgreSQL!
+2025-05-27 16:37:06.518 [main] INFO  Managers.ConnectionManager - Successfully loaded 2 routes from the database
+2025-05-27 16:39:38.032 [Thread-0] INFO  Managers.ConnectionManager - New client connected from: /127.0.0.1:59120
+2025-05-27 16:39:38.043 [Thread-0] DEBUG Managers.ConnectionManager - Successfully received 248 bytes
+2025-05-27 16:39:38.043 [Thread-0] DEBUG Managers.ConnectionManager - Deserializing 248 bytes into class Command.CommandWithArgs
+2025-05-27 16:39:38.046 [Thread-0] ERROR Managers.ConnectionManager - Deserialized object type mismatch. Expected: Command.CommandWithArgs, Got: Authentication.User
+2025-05-27 16:39:38.047 [Thread-0] DEBUG Managers.ConnectionManager - Deserializing 248 bytes into class Authentication.User
+2025-05-27 16:39:38.047 [Thread-0] DEBUG Managers.ConnectionManager - Successfully deserialized object: Authentication.User@1d21e38b
+2025-05-27 16:39:38.151 [Thread-0] INFO  Managers.AuthorizationManager - User sh_ub successfully logged in
+2025-05-27 16:39:38.152 [Thread-0] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-05-27 16:39:38.155 [Thread-0] DEBUG Managers.ConnectionManager - Successfully serialized object, size: 154 bytes
+2025-05-27 16:39:38.155 [Thread-0] DEBUG Managers.ConnectionManager - Successfully sent 154 bytes
+2025-05-27 16:39:38.255 [Thread-1] INFO  Managers.ConnectionManager - New client connected from: /127.0.0.1:59121
+2025-05-27 16:39:38.261 [Thread-1] DEBUG Managers.ConnectionManager - Successfully received 456 bytes
+2025-05-27 16:39:38.261 [Thread-1] DEBUG Managers.ConnectionManager - Deserializing 456 bytes into class Command.CommandWithArgs
+2025-05-27 16:39:38.263 [Thread-1] DEBUG Managers.ConnectionManager - Successfully deserialized object: Command.CommandWithArgs@6557b766
+2025-05-27 16:39:38.265 [pool-1-thread-1] DEBUG Managers.ConnectionManager - Serializing object of type: Utility.ExecutionResponse
+2025-05-27 16:39:38.271 [pool-1-thread-1] DEBUG Managers.ConnectionManager - Successfully serialized object, size: 1021 bytes
+2025-05-27 16:39:38.272 [pool-1-thread-1] DEBUG Managers.ConnectionManager - Successfully sent 1021 bytes
+2025-05-27 16:39:40.336 [Thread-1] ERROR Managers.ConnectionManager - Failed to receive data: Connection reset
+2025-05-27 16:39:40.336 [Thread-0] ERROR Managers.ConnectionManager - Failed to receive data: Connection reset
+2025-05-27 16:39:40.336 [Thread-1] INFO  Managers.ConnectionManager - Client exits from socket /127.0.0.1:59121
+2025-05-27 16:39:40.336 [Thread-0] INFO  Managers.ConnectionManager - Client exits from socket /127.0.0.1:59120
+2025-05-27 16:39:40.336 [Thread-1] INFO  Managers.ConnectionManager - Successfully closed connection streams
+2025-05-27 16:39:40.336 [Thread-0] INFO  Managers.ConnectionManager - Successfully closed connection streams
+2025-05-27 16:39:40.336 [Thread-1] INFO  Managers.ConnectionManager - Socket /127.0.0.1:59121 was closed.
+2025-05-27 16:39:40.336 [Thread-0] INFO  Managers.ConnectionManager - Socket /127.0.0.1:59120 was closed.

@@ -37,7 +37,6 @@ public class Add extends Command{
             else return new ExecutionResponse("Object Route is not valid.", false);
 
         } catch (NullPointerException e){
-            e.printStackTrace();
             return new ExecutionResponse("Failed to add route.", false);
         }
     }
