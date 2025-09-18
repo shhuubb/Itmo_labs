@@ -11,6 +11,7 @@ javafx {
     version = "17"
     modules = [ 'javafx.controls' ]
 }
+
 dependencies {
     implementation project(':Common')
     implementation 'org.openjfx:javafx-controls:17.0.2'
@@ -18,14 +19,24 @@ dependencies {
     implementation 'de.jensd:fontawesomefx-fontawesome:4.7.0-9.1.2'
 }
 
-mainClassName = 'Gui.Main'
-
+application {
+    mainClass = 'Gui.Main'
+}
 
 // Ensure resources are included in the build
 sourceSets {
     main {
+        java {
+            srcDirs = ['src/main/java']
+        }
         resources {
             srcDirs = ['src/main/resources']
         }
     }
 }
+
+run {
+    standardInput = System.in
+    standardOutput = System.out
+}
+

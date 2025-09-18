@@ -2,8 +2,9 @@ plugins {
     id 'java'
 }
 
-group = 'org.example'
+group = 'sh_ub.server'
 version = '1.0-SNAPSHOT'
+
 
 repositories {
     mavenCentral()
@@ -15,10 +16,10 @@ dependencies {
 
 jar {
     manifest {
-        attributes(
-                'Main-Class': 'org.example.Main'
-        )
-    }
+                attributes(
+                        'Main-Class': 'sh_ub.server.Server'
+                )
+            }
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
