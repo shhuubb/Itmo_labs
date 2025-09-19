@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.Locale;
 
 public class JsonFormatter {
     final private Path file;
@@ -26,17 +27,16 @@ public class JsonFormatter {
     }
 
     public String toJsonRecord(Coordinates point, long time) {
-        return """
-            {
-                "creationTime": "%s",
-                "x": %d,
-                "y": %f,
-                "r": %f,
-                "IsHit": %s,
-                "executionTime": "%s"
-            }
-            """.formatted(point.getTime(), point.getX(), point.getY(), point.getR(), point.isHit(), time);
-
+        return String.format(Locale.US, """
+        {
+            "creationTime": "%s",
+            "x": %d,
+            "y": %.2f,
+            "r": %.2f,
+            "IsHit": %b,
+            "executionTime": %d
+        }
+        """, point.getTime(), point.getX(), point.getY(), point.getR(), point.isHit(), time);
     }
 
     public void writeJsonResponse(String json){

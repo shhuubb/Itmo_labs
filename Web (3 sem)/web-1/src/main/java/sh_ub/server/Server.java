@@ -39,6 +39,7 @@ public class Server {
 
                 jsonFormatter.writeJsonResponse("{\"history\":" + historyArray + "}");
             } catch (Exception e) {
+                e.printStackTrace();
                 jsonFormatter.writeJsonResponse("{\"error\":\"" + e.getMessage() + "\"}");
             }
         }
