@@ -16,19 +16,67 @@ public class Server {
         FCGIInterface fcgi = new FCGIInterface();
 
         while (fcgi.FCGIaccept() >= 0) {
+
             try {
                 String queryString = System.getProperty("QUERY_STRING");
+                if (queryString.contains("history")) {
+                    jsonFormatter.writeJsonResponse("{\"history\":" + jsonFormatter.readHistoryAsArray() + "}");
+                    continue;
+                }
+
                 long started = System.nanoTime();
 
                 Map<String, String> params = parseQuery(queryString);
 
-                if (queryString.contains("history")) {
-                    String historyArray = jsonFormatter.readHistoryAsArray();
-                    jsonFormatter.writeJsonResponse("{\"history\":" + historyArray + "}");
+                // Validate presence
+                if (!params.containsKey("x") || !params.containsKey("y") || !params.containsKey("r")){
+                    jsonFormatter.writeJsonError("Missing parameters: x, y, r are required");
                     continue;
                 }
 
-                Coordinates point = new Coordinates(Integer.parseInt(params.get("x")), Double.parseDouble(params.get("y")), Double.parseDouble(params.get("r")));
+                int x;
+                double y;
+                double r;
+                try {
+                    x = Integer.parseInt(params.get("x"));
+                } catch (NumberFormatException nfe) {
+                    jsonFormatter.writeJsonError("x must be an integer");
+                    continue;
+                }
+                try {
+                    y = Double.parseDouble(params.get("y"));
+                } catch (NumberFormatException nfe) {
+                    jsonFormatter.writeJsonError("y must be a number");
+                    continue;
+                }
+                try {
+                    r = Double.parseDouble(params.get("r"));
+                } catch (NumberFormatException nfe) {
+                    jsonFormatter.writeJsonError("r must be a number");
+                    continue;
+                }
+
+                // Domain validation (align with frontend: y in (-3,5), x in set, r in set)
+                int[] allowedX = {-4,-3,-2,-1,0,1,2,3,4};
+                boolean xAllowed = false;
+                for (int xv : allowedX) if (xv == x) { xAllowed = true; break; }
+                if (!xAllowed){
+                    jsonFormatter.writeJsonError("x is out of allowed set [-4..4]");
+                    continue;
+                }
+                if (!(y > -3 && y < 5)){
+                    jsonFormatter.writeJsonError("y must be in (-3, 5)");
+                    continue;
+                }
+                double[] allowedR = {1,1.5,2,2.5,3};
+                boolean rAllowed = false;
+                for (double rv : allowedR) if (Double.compare(rv, r) == 0) { rAllowed = true; break; }
+                if (!rAllowed){
+                    jsonFormatter.writeJsonError("r must be one of [1, 1.5, 2, 2.5, 3]");
+                    continue;
+                }
+
+                Coordinates point = new Coordinates(x, y, r);
 
                 long ended = System.nanoTime();
 
@@ -39,7 +87,6 @@ public class Server {
 
                 jsonFormatter.writeJsonResponse("{\"history\":" + historyArray + "}");
             } catch (Exception e) {
-                e.printStackTrace();
                 jsonFormatter.writeJsonResponse("{\"error\":\"" + e.getMessage() + "\"}");
             }
         }

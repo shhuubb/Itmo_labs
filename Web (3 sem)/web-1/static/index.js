@@ -165,9 +165,13 @@
 	}
 
 	async function loadHistory(){
-		const url = `http://localhost:8080/fcgi-bin/labwork1.jar?action=history`;
+		const params = new URLSearchParams();
+		params.append('history',"1")
 		try {
-			const res = await fetch(url, { method: 'GET' });
+			const res = await fetch(`calculate?${params}`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+			});
 			const text = await res.text();
 			let json;
 			try {
@@ -175,7 +179,10 @@
 			} catch (_) {
 				throw new Error(text || 'Failed to parse history');
 			}
-			if (!res.ok) throw new Error(json.error || 'Failed to load history');
+			if (!res.ok) {
+				console.error('Server validation error:', json.error || text);
+				throw new Error(json.error || 'Failed to load history');
+			}
 
 			resultsBody.innerHTML = '';
 			if (json && Array.isArray(json.history) && json.history.length > 0) {
@@ -196,7 +203,7 @@
 			params.append('x', x);
 			params.append('y', y.toString());
 			params.append('r', r.toString());
-			const url = `http://localhost:8080/fcgi-bin/labwork1.jar?${params.toString()}`;
+			const url = `calculate?${params.toString()}`;
 			const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
 			const text = await res.text();
 			let json;
@@ -206,7 +213,10 @@
 			} catch(_) {
 				throw new Error(text || 'Bad response');
 			}
-			if (!res.ok) throw new Error(json.error || 'Request failed');
+			if (!res.ok) {
+				console.error('Server validation error:', json.error || text);
+				throw new Error(json.error || 'Request failed');
+			}
 
 			latestPoint = { x, y, r };
 			setCanvasSize();

@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+
 import java.util.Locale;
 
 public class JsonFormatter {
@@ -31,8 +30,8 @@ public class JsonFormatter {
         {
             "creationTime": "%s",
             "x": %d,
-            "y": %.2f,
-            "r": %.2f,
+            "y": %.10f,
+            "r": %.1f,
             "IsHit": %b,
             "executionTime": %d
         }
@@ -45,4 +44,11 @@ public class JsonFormatter {
         System.out.print(json);
         System.out.flush();
     }
+
+	public void writeJsonError(String message){
+		String headers = "Status: 400 Bad Request\r\nContent-Type: application/json\r\n\r\n";
+		System.out.print(headers);
+		System.out.print("{\"error\":\"" + message.replace("\"", "\\\"") + "\"}");
+		System.out.flush();
+	}
 }
