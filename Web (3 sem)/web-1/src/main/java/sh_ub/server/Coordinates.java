@@ -1,6 +1,8 @@
 package sh_ub.server;
 
 import java.time.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class Coordinates {
     private final int x;
@@ -45,5 +47,11 @@ public class Coordinates {
         boolean inTriangle = (x >= 0 && y <= 0) && (y >= (x - R/2));
 
         return inRectangle || inQuarterCircle || inTriangle;
+    }
+
+    public boolean isValidCoordinates() {
+        List<Integer> X = Arrays.asList(-4, -3,-2, -1, 0, 1, 2, 3, 4);
+        List<Double> R = Arrays.asList(1., 1.5, 2., 2.5, 3.);
+        return X.contains(x) && R.contains(r) && -3 < y && y  < 5 ;
     }
 }
