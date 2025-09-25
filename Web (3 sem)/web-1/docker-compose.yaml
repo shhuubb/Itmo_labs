@@ -1,41 +1,19 @@
 services:
-  fcgi1:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: fcgi1
-    environment:
-      - FCGI_PORT=9001
+  fcgi:
+    build: .
+    deploy:
+      replicas: 3
     networks:
       - backend
 
-  fcgi2:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: fcgi2
-    environment:
-      - FCGI_PORT=9002
-    networks:
-      - backend
-
-  fcgi3:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: fcgi3
-    environment:
-      - FCGI_PORT=9003
-    networks:
-      - backend
-
-  httpd:
-    image: "httpd:2.4.62"
-    container_name: httpd
+  nginx:
+    image: nginx
+    depends_on:
+      - fcgi
     ports:
       - "1801:1801"
     volumes:
-      - "./httpd.conf:/usr/local/apache2/conf/httpd.conf"
+      - "./nginx.conf:/etc/nginx/nginx.conf"
       - "./static:/var/www"
     networks:
       - backend
