@@ -9,4 +9,5 @@ EXPOSE 1337
 RUN mkdir /app
 WORKDIR /app
 COPY --from=build /home/gradle/src/build/libs/*.jar /app/app.jar
+COPY .env /app/.env
 ENTRYPOINT ["java", "-DFCGI_PORT=1337", "-jar", "app.jar"]

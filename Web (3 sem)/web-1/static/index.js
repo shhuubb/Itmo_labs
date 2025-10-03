@@ -157,9 +157,9 @@
 
 	function appendRow(item){
 		const tr = document.createElement('tr');
-		const creationTime = item.creationTime ?? item.now;
+		const creationTime = item.creationTime ?? item.now ?? 'Неизвестно';
 		const hit = (typeof item.IsHit !== 'undefined') ? item.IsHit : item.hit;
-		const exec = item.executionTime ?? item.execMs;
+		const exec = item.executionTime ?? item.execMs ?? 0;
 		tr.innerHTML = `<td>${creationTime}</td><td>${item.x}</td><td>${item.y}</td><td>${item.r}</td><td><span class="badge ${hit?'':'fail'}">${hit? 'Да' : 'Нет'}</span></td><td>${exec}</td>`;
 		resultsBody.prepend(tr);
 	}

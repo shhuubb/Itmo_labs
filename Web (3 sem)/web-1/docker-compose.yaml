@@ -6,6 +6,7 @@ services:
     networks:
       - backend
 
+
   nginx:
     image: nginx
     depends_on:
@@ -17,6 +18,21 @@ services:
       - "./static:/var/www"
     networks:
       - backend
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example_password
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - backend
+volumes:
+  mongo-data:
 
 networks:
   backend:
