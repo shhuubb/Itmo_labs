@@ -16,7 +16,12 @@ public class Server {
 
         while (fcgi.FCGIaccept() >= 0) {
             try {
-                String queryString = System.getProperty("QUERY_STRING");
+                String queryString = System.getProperty("QUERY_STRING", "");
+                String pathInfo = System.getProperty("PATH_INFO", "");
+                if (pathInfo.equals("/health")) {
+                    mongoDBHandler.writeJsonResponse("OK");
+                    continue;
+                }
 
                 if (queryString.contains("history")) {
                     String history = mongoDBHandler.readHistoryAsArray();
