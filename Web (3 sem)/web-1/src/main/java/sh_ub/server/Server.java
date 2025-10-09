@@ -17,22 +17,20 @@ public class Server {
         while (fcgi.FCGIaccept() >= 0) {
             try {
                 String queryString = System.getProperty("QUERY_STRING", "");
-                String pathInfo = System.getProperty("PATH_INFO", "");
-                if (pathInfo.equals("/health")) {
-                    mongoDBHandler.writeJsonResponse("OK");
-                    continue;
-                }
+                String scriptName = System.getProperty("SCRIPT_NAME", "");
 
                 if (queryString.contains("history")) {
                     String history = mongoDBHandler.readHistoryAsArray();
                     mongoDBHandler.writeJsonResponse("{\"history\":" + history + "}");
                     continue;
                 }
+                else if (scriptName.equals("/health")) {
+                    mongoDBHandler.writeJsonResponse("{\"status\":\"UP\"}");
+                    continue;
+                }
 
                 long started = System.nanoTime();
-
                 Map<String, String> params = parseQuery(queryString);
-
 
                 Coordinates point = new Coordinates(
                         Integer.parseInt(params.get("x")),
