@@ -1,0 +1,38 @@
+services:
+  fcgi:
+    build: .
+    networks:
+      - backend
+
+  httpd:
+    image: "httpd:2.4.62"
+    container_name: httpd
+    ports:
+      - "1802:1802"
+    volumes:
+      - "./httpd.conf:/usr/local/apache2/conf/httpd.conf"
+      - "./static:/var/www"
+    networks:
+      - backend
+
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASS}
+      - MONGO_INITDB_DATABASE=${DB_NAME}
+    volumes:
+      - mongo-data:/data/db
+
+    networks:
+      - backend
+volumes:
+  mongo-data:
+
+networks:
+  backend:
+    driver: bridge
