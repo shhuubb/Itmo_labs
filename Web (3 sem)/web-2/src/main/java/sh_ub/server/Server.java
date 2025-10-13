@@ -33,7 +33,7 @@ public class Server {
                 Map<String, String> params = parseQuery(queryString);
 
                 Coordinates point = new Coordinates(
-                        Integer.parseInt(params.get("x")),
+                        Double.parseDouble(params.get("x")),
                         Double.parseDouble(params.get("y")),
                         Double.parseDouble(params.get("r"))
                 );

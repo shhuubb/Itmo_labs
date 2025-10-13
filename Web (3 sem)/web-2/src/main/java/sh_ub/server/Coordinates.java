@@ -5,13 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Coordinates {
-    private final int x;
+    private final double x;
     private final double y;
     private final double r;
     private final LocalDate time;
     private final boolean isHit;
 
-    public Coordinates(int x, double y, double R) {
+    public Coordinates(double x, double y, double R) {
         this.x = x;
         this.y = y;
         this.r = R;
@@ -19,7 +19,7 @@ public class Coordinates {
         isHit = calculate();
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
@@ -46,7 +46,7 @@ public class Coordinates {
     private boolean calculate() {
         double R = this.r;
 
-        boolean inRectangle = (x >= -R && x <= 0) && (y >= 0 && y <= R);
+        boolean inRectangle = (x <= R && x >= 0) && (y >= 0 && y <= R);
         boolean inQuarterCircle = (x <= 0 && y <= 0) && ((double)(x * x)  + y * y <= (R * R) / 4.0);
         boolean inTriangle = (x >= 0 && y <= 0) && (y >= (x - R/2));
 
@@ -54,8 +54,10 @@ public class Coordinates {
     }
 
     public boolean isValidCoordinates() {
-        List<Integer> X = Arrays.asList(-4, -3,-2, -1, 0, 1, 2, 3, 4);
-        List<Double> R = Arrays.asList(1., 1.5, 2., 2.5, 3.);
-        return X.contains(x) && R.contains(r) && -3 < y && y  < 5 ;
+        List<Double> allowedY = Arrays.asList(-2.0, 1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0);
+        boolean xOk = (-3 < x) && (x < 5);
+        boolean yOk = allowedY.contains(y);
+        boolean rOk = (2 < r) && (r < 5);
+        return xOk && yOk && rOk;
     }
 }

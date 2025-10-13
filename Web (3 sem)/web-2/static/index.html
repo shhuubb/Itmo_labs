@@ -25,18 +25,18 @@
 		<form id="point-form" class="form" method="post">
 			<div id="errors" class="errors" aria-live="polite" role="alert" style="display:none"></div>
 			<div class="field">
-				<label>X</label>
-				<div class="controls" id="x-controls"></div>
+				<label for="x">X (−3 … 5)</label>
+				<input id="x" name="x" type="text" placeholder="Например, 1.25" maxlength="10" inputmode="decimal" autocomplete="off" />
 			</div>
 
 			<div class="field">
-				<label for="y">Y (−3 … 5)</label>
-				<input id="y" name="y" type="text" placeholder="Например, 1.25" maxlength="10" inputmode="decimal" autocomplete="off" />
+				<label>Y</label>
+				<div class="controls" id="y-controls"></div>
 			</div>
 
 			<div class="field">
-				<label>R</label>
-				<div class="controls" id="r-controls"></div>
+				<label for="r">R (2 … 5)</label>
+				<input id="r" name="r" type="text" placeholder="Например, 2.5" maxlength="10" inputmode="decimal" autocomplete="off" />
 			</div>
 
 			<button class="submit" type="submit">Проверить</button>

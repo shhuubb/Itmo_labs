@@ -1,14 +1,13 @@
 (function(){
 	'use strict';
 
-	const X_VALUES = [-4,-3,-2,-1,0,1,2,3,4];
-	const R_VALUES = [1,1.5,2,2.5,3];
+	const Y_VALUES = [-2, 1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2];
 
-	const xBox = document.getElementById('x-controls');
-	const rBox = document.getElementById('r-controls');
+	const yBox = document.getElementById('y-controls');
 	const form = document.getElementById('point-form');
 	const resultsBody = document.querySelector('#results tbody');
-	const yInput = document.getElementById('y');
+	const xInput = document.getElementById('x');
+	const rInputText = document.getElementById('r');
 	const errorsBox = document.getElementById('errors');
 	const plot = document.getElementById('plot');
 	const ctx = plot.getContext('2d');
@@ -30,7 +29,7 @@
 		input.name = name;
 		input.value = String(value);
 		input.style.margin = '0 4px 0 0';
-		if (type === 'radio'){
+		if (type === 'checkbox'){
 			let wasChecked = false;
 			wrap.addEventListener('pointerdown', ()=>{ wasChecked = input.checked; });
 			wrap.addEventListener('click', (e)=>{
@@ -53,8 +52,7 @@
 		return wrap;
 	}
 
-	X_VALUES.forEach(v => xBox.appendChild(createControl(v, 'x', 'radio')));
-	R_VALUES.forEach(v => rBox.appendChild(createControl(v, 'r', 'radio')));
+	Y_VALUES.forEach(v => yBox.appendChild(createControl(v, 'y', 'checkbox')));
 
 	function setErrors(messages){
 		if (!errorsBox) return;
@@ -73,27 +71,38 @@
 	}
 
 	function validateCollect(){
-		const xs = [...document.querySelectorAll('input[name="x"]:checked')].map(i => Number(i.value));
-		const yRaw = yInput.value;
-		const yVal = yRaw.replace(',', '.');
-		const yProvided = yVal.trim() !== '';
-		const y = yProvided ? Number(yVal) : NaN;
-		const rInput = document.querySelector('input[name="r"]:checked');
-		const rProvided = !!rInput;
-		const r = rProvided ? Number(rInput.value) : NaN;
+		const xRaw = xInput.value;
+		const xVal = xRaw.replace(',', '.');
+		const xProvided = xVal.trim() !== '';
+		const x = xProvided ? Number(xVal) : NaN;
+
+		const yChecked = [...document.querySelectorAll('input[name="y"]:checked')].map(i => Number(i.value));
+		const yProvided = yChecked.length > 0;
+		const y = yProvided ? yChecked[0] : NaN;
+
+		const rRaw = rInputText.value;
+		const rVal = rRaw.replace(',', '.');
+		const rProvided = rVal.trim() !== '';
+		const r = rProvided ? Number(rVal) : NaN;
 
 		const messages = [];
 		const missing = [];
-		if (xs.length === 0) missing.push('X');
+		if (!xProvided) missing.push('X');
 		if (!yProvided) missing.push('Y');
 		if (!rProvided) missing.push('R');
 		if (missing.length > 0){
 			messages.push('Необходимо выбрать/ввести: ' + missing.join(', '));
 		}
-		if (yProvided && !Number.isFinite(y)) messages.push('Y должен быть числом');
-		if (Number.isFinite(y) && (y <= -3 || y >= 5)) messages.push('Y должен быть в диапазоне (-3, 5)');
+		if (xProvided && !Number.isFinite(x)) messages.push('X должен быть числом');
+		if (Number.isFinite(x) && (x <= -3 || x >= 5)) messages.push('X должен быть в диапазоне (-3, 5)');
 
-		return { xs, y, r, messages };
+		if (yProvided && !Y_VALUES.includes(y)) messages.push('Y должен быть выбран из списка');
+		if (yChecked.length > 1) messages.push('Можно выбрать только одно значение Y');
+
+		if (rProvided && !Number.isFinite(r)) messages.push('R должен быть числом');
+		if (Number.isFinite(r) && (r <= 2 || r >= 5)) messages.push('R должен быть в диапазоне (2, 5)');
+
+		return { x, y, r, messages };
 	}
 
 	function drawAxes(){
@@ -132,9 +141,9 @@
 			label(W/2+8, y+4, ['R','R/2','-R/2','-R'][i]);
 		});
 
-		// Draw shapes
+
 		ctx.fillStyle = 'rgba(37,99,235,.45)';
-		ctx.fillRect(W/2-100, H/2-200, 100, 200);
+		ctx.fillRect(W/2, H/2-200, 200, 200);
 		ctx.beginPath();
 		ctx.moveTo(W/2+100, H/2);
 		ctx.arc(W/2, H/2, 100, Math.PI/2, Math.PI, false);
@@ -197,35 +206,32 @@
 		}
 	}
 
-	async function submit(xs, y, r){
-		for(const x of xs){
-			const params = new URLSearchParams();
-			params.append('x', x);
-			params.append('y', y.toString());
-			params.append('r', r.toString());
-			const url = `calculate?${params.toString()}`;
-			const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
-			const text = await res.text();
-			let json;
+	async function submit(x, y, r){
+		const params = new URLSearchParams();
+		params.append('x', x);
+		params.append('y', y.toString());
+		params.append('r', r.toString());
+		const url = `calculate?${params.toString()}`;
+		const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' } });
+		const text = await res.text();
+		let json;
+		try {
+			json = JSON.parse(text);
+		} catch(_) {
+			throw new Error(text || 'Bad response');
+		}
+		if (!res.ok) {
+			console.error('Server validation error:', json.error || text);
+			throw new Error(json.error || 'Request failed');
+		}
 
-			try {
-				json = JSON.parse(text);
-			} catch(_) {
-				throw new Error(text || 'Bad response');
-			}
-			if (!res.ok) {
-				console.error('Server validation error:', json.error || text);
-				throw new Error(json.error || 'Request failed');
-			}
+		latestPoint = { x, y, r };
+		setCanvasSize();
+		drawAxes();
 
-			latestPoint = { x, y, r };
-			setCanvasSize();
-			drawAxes();
-
-			resultsBody.innerHTML = '';
-			if (json && Array.isArray(json.history)) {
-				json.history.forEach(appendRow);
-			}
+		resultsBody.innerHTML = '';
+		if (json && Array.isArray(json.history)) {
+			json.history.forEach(appendRow);
 		}
 	}
 
@@ -233,12 +239,12 @@
 	form.addEventListener('submit', async (e)=>{
 		e.preventDefault();
 		setErrors([]);
-		const { xs, y, r, messages } = validateCollect();
+		const { x, y, r, messages } = validateCollect();
 		if (messages.length > 0){
 			setErrors(messages);
 			return;
 		}
-		await submit(xs, y, r);
+		await submit(x, y, r);
 	});
 
 	setCanvasSize();
@@ -247,8 +253,9 @@
 
 	(function resetControls(){
 		form.reset();
-		[...document.querySelectorAll('input[name="x"], input[name="r"]')].forEach(i => { i.checked = false; });
-		yInput.value = '';
+		[...document.querySelectorAll('input[name="y"]')].forEach(i => { i.checked = false; });
+		xInput.value = '';
+		rInputText.value = '';
 		setErrors([]);
 	})();
 

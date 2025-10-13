@@ -1,8 +1,10 @@
 services:
   fcgi:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     networks:
-      - backend
+      backend:
 
   httpd:
     image: "httpd:2.4.62"
@@ -20,7 +22,7 @@ services:
     image: mongo:latest
     restart: always
     ports:
-      - "27017:27017"
+      - "1803:27017"
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${DB_PASS}
