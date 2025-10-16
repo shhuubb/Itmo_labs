@@ -34,10 +34,6 @@ public class Coordinates {
     public LocalDate getTime() {
         return time;
     }
-    
-    public String getTimeString() {
-        return time.toString();
-    }
 
     public boolean isHit() {
         return isHit;
