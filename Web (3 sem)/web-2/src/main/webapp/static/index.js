@@ -4,7 +4,9 @@
 
   const yBox = document.getElementById('y-controls');
   const form = document.getElementById('point-form');
-  const resultsBody = document.querySelector('#results tbody');
+  const resultsBody = document.querySelector('#results-table tbody');
+  const openBtn = document.getElementById('open-results');
+  const modal = document.getElementById('results-modal');
   const xInput = document.getElementById('x');
   const rInputText = document.getElementById('r');
   const errorsBox = document.getElementById('errors');
@@ -12,6 +14,7 @@
   const ctx = plot.getContext('2d');
 
   let latestPoint = null;
+  const contextPath = (typeof window.__CTX__ === 'string') ? window.__CTX__ : '';
 
   function setCanvasSize() {
     const dpr = window.devicePixelRatio || 1;
@@ -51,7 +54,7 @@
     return wrap;
   }
 
-  Y_VALUES.forEach(v => yBox.appendChild(createControl(v, 'y', 'checkbox')));
+  Y_VALUES.forEach(v => yBox.appendChild(createControl(v, 'y', 'radio')));
 
   function setErrors(messages){
     if (!errorsBox) return;
@@ -155,7 +158,7 @@
       const canvasX = W/2 + x * scale;
       const canvasY = H/2 - y * scale;
       if (canvasX >= 0 && canvasX <= W && canvasY >= 0 && canvasY <= H) {
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = latestPoint.hit ? '#22c55e' : '#ef4444';
         ctx.beginPath();
         ctx.arc(canvasX, canvasY, 3, 0, 2 * Math.PI);
         ctx.fill();
@@ -163,13 +166,86 @@
     }
   }
 
+  function getRValue(){
+    const rRaw = rInputText.value;
+    const rVal = rRaw.replace(',', '.');
+    const provided = rVal.trim() !== '';
+    const r = provided ? Number(rVal) : NaN;
+    if (!provided) return { ok:false, error:'Сначала укажите радиус R' };
+    if (!Number.isFinite(r)) return { ok:false, error:'R должен быть числом' };
+    if (r <= 2 || r >= 5) return { ok:false, error:'R должен быть в диапазоне (2, 5)' };
+    return { ok:true, r };
+  }
+
+  function canvasToCoords(px, py, r){
+    const W = plot.offsetWidth, H = plot.offsetHeight;
+    const scale = 200 / r; // pixels per unit
+    const x = (px - W/2) / scale;
+    const y = (H/2 - py) / scale;
+    return { x, y };
+  }
+
+  function toFixedNum(n, digits){
+    const d = digits ?? 6;
+    return Number(n.toFixed(d));
+  }
+
+  function snapYToAllowed(y){
+    let best = Y_VALUES[0];
+    let bestDiff = Math.abs(y - best);
+    for (let i = 1; i < Y_VALUES.length; i++){
+      const dv = Math.abs(y - Y_VALUES[i]);
+      if (dv < bestDiff){
+        best = Y_VALUES[i];
+        bestDiff = dv;
+      }
+    }
+    return best;
+  }
+
+  async function sendPoint(x, y, r){
+    const url = `${contextPath}/controller?x=${encodeURIComponent(x)}&y=${encodeURIComponent(y)}&r=${encodeURIComponent(r)}`;
+    const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    if (!res.ok) {
+      const t = await res.text().catch(()=> '');
+      let err = 'Ошибка запроса';
+      try { const j = JSON.parse(t); if (j && j.error) err = j.error; } catch(e) {}
+      throw new Error(err);
+    }
+    return res.json();
+  }
+
+  if (plot) {
+    plot.addEventListener('click', async (e)=>{
+      setErrors([]);
+      const rRes = getRValue();
+      if (!rRes.ok){
+        setErrors([rRes.error]);
+        return;
+      }
+      const rect = plot.getBoundingClientRect();
+      const px = e.clientX - rect.left;
+      const py = e.clientY - rect.top;
+      const { x, y } = canvasToCoords(px, py, rRes.r);
+      const xn = toFixedNum(x, 6);
+      const yn = snapYToAllowed(y);
+      try {
+        const data = await sendPoint(xn, yn, rRes.r);
+        appendRow(data);
+        latestPoint = { x: data.x, y: data.y, r: data.r, hit: data.hit};
+        drawAxes();
+      } catch(err){
+        setErrors([String(err.message || err)]);
+      }
+    });
+  }
+
   function appendRow(item){
     const tr = document.createElement('tr');
     const creationTime = item.creationTime ?? item.now ?? 'Неизвестно';
     const hit = (typeof item.IsHit !== 'undefined') ? item.IsHit : item.hit;
-    const exec = item.executionTime ?? item.execMs ?? 0;
-    tr.innerHTML = `<td>${creationTime}</td><td>${item.x}</td><td>${item.y}</td><td>${item.r}</td><td><span class="badge ${hit?'':'fail'}">${hit? 'Да' : 'Нет'}</span></td><td>${exec}</td>`;
-    resultsBody.prepend(tr);
+    tr.innerHTML = `<td>${creationTime}</td><td>${item.x}</td><td>${item.y}</td><td>${item.r}</td><td><span class="badge ${hit?'':'fail'}">${hit? 'Да' : 'Нет'}`;
+    if (resultsBody) resultsBody.prepend(tr);
   }
 
   form.addEventListener('submit', (e)=>{
@@ -178,7 +254,6 @@
     if (messages.length > 0){
       e.preventDefault();
       setErrors(messages);
-      return;
     }
   });
 
@@ -197,5 +272,42 @@
     setCanvasSize();
     drawAxes();
   });
+
+  (function hydrate(){
+    const el = document.getElementById('initial-results');
+    const items = el ? JSON.parse(el.textContent || '[]') : [];
+    items.forEach(appendRow);
+    if (items.length > 0) {
+      const last = items[items.length - 1];
+      latestPoint = { x: last.x, y: last.y, r: last.r, hit: last.hit};
+      drawAxes();
+    }
+  })();
+
+  function openModal(){
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (openBtn) {
+    openBtn.addEventListener('click', openModal);
+  }
+  if (modal) {
+    modal.addEventListener('click', (e)=>{
+      if (e.target && e.target.hasAttribute('data-close')) closeModal();
+    });
+    window.addEventListener('keydown', (e)=>{
+      if (e.key === 'Escape') closeModal();
+    });
+  }
 
 })();

@@ -162,6 +162,7 @@ canvas {
     background: #0b1324;
     border-radius: 12px;
     border: 1px solid rgba(148, 163, 184, .18);
+    cursor: crosshair;
 }
 
 .errors {
@@ -177,3 +178,73 @@ canvas {
     color: #fecaca;
     border: 1px solid rgba(239, 68, 68, .35);
 }
+
+
+
+.btn {
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, .25);
+    background: #111827;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.btn.ghost {
+    background: transparent;
+}
+
+.modal.hidden { display: none; }
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+}
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    backdrop-filter: blur(2px);
+}
+
+.modal-dialog {
+    position: relative;
+    width: min(100% - 24px, 920px);
+    margin: 48px auto;
+    background: var(--panel);
+    border: 1px solid rgba(148,163,184,.15);
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 96px);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(148,163,184,.12);
+}
+
+.modal-close {
+    background: transparent;
+    border: 0;
+    color: var(--text);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.modal-content {
+    padding: 0 16px 16px 16px;
+    overflow: auto;
+}
+
+.modal-content thead th {
+    position: sticky;
+    top: 0;
+    background: var(--panel);
+}
+
