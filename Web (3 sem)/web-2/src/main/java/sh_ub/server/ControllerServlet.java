@@ -21,7 +21,7 @@ public class ControllerServlet extends HttpServlet {
         if (x != null && y != null && r != null) {
             request.getRequestDispatcher("/area-check").forward(request, response);
         } else {
-            request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
 }
